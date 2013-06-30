@@ -1,0 +1,87 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.keyboardplaying</groupId>
+	<artifactId>imperative-todos</artifactId>
+	<version>0.1.0</version>
+	<packaging>jar</packaging>
+
+	<name>daily-tasks</name>
+	<description>Launches a Java application which will not close until all tasks are checked.</description>
+	<url>https://github.com/cyChop/daily-tasks</url>
+
+	<properties>
+		<project.java.version>1.6</project.java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<build>
+		<plugins>
+			<!-- Specify Java version -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>${project.java.version}</source>
+					<target>${project.java.version}</target>
+				</configuration>
+			</plugin>
+
+			<!-- Make JAR executable -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.4</version>
+				<executions>
+					<execution>
+						<id>make-manifest</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<archive>
+								<manifest>
+									<mainClass>org.keyboardplaying.dailytasks.App</mainClass>
+								</manifest>
+							</archive>
+							<descriptorRefs>
+								<!-- Pre-defined descriptor -->
+								<descriptorRef>jar-with-dependencies</descriptorRef>
+							</descriptorRefs>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.10</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<!-- Project additional information -->
+	<developers>
+		<developer>
+			<id>cyChop</id>
+			<name>Cyrille Chopelet</name>
+			<email>cyrille.chopelet@ext.europarl.europa.eu</email>
+			<roles>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+			<timezone>+1</timezone>
+			<url>http://keyboardplaying.org</url>
+			<properties>
+				<picUrl>http://keyboardplaying.org/assets/img/chop_large.jpg</picUrl>
+			</properties>
+		</developer>
+	</developers>
+</project>
