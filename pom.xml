@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.keyboardplaying</groupId>
-	<artifactId>imperative-todos</artifactId>
+	<artifactId>daily-tasks</artifactId>
 	<version>0.1.0</version>
 	<packaging>jar</packaging>
 
-	<name>daily-tasks</name>
+	<name>Daily Tasks manager</name>
 	<description>Launches a Java application which will not close until all tasks are checked.</description>
 	<url>https://github.com/cyChop/daily-tasks</url>
 
