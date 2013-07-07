@@ -1,10 +1,12 @@
-package org.keyboardplaying.dailytasks;
+package org.keyboardplaying.dailytasks.properties;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.InputStream;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Properties;
+import java.util.Set;
 
 import org.keyboardplaying.dailytasks.ui.Theme;
 
@@ -66,14 +68,28 @@ public class TaskProperties {
 
 	/* === ERROR MESSAGES === */
 	/**
-	 * Warning messages for errors which do not prevent the application from
-	 * working.
+	 * Info, warning and error messages, filled while initializing the instance.
+	 * <p/>
+	 * A {@link Set} is used to guarantee fast access and unicity of each
+	 * element.
 	 */
-	private List<String> warningMessages = new ArrayList<String>();
-	/** Error message if properties parsing failed. */
-	private String errorMessage;
+	private Set<Message> messages = new HashSet<Message>();
 
-	/* === CONSTRUCTOR === */
+	/* === CONSTRUCTORS === */
+	/**
+	 * Loads a properties file from the supplied file name and parses it.
+	 * 
+	 * @param stream
+	 *            the stream containing the properties file
+	 */
+	public TaskProperties(InputStream stream) {
+		try {
+			parseProperties(stream);
+		} catch (IOException e) {
+			messages.add(Message.ERROR_READING_FILE);
+		}
+	}
+
 	/**
 	 * Loads a properties file from the supplied file name and parses it.
 	 * 
@@ -82,14 +98,9 @@ public class TaskProperties {
 	 */
 	public TaskProperties(String fileName) {
 		try {
-			Properties prop = loadProperties(fileName);
-			parseTheme(prop);
-			parseOnTop(prop);
-			parseTasks(prop);
+			parseProperties(new FileInputStream(fileName));
 		} catch (IOException e) {
-			errorMessage = "Properties file " + fileName
-					+ " could not be read."
-					+ "\nPlease make sure it is located on the classpath.";
+			messages.add(Message.ERROR_READING_FILE);
 		}
 	}
 
@@ -123,39 +134,43 @@ public class TaskProperties {
 	}
 
 	/**
-	 * Returns the warning messages for errors which do not prevent the
-	 * application from working.
+	 * Returns the info messages for user.
 	 * 
-	 * @return the warning messages for errors which do not prevent the
-	 *         application from working
+	 * @return the info messages
 	 */
-	public List<String> getWarningMessages() {
-		return warningMessages;
-	}
-
-	/**
-	 * Returns the error message if properties parsing failed.
-	 * 
-	 * @return the error message if properties parsing failed
-	 */
-	public String getErrorMessage() {
-		return errorMessage;
+	public Collection<Message> getMessages() {
+		return messages;
 	}
 
 	/* === BUSINESS METHODS === */
 	/**
+	 * Loads a properties stream and maps its content to the various fields of
+	 * this instance.
+	 * 
+	 * @param stream
+	 *            the stream containing the properties file
+	 * @throws IOException
+	 *             when the properties file could not be read
+	 */
+	private void parseProperties(InputStream stream) throws IOException {
+		Properties prop = loadProperties(stream);
+		parseTheme(prop);
+		parseOnTop(prop);
+		parseTasks(prop);
+	}
+
+	/**
 	 * Loads the properties file.
 	 * 
-	 * @param fileName
-	 *            the name of the properties file
+	 * @param stream
+	 *            the stream containing the properties file
 	 * @return a {@link Properties} file
 	 * @throws IOException
 	 *             when the properties file could not be read
 	 */
-	private static Properties loadProperties(String fileName)
-			throws IOException {
+	private Properties loadProperties(InputStream stream) throws IOException {
 		Properties properties = new Properties();
-		properties.load(new FileInputStream(fileName));
+		properties.load(stream);
 		return properties;
 	}
 
@@ -171,15 +186,13 @@ public class TaskProperties {
 		try {
 			if (themeProp == null) {
 				theme = DEFAULT_THEME;
-				warningMessages
-						.add("Theme could not be read from properties file, using default instead.");
+				messages.add(Message.UNSPECIFIED_THEME);
 			} else {
 				theme = Theme.valueOf(themeProp);
 			}
 		} catch (IllegalArgumentException e) {
 			theme = DEFAULT_THEME;
-			warningMessages
-					.add("Theme could not be read from properties file, using default instead.");
+			messages.add(Message.UNSPECIFIED_THEME);
 		}
 	}
 
@@ -195,15 +208,13 @@ public class TaskProperties {
 		try {
 			if (onTopProp == null) {
 				onTop = DEFAULT_ON_TOP;
-				warningMessages
-						.add("OnTop property could not be read from properties file, using default instead.");
+				messages.add(Message.UNSPECIFIED_ONTOP);
 			} else {
 				onTop = Boolean.valueOf(onTopProp);
 			}
 		} catch (IllegalArgumentException e) {
 			onTop = DEFAULT_ON_TOP;
-			warningMessages
-					.add("OnTop property could not be read from properties file, using default instead.");
+			messages.add(Message.UNSPECIFIED_ONTOP);
 		}
 	}
 
@@ -217,8 +228,7 @@ public class TaskProperties {
 		String separator = (String) prop.get(PROPERTY_SEPARATOR);
 		String tasksProp = (String) prop.get(PROPERTY_TASKS);
 		if (tasksProp == null || separator == null) {
-			errorMessage = "Properties tasks data seem incorrect."
-					+ "\nPlease make sure the properties are correct.";
+			messages.add(Message.ERROR_READING_TASKS);
 		} else {
 			tasks = tasksProp.split(separator);
 		}

@@ -1,14 +1,15 @@
 package org.keyboardplaying.dailytasks;
 
+import java.util.Collection;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.swing.JOptionPane;
 
 import org.keyboardplaying.dailytasks.model.Task;
+import org.keyboardplaying.dailytasks.properties.Message;
+import org.keyboardplaying.dailytasks.properties.TaskProperties;
 import org.keyboardplaying.dailytasks.ui.TaskWindow;
-import org.keyboardplaying.dailytasks.util.Utils;
 
 /**
  * Main class for the application.
@@ -27,14 +28,58 @@ public class App {
 	 *            optional arguments (unused)
 	 */
 	public static void main(String... args) {
+
+		/* Load the properties. */
 		TaskProperties prop = new TaskProperties(PROPERTIES_FILE_NAME);
 
-		if (prop.getErrorMessage() == null) {
-			displayWarningsIfAny(prop.getWarningMessages());
+		/* Display each message in a pop-up. */
+		boolean noFatalError = displayEachMessageInADialog(prop.getMessages());
+
+		/*
+		 * Display the tasks only if no error occurred while loading the
+		 * properties.
+		 */
+		if (noFatalError) {
 			displayTaskWindow(prop);
-		} else {
-			displayErrorDialog(prop.getErrorMessage());
 		}
+	}
+
+	/**
+	 * Displays each of the supplied message in a separate dialog.
+	 * 
+	 * @param messages
+	 *            the messages to display
+	 * @return {@code true} if at least one of the messages was at
+	 *         {@link org.keyboardplaying.dailytasks.properties.MessageLevel#ERROR}
+	 *         level
+	 */
+	private static boolean displayEachMessageInADialog(
+			Collection<Message> messages) {
+		boolean noFatalError = true;
+
+		// Wanna get rid of it? Configure your app properly.
+		for (Message msg : messages) {
+			int msgLevel;
+
+			switch (msg.getLevel()) {
+			case ERROR:
+				msgLevel = JOptionPane.ERROR_MESSAGE;
+				noFatalError = false;
+				break;
+			case WARNING:
+				msgLevel = JOptionPane.WARNING_MESSAGE;
+				break;
+			case INFO:
+			default:
+				msgLevel = JOptionPane.INFORMATION_MESSAGE;
+			}
+
+			displayDialog(msg.getMessage(), msgLevel);
+			if (msgLevel == JOptionPane.ERROR_MESSAGE) {
+				noFatalError = false;
+			}
+		}
+		return noFatalError;
 	}
 
 	/**
@@ -68,38 +113,6 @@ public class App {
 			tasks.add(new Task(todo));
 		}
 		return tasks;
-	}
-
-	/**
-	 * Displays dialogs for all warning messages if any.
-	 * 
-	 * @param messages
-	 *            the message list
-	 */
-	private static void displayWarningsIfAny(List<String> messages) {
-		if (messages != null && !messages.isEmpty()) {
-			displayWarningDialog(Utils.implode(messages, "\n"));
-		}
-	}
-
-	/**
-	 * Displays a warning dialog.
-	 * 
-	 * @param message
-	 *            the warning message
-	 */
-	private static void displayWarningDialog(final String message) {
-		displayDialog(message, JOptionPane.WARNING_MESSAGE);
-	}
-
-	/**
-	 * Displays an alert dialog.
-	 * 
-	 * @param message
-	 *            the alert message
-	 */
-	private static void displayErrorDialog(final String message) {
-		displayDialog(message, JOptionPane.ERROR_MESSAGE);
 	}
 
 	/**
