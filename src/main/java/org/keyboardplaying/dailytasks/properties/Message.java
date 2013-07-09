@@ -1,6 +1,5 @@
 package org.keyboardplaying.dailytasks.properties;
 
-// TODO I18N?
 /**
  * The possible error messages for the task properties.
  * 
@@ -12,14 +11,28 @@ public enum Message {
 	 * Message for when no theme has been specified and the default one had to
 	 * be applied.
 	 */
-	UNSPECIFIED_THEME(MessageLevel.WARNING,
-			"Theme could not be read from properties file, using default instead."),
+	UNSPECIFIED_THEME(MessageLevel.INFO,
+			"Theme was not specified in the properties file, using default instead."),
 	/**
 	 * Message for when it has not been specified whether the window should be
 	 * stuck on top and the default value had to be applied.
 	 */
-	UNSPECIFIED_ONTOP(MessageLevel.WARNING,
-			"OnTop property could not be read from properties file, using default instead."),
+	UNSPECIFIED_ONTOP(
+			MessageLevel.INFO,
+			"OnTop property was not specified in the properties file, using default instead."),
+	/**
+	 * Message for when the specified message level threshold is incorect and
+	 * the default one had to be used instead.
+	 */
+	INCORRECT_MSG_LVL(
+			MessageLevel.WARNING,
+			"The specified level threshold for messages is incorrect, using default instead."),
+	/**
+	 * Message for when the specified theme is incorrect and the default one had
+	 * to be applied.
+	 */
+	INCORRECT_THEME(MessageLevel.WARNING,
+			"Theme specified in properties file is incorrect, using default instead."),
 	/** Message for when the file could not be read. */
 	ERROR_READING_FILE(MessageLevel.ERROR, "Properties file could not be read."
 			+ "\nPlease make sure it is on the classpath."),

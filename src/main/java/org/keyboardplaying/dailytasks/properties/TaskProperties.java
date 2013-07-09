@@ -39,6 +39,11 @@ import org.keyboardplaying.dailytasks.ui.Theme;
 public class TaskProperties {
 
 	/* === PROPERTIES === */
+	/**
+	 * The field storing the minimal level for a message to be displayed in the
+	 * properties file.
+	 */
+	private static final String PROPERTY_MSG_LEVEL = "msg.level";
 	/** The field storing the "on top" property in the properties file. */
 	private static final String PROPERTY_ON_TOP = "always.on.top";
 	/** The field storing the theme in the properties file. */
@@ -49,12 +54,23 @@ public class TaskProperties {
 	private static final String PROPERTY_TASKS = "tasks.todos";
 
 	/* === DEFAULT VALUES === */
+	/**
+	 * The default minimal level for a message to be displayed when none or an
+	 * incorrect one is provided.
+	 */
+	private static final MessageLevel DEFAULT_MSG_LEVEL = MessageLevel.WARNING;
 	/** The default theme when none or an incorrect one is provided. */
 	private static final Theme DEFAULT_THEME = Theme.GRAY;
 	/** The default "on top" property when none or an incorrect one is provided. */
 	private static final boolean DEFAULT_ON_TOP = true;
 
 	/* === PARSED PARAMETERS === */
+	/**
+	 * The minimal level for a message to be saved.
+	 * <p/>
+	 * This field is not exposed.
+	 */
+	private MessageLevel msgLvl = DEFAULT_MSG_LEVEL;
 	/**
 	 * The "on top" properties.
 	 * <p/>
@@ -86,7 +102,7 @@ public class TaskProperties {
 		try {
 			parseProperties(stream);
 		} catch (IOException e) {
-			messages.add(Message.ERROR_READING_FILE);
+			addMessage(Message.ERROR_READING_FILE);
 		}
 	}
 
@@ -100,7 +116,7 @@ public class TaskProperties {
 		try {
 			parseProperties(new FileInputStream(fileName));
 		} catch (IOException e) {
-			messages.add(Message.ERROR_READING_FILE);
+			addMessage(Message.ERROR_READING_FILE);
 		}
 	}
 
@@ -154,6 +170,7 @@ public class TaskProperties {
 	 */
 	private void parseProperties(InputStream stream) throws IOException {
 		Properties prop = loadProperties(stream);
+		parseMsgLvl(prop);
 		parseTheme(prop);
 		parseOnTop(prop);
 		parseTasks(prop);
@@ -175,6 +192,24 @@ public class TaskProperties {
 	}
 
 	/**
+	 * Extracts and stores the minimum level for messages to be displayed, or
+	 * applies default if parsing is impossible.
+	 * 
+	 * @param prop
+	 *            the properties
+	 */
+	private void parseMsgLvl(Properties prop) {
+		String themeProp = (String) prop.get(PROPERTY_MSG_LEVEL);
+		if (themeProp != null) {
+			try {
+				msgLvl = MessageLevel.valueOf(themeProp);
+			} catch (IllegalArgumentException e) {
+				addMessage(Message.INCORRECT_MSG_LVL);
+			}
+		}
+	}
+
+	/**
 	 * Extracts and stores the theme information from the supplied properties,
 	 * or applies the default one if parsing is impossible.
 	 * 
@@ -183,16 +218,16 @@ public class TaskProperties {
 	 */
 	private void parseTheme(Properties prop) {
 		String themeProp = (String) prop.get(PROPERTY_THEME);
-		try {
-			if (themeProp == null) {
-				theme = DEFAULT_THEME;
-				messages.add(Message.UNSPECIFIED_THEME);
-			} else {
-				theme = Theme.valueOf(themeProp);
-			}
-		} catch (IllegalArgumentException e) {
+		if (themeProp == null) {
 			theme = DEFAULT_THEME;
-			messages.add(Message.UNSPECIFIED_THEME);
+			addMessage(Message.UNSPECIFIED_THEME);
+		} else {
+			try {
+				theme = Theme.valueOf(themeProp);
+			} catch (IllegalArgumentException e) {
+				theme = DEFAULT_THEME;
+				addMessage(Message.INCORRECT_THEME);
+			}
 		}
 	}
 
@@ -205,16 +240,11 @@ public class TaskProperties {
 	 */
 	private void parseOnTop(Properties prop) {
 		String onTopProp = (String) prop.get(PROPERTY_ON_TOP);
-		try {
-			if (onTopProp == null) {
-				onTop = DEFAULT_ON_TOP;
-				messages.add(Message.UNSPECIFIED_ONTOP);
-			} else {
-				onTop = Boolean.valueOf(onTopProp);
-			}
-		} catch (IllegalArgumentException e) {
+		if (onTopProp == null) {
 			onTop = DEFAULT_ON_TOP;
-			messages.add(Message.UNSPECIFIED_ONTOP);
+			addMessage(Message.UNSPECIFIED_ONTOP);
+		} else {
+			onTop = Boolean.valueOf(onTopProp);
 		}
 	}
 
@@ -228,9 +258,22 @@ public class TaskProperties {
 		String separator = (String) prop.get(PROPERTY_SEPARATOR);
 		String tasksProp = (String) prop.get(PROPERTY_TASKS);
 		if (tasksProp == null || separator == null) {
-			messages.add(Message.ERROR_READING_TASKS);
+			addMessage(Message.ERROR_READING_TASKS);
 		} else {
 			tasks = tasksProp.split(separator);
+		}
+	}
+
+	/**
+	 * Adds a message to the list of messages for display, provided the level of
+	 * this message is at least equal to the specified threshold.
+	 * 
+	 * @param msg
+	 *            the message for user
+	 */
+	private void addMessage(Message msg) {
+		if (msgLvl.compareTo(msg.getLevel()) <= 0) {
+			messages.add(msg);
 		}
 	}
 }
