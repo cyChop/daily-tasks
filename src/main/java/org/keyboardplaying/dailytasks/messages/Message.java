@@ -1,7 +1,7 @@
 package org.keyboardplaying.dailytasks.messages;
 
 /**
- * The possible error messages for the task properties.
+ * The possible error messages.
  * 
  * @author cyChop (http://keyboardplaying.org/)
  */
@@ -10,12 +10,14 @@ public enum Message {
 	/** Message for when the look and feel could not be loaded. */
 	LAF_LOADING_PROBLEM(MessageLevel.WARNING,
 			"The system look & feel could not be loaded. Using Java's instead."),
+
 	/**
 	 * Message for when no theme has been specified and the default one had to
 	 * be applied.
 	 */
 	UNSPECIFIED_THEME(MessageLevel.INFO,
 			"Theme was not specified in the properties file, using default instead."),
+
 	/**
 	 * Message for when it has not been specified whether the window should be
 	 * stuck on top and the default value had to be applied.
@@ -23,6 +25,7 @@ public enum Message {
 	UNSPECIFIED_ONTOP(
 			MessageLevel.INFO,
 			"OnTop property was not specified in the properties file, using default instead."),
+
 	/**
 	 * Message for when the specified message level threshold is incorrect and
 	 * the default one had to be used instead.
@@ -30,15 +33,18 @@ public enum Message {
 	INCORRECT_MSG_LVL(
 			MessageLevel.WARNING,
 			"The specified level threshold for messages is incorrect, using default instead."),
+
 	/**
 	 * Message for when the specified theme is incorrect and the default one had
 	 * to be applied.
 	 */
 	INCORRECT_THEME(MessageLevel.WARNING,
 			"Theme specified in properties file is incorrect, using default instead."),
+
 	/** Message for when the file could not be read. */
 	ERROR_READING_FILE(MessageLevel.ERROR, "Properties file could not be read."
 			+ "\nPlease make sure it is on the classpath."),
+
 	/** Message for when the tasks could not be parsed from file. */
 	ERROR_READING_TASKS(MessageLevel.ERROR,
 			"Properties tasks data seem incorrect."
