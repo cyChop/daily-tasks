@@ -10,6 +10,7 @@ import java.util.Collection;
 
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import org.keyboardplaying.dailytasks.model.Task;
@@ -61,8 +62,6 @@ public class TaskWindow extends JFrame implements ActionListener {
 		setResizable(false);
 		// Center on screen
 		setLocationRelativeTo(null);
-		// The tasker should not be closed manually.
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
 		/* Now, the content. */
 		setContentPane(buildContentPane());
@@ -170,8 +169,40 @@ public class TaskWindow extends JFrame implements ActionListener {
 
 	/** Closes the window. */
 	private void closeWindow() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		WindowEvent wev = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
 		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.swing.JFrame#processWindowEvent(java.awt.event.WindowEvent)
+	 */
+	@Override
+	protected void processWindowEvent(WindowEvent e) {
+
+		if (e.getID() == WindowEvent.WINDOW_CLOSING && !areAllTasksDone()) {
+
+			/*
+			 * For window closing, if some tasks are not yet completed, ask for
+			 * confirmation.
+			 */
+			int exit = JOptionPane
+					.showConfirmDialog(
+							this,
+							"Some tasks were not completed. Are you sure you want to close?",
+							"Skip unfinished tasks?", JOptionPane.YES_NO_OPTION);
+			if (exit == JOptionPane.YES_OPTION) {
+				super.processWindowEvent(e);
+			}
+
+		} else {
+
+			/*
+			 * All other events, including closing when all tasks are completed,
+			 * are processed the usual way.
+			 */
+			super.processWindowEvent(e);
+		}
 	}
 }
