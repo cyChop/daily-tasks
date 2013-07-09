@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+import org.keyboardplaying.dailytasks.messages.MessageLevel;
 
 /**
  * Some basic tests to make sure no regression is made due to changes on

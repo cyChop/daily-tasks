@@ -1,4 +1,4 @@
-package org.keyboardplaying.dailytasks.properties;
+package org.keyboardplaying.dailytasks.messages;
 
 /**
  * The possible error messages for the task properties.
@@ -7,6 +7,9 @@ package org.keyboardplaying.dailytasks.properties;
  */
 public enum Message {
 
+	/** Message for when the look and feel could not be loaded. */
+	LAF_LOADING_PROBLEM(MessageLevel.WARNING,
+			"The system look & feel could not be loaded. Using Java's instead."),
 	/**
 	 * Message for when no theme has been specified and the default one had to
 	 * be applied.
@@ -21,7 +24,7 @@ public enum Message {
 			MessageLevel.INFO,
 			"OnTop property was not specified in the properties file, using default instead."),
 	/**
-	 * Message for when the specified message level threshold is incorect and
+	 * Message for when the specified message level threshold is incorrect and
 	 * the default one had to be used instead.
 	 */
 	INCORRECT_MSG_LVL(

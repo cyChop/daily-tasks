@@ -4,11 +4,14 @@ import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
+import org.keyboardplaying.dailytasks.messages.Message;
+import org.keyboardplaying.dailytasks.messages.MessageLevel;
 import org.keyboardplaying.dailytasks.model.Task;
-import org.keyboardplaying.dailytasks.properties.Message;
 import org.keyboardplaying.dailytasks.properties.TaskProperties;
+import org.keyboardplaying.dailytasks.ui.DialogUtils;
 import org.keyboardplaying.dailytasks.ui.TaskWindow;
 
 /**
@@ -28,6 +31,7 @@ public class App {
 	 *            optional arguments (unused)
 	 */
 	public static void main(String... args) {
+		applySystemLookAndFeel();
 
 		/* Load the properties. */
 		TaskProperties prop = new TaskProperties(PROPERTIES_FILE_NAME);
@@ -45,12 +49,31 @@ public class App {
 	}
 
 	/**
+	 * Loads and applies the system look and feel for better integration within
+	 * the environment.
+	 */
+	private static void applySystemLookAndFeel() {
+		try {
+			// Use system look & feel
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (UnsupportedLookAndFeelException e) {
+			DialogUtils.displayDialog(Message.LAF_LOADING_PROBLEM);
+		} catch (ClassNotFoundException e) {
+			DialogUtils.displayDialog(Message.LAF_LOADING_PROBLEM);
+		} catch (InstantiationException e) {
+			DialogUtils.displayDialog(Message.LAF_LOADING_PROBLEM);
+		} catch (IllegalAccessException e) {
+			DialogUtils.displayDialog(Message.LAF_LOADING_PROBLEM);
+		}
+	}
+
+	/**
 	 * Displays each of the supplied message in a separate dialog.
 	 * 
 	 * @param messages
 	 *            the messages to display
 	 * @return {@code true} if at least one of the messages was at
-	 *         {@link org.keyboardplaying.dailytasks.properties.MessageLevel#ERROR}
+	 *         {@link org.keyboardplaying.dailytasks.messages.MessageLevel#ERROR}
 	 *         level
 	 */
 	private static boolean displayEachMessageInADialog(
@@ -59,23 +82,8 @@ public class App {
 
 		// Wanna get rid of it? Configure your app properly.
 		for (Message msg : messages) {
-			int msgLevel;
-
-			switch (msg.getLevel()) {
-			case ERROR:
-				msgLevel = JOptionPane.ERROR_MESSAGE;
-				noFatalError = false;
-				break;
-			case WARNING:
-				msgLevel = JOptionPane.WARNING_MESSAGE;
-				break;
-			case INFO:
-			default:
-				msgLevel = JOptionPane.INFORMATION_MESSAGE;
-			}
-
-			displayDialog(msg.getMessage(), msgLevel);
-			if (msgLevel == JOptionPane.ERROR_MESSAGE) {
+			DialogUtils.displayDialog(msg);
+			if (msg.getLevel() == MessageLevel.ERROR) {
 				noFatalError = false;
 			}
 		}
@@ -113,17 +121,5 @@ public class App {
 			tasks.add(new Task(todo));
 		}
 		return tasks;
-	}
-
-	/**
-	 * Displays a dialog.
-	 * 
-	 * @param message
-	 *            the message
-	 * @param type
-	 *            the dialog type
-	 */
-	private static void displayDialog(final String message, final int type) {
-		JOptionPane.showMessageDialog(null, message, "Error", type);
 	}
 }

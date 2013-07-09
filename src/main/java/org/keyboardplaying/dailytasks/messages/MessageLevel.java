@@ -1,4 +1,4 @@
-package org.keyboardplaying.dailytasks.properties;
+package org.keyboardplaying.dailytasks.messages;
 
 /**
  * A list of possible levels for messages.

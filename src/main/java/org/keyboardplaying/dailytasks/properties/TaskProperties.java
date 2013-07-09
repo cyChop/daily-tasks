@@ -8,6 +8,8 @@ import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
 
+import org.keyboardplaying.dailytasks.messages.Message;
+import org.keyboardplaying.dailytasks.messages.MessageLevel;
 import org.keyboardplaying.dailytasks.ui.Theme;
 
 /**
