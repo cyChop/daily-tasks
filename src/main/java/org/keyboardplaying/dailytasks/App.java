@@ -28,13 +28,17 @@ public class App {
 	 * Main method for the application.
 	 * 
 	 * @param args
-	 *            optional arguments (unused)
+	 *            optional arguments; first argument can be used to pass the
+	 *            path to the properties file
 	 */
 	public static void main(String... args) {
+		/* Apply the system L&F. */
 		applySystemLookAndFeel();
 
 		/* Load the properties. */
-		TaskProperties prop = new TaskProperties(PROPERTIES_FILE_NAME);
+		String propertiesPath = args.length > 0 ? args[0]
+				: PROPERTIES_FILE_NAME;
+		TaskProperties prop = new TaskProperties(propertiesPath);
 
 		/* Display each message in a pop-up. */
 		boolean noFatalError = displayEachMessageInADialog(prop.getMessages());
