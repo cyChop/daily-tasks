@@ -56,7 +56,7 @@ public class TaskWindow extends JFrame implements ActionListener {
 	private void build() {
 		/* The basics. */
 		setTitle("Tasks");
-		setIconImages(IconUtils.getIconImages("checkicon", ".png"));
+		setIconImages(IconUtils.getIconImages(this.theme.getIcon(), ".png"));
 
 		/* General styling. */
 		setAlwaysOnTop(true);
