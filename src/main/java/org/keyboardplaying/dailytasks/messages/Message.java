@@ -8,52 +8,48 @@ package org.keyboardplaying.dailytasks.messages;
 public enum Message {
 
 	/** Message for when the look and feel could not be loaded. */
-	LAF_LOADING_PROBLEM(MessageLevel.WARNING,
-			"The system look & feel could not be loaded. Using Java's instead."),
+	LAF_LOADING_PROBLEM(MessageLevel.WARNING, "warning.lookandfeel"),
 
 	/**
 	 * Message for when no theme has been specified and the default one had to
 	 * be applied.
 	 */
-	UNSPECIFIED_THEME(MessageLevel.INFO,
-			"Theme was not specified in the properties file, using default instead."),
+	UNSPECIFIED_THEME(MessageLevel.INFO, "info.theme.unspecified"),
 
 	/**
 	 * Message for when it has not been specified whether the window should be
 	 * stuck on top and the default value had to be applied.
 	 */
-	UNSPECIFIED_ONTOP(
-			MessageLevel.INFO,
-			"OnTop property was not specified in the properties file, using default instead."),
+	UNSPECIFIED_ONTOP(MessageLevel.INFO, "info.ontop.unspecified"),
 
 	/**
 	 * Message for when the specified message level threshold is incorrect and
 	 * the default one had to be used instead.
 	 */
-	INCORRECT_MSG_LVL(
-			MessageLevel.WARNING,
-			"The specified level threshold for messages is incorrect, using default instead."),
+	INCORRECT_MSG_LVL(MessageLevel.WARNING, "warning.messagelevel.incorrect"),
+
+	/**
+	 * Message for when the specified locale is incorrect and the default one
+	 * had to be used instead.
+	 */
+	INCORRECT_LOCALE(MessageLevel.WARNING, "warning.locale.incorrect"),
 
 	/**
 	 * Message for when the specified theme is incorrect and the default one had
 	 * to be applied.
 	 */
-	INCORRECT_THEME(MessageLevel.WARNING,
-			"Theme specified in properties file is incorrect, using default instead."),
+	INCORRECT_THEME(MessageLevel.WARNING, "warning.theme.incorrect"),
 
 	/** Message for when the file could not be read. */
-	ERROR_READING_FILE(MessageLevel.ERROR, "Properties file could not be read."
-			+ "\nPlease make sure it is on the classpath."),
+	ERROR_READING_FILE(MessageLevel.ERROR, "error.properties.incorrect"),
 
 	/** Message for when the tasks could not be parsed from file. */
-	ERROR_READING_TASKS(MessageLevel.ERROR,
-			"Properties tasks data seem incorrect."
-					+ "\nPlease make sure the properties are correct.");
+	ERROR_READING_TASKS(MessageLevel.ERROR, "error.tasks.incorrect");
 
 	/** The message level. */
 	private MessageLevel level;
-	/** A human-readable message. */
-	private String message;
+	/** The key for the message in the bundle. */
+	private String messageKey;
 
 	/**
 	 * Creates a new instance.
@@ -65,7 +61,7 @@ public enum Message {
 	 */
 	private Message(MessageLevel level, String message) {
 		this.level = level;
-		this.message = message;
+		this.messageKey = message;
 	}
 
 	/**
@@ -78,11 +74,11 @@ public enum Message {
 	}
 
 	/**
-	 * Returns a human-readable message.
+	 * Returns the key for the message in the bundle.
 	 * 
-	 * @return a human-readable message
+	 * @return the key for the message in the bundle
 	 */
-	public String getMessage() {
-		return message;
+	public String getKey() {
+		return messageKey;
 	}
 }

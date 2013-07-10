@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Properties;
 import java.util.Set;
 
@@ -13,9 +14,9 @@ import org.keyboardplaying.dailytasks.messages.MessageLevel;
 import org.keyboardplaying.dailytasks.ui.Theme;
 
 /**
- * Object representation of the tasks.properties file.
+ * Object representation of the tasks.configuration file.
  * <p/>
- * Below is a sample of a commented tasks.properties file, formatted as
+ * Below is a sample of a commented tasks.configuration file, formatted as
  * expected.
  * 
  * <pre>
@@ -43,16 +44,18 @@ public class TaskProperties {
 	/* === PROPERTIES === */
 	/**
 	 * The field storing the minimal level for a message to be displayed in the
-	 * properties file.
+	 * configuration file.
 	 */
 	private static final String PROPERTY_MSG_LEVEL = "msg.level";
-	/** The field storing the "on top" property in the properties file. */
+	/** The field storing the locale in the configuration file. */
+	private static final String PROPERTY_LOCALE = "locale";
+	/** The field storing the "on top" property in the configuration file. */
 	private static final String PROPERTY_ON_TOP = "always.on.top";
-	/** The field storing the theme in the properties file. */
+	/** The field storing the theme in the configuration file. */
 	private static final String PROPERTY_THEME = "theme";
-	/** The field storing the task separator in the properties file. */
+	/** The field storing the task separator in the configuration file. */
 	private static final String PROPERTY_SEPARATOR = "tasks.separator";
-	/** The field storing the tasks in the properties file. */
+	/** The field storing the tasks in the configuration file. */
 	private static final String PROPERTY_TASKS = "tasks.todos";
 
 	/* === DEFAULT VALUES === */
@@ -73,6 +76,8 @@ public class TaskProperties {
 	 * This field is not exposed.
 	 */
 	private MessageLevel msgLvl = DEFAULT_MSG_LEVEL;
+	/** The locale specified in the configuration file; {@code null} if none. */
+	private Locale locale = null;
 	/**
 	 * The "on top" properties.
 	 * <p/>
@@ -95,10 +100,10 @@ public class TaskProperties {
 
 	/* === CONSTRUCTORS === */
 	/**
-	 * Loads a properties file from the supplied file name and parses it.
+	 * Loads a configuration file from the supplied file name and parses it.
 	 * 
 	 * @param stream
-	 *            the stream containing the properties file
+	 *            the stream containing the configuration file
 	 */
 	public TaskProperties(InputStream stream) {
 		try {
@@ -109,7 +114,7 @@ public class TaskProperties {
 	}
 
 	/**
-	 * Loads a properties file from the supplied file name and parses it.
+	 * Loads a configuration file from the supplied file name and parses it.
 	 * 
 	 * @param fileName
 	 *            the name of the file to load
@@ -123,6 +128,25 @@ public class TaskProperties {
 	}
 
 	/* === GETTERS === */
+	/**
+	 * Returns the info messages for user.
+	 * 
+	 * @return the info messages
+	 */
+	public Collection<Message> getMessages() {
+		return messages;
+	}
+
+	/**
+	 * Returns the locale, or {@code null} if none has been set in the
+	 * configuration file.
+	 * 
+	 * @return the locale
+	 */
+	public Locale getLocale() {
+		return locale;
+	}
+
 	/**
 	 * Returns the "on top" properties.
 	 * 
@@ -151,41 +175,33 @@ public class TaskProperties {
 		return tasks;
 	}
 
-	/**
-	 * Returns the info messages for user.
-	 * 
-	 * @return the info messages
-	 */
-	public Collection<Message> getMessages() {
-		return messages;
-	}
-
 	/* === BUSINESS METHODS === */
 	/**
 	 * Loads a properties stream and maps its content to the various fields of
 	 * this instance.
 	 * 
 	 * @param stream
-	 *            the stream containing the properties file
+	 *            the stream containing the configuration file
 	 * @throws IOException
-	 *             when the properties file could not be read
+	 *             when the configuration file could not be read
 	 */
 	private void parseProperties(InputStream stream) throws IOException {
 		Properties prop = loadProperties(stream);
 		parseMsgLvl(prop);
+		parseLocale(prop);
 		parseTheme(prop);
 		parseOnTop(prop);
 		parseTasks(prop);
 	}
 
 	/**
-	 * Loads the properties file.
+	 * Loads the configuration file.
 	 * 
 	 * @param stream
-	 *            the stream containing the properties file
+	 *            the stream containing the configuration file
 	 * @return a {@link Properties} file
 	 * @throws IOException
-	 *             when the properties file could not be read
+	 *             when the configuration file could not be read
 	 */
 	private Properties loadProperties(InputStream stream) throws IOException {
 		Properties properties = new Properties();
@@ -201,12 +217,42 @@ public class TaskProperties {
 	 *            the properties
 	 */
 	private void parseMsgLvl(Properties prop) {
-		String themeProp = (String) prop.get(PROPERTY_MSG_LEVEL);
-		if (themeProp != null) {
+		String levelProp = (String) prop.get(PROPERTY_MSG_LEVEL);
+		if (levelProp != null) {
 			try {
-				msgLvl = MessageLevel.valueOf(themeProp);
+				msgLvl = MessageLevel.valueOf(levelProp);
 			} catch (IllegalArgumentException e) {
 				addMessage(Message.INCORRECT_MSG_LVL);
+			}
+		}
+	}
+
+	/**
+	 * Extracts and stores the locale if any is specified in the configuration
+	 * file.
+	 * <p/>
+	 * Expected format is as follows: {@code xx} or {@code xx_YY} with
+	 * {@code xx} being the lowercase ISO-639 language code and {@code YY} the
+	 * uppercase ISO-3166 country code.
+	 * 
+	 * @param prop
+	 *            the properties
+	 */
+	private void parseLocale(Properties prop) {
+		String localeProp = (String) prop.get(PROPERTY_LOCALE);
+		if (localeProp != null) {
+			if (localeProp.length() == 2) {
+
+				/* Only the language code. */
+				locale = new Locale(localeProp.toLowerCase());
+
+			} else if (localeProp.length() == 5) {
+
+				/* Language and country code */
+				String language = localeProp.substring(0, 2);
+				String country = localeProp.substring(3);
+				locale = new Locale(language.toLowerCase(),
+						country.toUpperCase());
 			}
 		}
 	}

@@ -2,6 +2,7 @@ package org.keyboardplaying.dailytasks;
 
 import java.util.Collection;
 import java.util.LinkedHashSet;
+import java.util.Locale;
 import java.util.Set;
 
 import javax.swing.UIManager;
@@ -12,6 +13,7 @@ import org.keyboardplaying.dailytasks.messages.MessageLevel;
 import org.keyboardplaying.dailytasks.model.Task;
 import org.keyboardplaying.dailytasks.properties.TaskProperties;
 import org.keyboardplaying.dailytasks.ui.DialogUtils;
+import org.keyboardplaying.dailytasks.ui.MessageBundle;
 import org.keyboardplaying.dailytasks.ui.TaskWindow;
 
 /**
@@ -32,13 +34,22 @@ public class App {
 	 *            path to the properties file
 	 */
 	public static void main(String... args) {
-		/* Apply the system L&F. */
-		applySystemLookAndFeel();
+		// load the properties first and set the locale so that any error
+		// message displays with the right locale
 
 		/* Load the properties. */
 		String propertiesPath = args.length > 0 ? args[0]
 				: PROPERTIES_FILE_NAME;
 		TaskProperties prop = new TaskProperties(propertiesPath);
+
+		/* Apply the locale is any is specified. */
+		Locale locale = prop.getLocale();
+		if (locale != null) {
+			MessageBundle.setLocale(locale);
+		}
+
+		/* Apply the system L&F. */
+		applySystemLookAndFeel();
 
 		/* Display each message in a pop-up. */
 		boolean noFatalError = displayEachMessageInADialog(prop.getMessages());

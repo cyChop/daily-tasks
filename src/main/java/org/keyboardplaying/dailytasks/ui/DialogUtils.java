@@ -32,7 +32,7 @@ public final class DialogUtils {
 			msgLevel = JOptionPane.INFORMATION_MESSAGE;
 		}
 
-		DialogUtils.displayDialog(msg.getMessage(), msgLevel);
+		DialogUtils.displayDialog(MessageBundle.get(msg.getKey()), msgLevel);
 	}
 
 	/**

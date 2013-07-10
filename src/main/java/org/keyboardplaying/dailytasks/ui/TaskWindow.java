@@ -55,7 +55,7 @@ public class TaskWindow extends JFrame implements ActionListener {
 	/** Builds the window. */
 	private void build() {
 		/* The basics. */
-		setTitle("Tasks");
+		setTitle(MessageBundle.get("title"));
 		setIconImages(IconUtils.getIconImages(this.theme.getIcon(), ".png"));
 
 		/* General styling. */
@@ -188,11 +188,10 @@ public class TaskWindow extends JFrame implements ActionListener {
 			 * For window closing, if some tasks are not yet completed, ask for
 			 * confirmation.
 			 */
-			int exit = JOptionPane
-					.showConfirmDialog(
-							this,
-							"Some tasks were not completed. Are you sure you want to close?",
-							"Skip unfinished tasks?", JOptionPane.YES_NO_OPTION);
+			int exit = JOptionPane.showConfirmDialog(this,
+					MessageBundle.get("confirm.skip.unfinished.body"),
+					MessageBundle.get("confirm.skip.unfinished.title"),
+					JOptionPane.YES_NO_OPTION);
 			if (exit == JOptionPane.YES_OPTION) {
 				super.processWindowEvent(e);
 			}
