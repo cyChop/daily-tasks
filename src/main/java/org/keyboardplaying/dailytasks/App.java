@@ -22,8 +22,7 @@ import org.keyboardplaying.dailytasks.ui.TaskWindow;
 public class App {
 
 	/** The name of the expected properties file. */
-	// private static final String PROPERTIES_FILE_NAME = "tasks.properties";
-	private static final String PROPERTIES_FILE_NAME = "D:/Users/cyChop/Documents/workspace/daily-tasks/src/test/resources/org/keyboardplaying/dailytasks/properties/tasks.properties";
+	private static final String PROPERTIES_FILE_NAME = "tasks.properties";
 
 	/**
 	 * Main method for the application.
