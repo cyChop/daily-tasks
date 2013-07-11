@@ -64,6 +64,9 @@ public class TaskWindow extends JFrame implements ActionListener {
 		// Center on screen
 		setLocationRelativeTo(null);
 
+		/* Make sure the process ends when the window closes. */
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
 		/* Now, the content. */
 		setContentPane(buildContentPane());
 
