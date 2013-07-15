@@ -1,5 +1,7 @@
 package org.keyboardplaying.dailytasks.model;
 
+import java.io.Serializable;
+
 /**
  * A basic representation of a task and its state.
  * <p/>
@@ -8,7 +10,10 @@ package org.keyboardplaying.dailytasks.model;
  * 
  * @author cyChop (http://keyboardplaying.org/)
  */
-public class Task {
+public class Task implements Serializable {
+
+	/** Generated serial version UID. */
+	private static final long serialVersionUID = -7606638946156111184L;
 
 	/** The task's label and identifier. */
 	private String todo;
@@ -99,5 +104,15 @@ public class Task {
 		}
 
 		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "[" + (isDone() ? "X" : " ") + "] " + getTodo();
 	}
 }

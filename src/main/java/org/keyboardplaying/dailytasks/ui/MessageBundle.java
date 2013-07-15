@@ -3,6 +3,8 @@ package org.keyboardplaying.dailytasks.ui;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import org.keyboardplaying.dailytasks.preferences.AppPreferences;
+
 /**
  * Utility class for the management of localized messages.
  * <p/>
@@ -27,7 +29,8 @@ public class MessageBundle {
 	private ResourceBundle bundle;
 
 	/**
-	 * Returns the single instance of this object.
+	 * Returns the single instance of this object, after creating if not
+	 * initialized yet.
 	 * 
 	 * @return the single instance of this object
 	 */
@@ -38,41 +41,16 @@ public class MessageBundle {
 		return instance;
 	}
 
-	/** Creates a new instance, loading the system locale. */
+	/** Creates a new instance, loading the preferred locale. */
 	protected MessageBundle() {
-		setInstanceLocale(Locale.getDefault());
+		setInstanceLocale(AppPreferences.getLocale());
 	}
 
 	/**
-	 * Loads messages for another locale.
-	 * 
-	 * @param locale
-	 *            the locale to load
+	 * Refreshes the locale from the preferences
 	 */
-	public static void setLocale(Locale locale) {
-		getInstance().setInstanceLocale(locale);
-	}
-
-	/**
-	 * Loads messages for another locale.
-	 * 
-	 * @param language
-	 *            the language to load
-	 */
-	public static void setLocale(String language) {
-		setLocale(new Locale(language));
-	}
-
-	/**
-	 * Loads messages for another locale.
-	 * 
-	 * @param language
-	 *            the language to load
-	 * @param country
-	 *            the country specifics
-	 */
-	public static void setLocale(String language, String country) {
-		setLocale(new Locale(language, country));
+	public static void refreshLocale() {
+		getInstance().setInstanceLocale(AppPreferences.getLocale());
 	}
 
 	/**

@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
+import org.keyboardplaying.dailytasks.preferences.AppPreferences;
 import org.keyboardplaying.dailytasks.ui.MessageBundle;
 
 /**
@@ -30,23 +31,33 @@ public class MessageBundleTest {
 		/* Test the various locale switching. */
 		// Assume the testing machine has an English locale (this should be more
 		// widespread than French-localed testing machines)
-		MessageBundle.setLocale("fr", "CA");
+		AppPreferences.setLocale("fr", "CA");
+		MessageBundle.refreshLocale();
 		assertEquals(TITLE_FR, MessageBundle.get(TITLE));
-		MessageBundle.setLocale("en", "US");
+		AppPreferences.setLocale("en", "US");
+		// Should not work without a refresh.
+		assertEquals(TITLE_FR, MessageBundle.get(TITLE));
+		MessageBundle.refreshLocale();
 		assertEquals(TITLE_EN, MessageBundle.get(TITLE));
-		MessageBundle.setLocale("fr");
+		AppPreferences.setLocale("fr");
+		MessageBundle.refreshLocale();
 		assertEquals(TITLE_FR, MessageBundle.get(TITLE));
-		MessageBundle.setLocale("en");
+		AppPreferences.setLocale("en");
+		MessageBundle.refreshLocale();
 		assertEquals(TITLE_EN, MessageBundle.get(TITLE));
 
 		/* Test with some extravagant cases, just to make sure. */
-		MessageBundle.setLocale("fR", "Fr");
+		AppPreferences.setLocale("fR", "Fr");
+		MessageBundle.refreshLocale();
 		assertEquals(TITLE_FR, MessageBundle.get(TITLE));
-		MessageBundle.setLocale("EN", "uK");
+		AppPreferences.setLocale("EN", "uK");
+		MessageBundle.refreshLocale();
 		assertEquals(TITLE_EN, MessageBundle.get(TITLE));
-		MessageBundle.setLocale("FR");
+		AppPreferences.setLocale("FR");
+		MessageBundle.refreshLocale();
 		assertEquals(TITLE_FR, MessageBundle.get(TITLE));
-		MessageBundle.setLocale("En");
+		AppPreferences.setLocale("En");
+		MessageBundle.refreshLocale();
 		assertEquals(TITLE_EN, MessageBundle.get(TITLE));
 	}
 }

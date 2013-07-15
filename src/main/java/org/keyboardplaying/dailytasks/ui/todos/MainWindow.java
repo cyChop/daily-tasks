@@ -1,4 +1,4 @@
-package org.keyboardplaying.dailytasks.ui;
+package org.keyboardplaying.dailytasks.ui.todos;
 
 import java.awt.Container;
 import java.awt.GridBagLayout;
@@ -9,26 +9,26 @@ import java.awt.event.WindowEvent;
 import java.util.Collection;
 
 import javax.swing.JCheckBox;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import org.keyboardplaying.dailytasks.model.Task;
+import org.keyboardplaying.dailytasks.preferences.AppPreferences;
+import org.keyboardplaying.dailytasks.ui.AppWindow;
+import org.keyboardplaying.dailytasks.ui.MessageBundle;
 
 /**
- * A window to display tasks.
+ * The main window of the application. It displays the tasks.
  * <p/>
  * This window will only close once all tasks have been checked.
  * 
  * @author cyChop (http://keyboardplaying.org/)
  */
-public class TaskWindow extends JFrame implements ActionListener {
+public class MainWindow extends AppWindow implements ActionListener {
 
 	/** Generated serial version UID. */
-	private static final long serialVersionUID = 5969672761738565853L;
 
 	/** The theme applied to this window. */
-	private Theme theme;
 	/** The tasks displayed in this window. */
 	private Collection<Task> tasks;
 
@@ -37,16 +37,11 @@ public class TaskWindow extends JFrame implements ActionListener {
 	 * 
 	 * @param tasks
 	 *            the tasks this window should display
-	 * @param alwaysOnTop
-	 *            {@code true} to keep this window always on top of others
-	 * @param theme
-	 *            the {@link Theme} to apply to this window
 	 */
-	public TaskWindow(Collection<Task> tasks, boolean alwaysOnTop, Theme theme) {
-		super();
+	public MainWindow(Collection<Task> tasks) {
+		super("title");
 
 		// Save parameters
-		this.theme = theme;
 		this.tasks = tasks;
 
 		build();
@@ -54,18 +49,11 @@ public class TaskWindow extends JFrame implements ActionListener {
 
 	/** Builds the window. */
 	private void build() {
-		/* The basics. */
-		setTitle(MessageBundle.get("title"));
-		setIconImages(IconUtils.getIconImages(this.theme.getIcon(), ".png"));
-
 		/* General styling. */
-		setAlwaysOnTop(true);
+		setAlwaysOnTop(AppPreferences.isAlwaysOnTop());
 		setResizable(false);
 		// Center on screen
 		setLocationRelativeTo(null);
-
-		/* Make sure the process ends when the window closes. */
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		/* Now, the content. */
 		setContentPane(buildContentPane());
@@ -82,11 +70,11 @@ public class TaskWindow extends JFrame implements ActionListener {
 	private Container buildContentPane() {
 		/* Set the container. */
 		JPanel panel = new JPanel();
-		panel.setBackground(theme.getBgColor());
+		panel.setBackground(getTheme().getBgColor());
 		panel.setLayout(new GridBagLayout());
 
 		/* Add tasks. */
-		TaskWindowConstraintsHandler ch = new TaskWindowConstraintsHandler();
+		MainWindowConstraintsHandler ch = new MainWindowConstraintsHandler();
 		for (Task task : tasks) {
 			addTaskToPanel(panel, task, ch);
 		}
@@ -107,10 +95,10 @@ public class TaskWindow extends JFrame implements ActionListener {
 	 *            adding a new component to the {@link GridBagLayout}
 	 */
 	private void addTaskToPanel(Container panel, Task task,
-			TaskWindowConstraintsHandler ch) {
+			MainWindowConstraintsHandler ch) {
 		/* Create the checkbox. */
 		JCheckBox cb = new JCheckBox(task.getTodo(), task.isDone());
-		cb.setForeground(theme.getTxtColor());
+		cb.setForeground(getTheme().getTxtColor());
 		// blend checkbox into the pane
 		cb.setOpaque(false);
 		cb.addActionListener(this);

@@ -2,7 +2,6 @@ package org.keyboardplaying.dailytasks;
 
 import java.util.Collection;
 import java.util.LinkedHashSet;
-import java.util.Locale;
 import java.util.Set;
 
 import javax.swing.UIManager;
@@ -13,8 +12,7 @@ import org.keyboardplaying.dailytasks.messages.MessageLevel;
 import org.keyboardplaying.dailytasks.model.Task;
 import org.keyboardplaying.dailytasks.properties.TaskProperties;
 import org.keyboardplaying.dailytasks.ui.DialogUtils;
-import org.keyboardplaying.dailytasks.ui.MessageBundle;
-import org.keyboardplaying.dailytasks.ui.TaskWindow;
+import org.keyboardplaying.dailytasks.ui.todos.MainWindow;
 
 /**
  * Main class for the application.
@@ -41,12 +39,6 @@ public class App {
 		String propertiesPath = args.length > 0 ? args[0]
 				: PROPERTIES_FILE_NAME;
 		TaskProperties prop = new TaskProperties(propertiesPath);
-
-		/* Apply the locale is any is specified. */
-		Locale locale = prop.getLocale();
-		if (locale != null) {
-			MessageBundle.setLocale(locale);
-		}
 
 		/* Apply the system L&F. */
 		applySystemLookAndFeel();
@@ -115,8 +107,7 @@ public class App {
 		Set<Task> tasks = parseTasks(prop.getTasks());
 
 		// Prepare the window and show
-		TaskWindow window = new TaskWindow(tasks, prop.isAlwaysOnTop(),
-				prop.getTheme());
+		MainWindow window = new MainWindow(tasks);
 		window.setVisible(true);
 	}
 

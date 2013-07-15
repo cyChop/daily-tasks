@@ -1,11 +1,10 @@
 daily-tasks
 ===========
 
-A todo-manager for all tasks you should perform each time you are booting your machine.
+About
+-----
 
-Everything is configured via a single properties file.
-
-The task manager will display a list of tasks, each with a checkbox. You can optionnally configure it to stay on top of other windows. It will not close until all tasks are checked.
+For more information about Daily Tasks, please refer to the [project page](http://cychop.github.io/daily-tasks)
 
 License
 -------
