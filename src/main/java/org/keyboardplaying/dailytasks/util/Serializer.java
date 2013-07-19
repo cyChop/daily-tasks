@@ -9,12 +9,23 @@ import java.io.Serializable;
 
 import org.apache.commons.io.IOUtils;
 
-// XXX JAVADOC
 /**
+ * A utility class to convert {@link Serializable} objects to byte arrays and
+ * back.
+ * <p/>
+ * This class uses the {@link ObjectOutputStream} and {@link ObjectInputStream}.
+ * 
  * @author cyChop (http://keyboardplaying.org/)
  */
 public final class Serializer {
 
+	/**
+	 * Marshals a {@link Serializable} object to a byte array.
+	 * 
+	 * @param object
+	 *            the object to serialize
+	 * @return the object serialized as a byte array
+	 */
 	public static <T extends Serializable> byte[] serialize(T object) {
 		ObjectOutputStream oos = null;
 
@@ -41,6 +52,13 @@ public final class Serializer {
 		}
 	}
 
+	/**
+	 * Unmarshals a serialized object.
+	 * 
+	 * @param serialized
+	 *            the serialized object
+	 * @return the deserialized object
+	 */
 	@SuppressWarnings("unchecked")
 	public static <T extends Serializable> T deserialize(byte[] serialized) {
 		ObjectInputStream ois = null;
@@ -48,8 +66,7 @@ public final class Serializer {
 		try {
 
 			/* Use the ObjectInputStream to deserialize. */
-			ByteArrayInputStream input = new ByteArrayInputStream(
-					serialized);
+			ByteArrayInputStream input = new ByteArrayInputStream(serialized);
 			ois = new ObjectInputStream(input);
 
 			// done, return the result

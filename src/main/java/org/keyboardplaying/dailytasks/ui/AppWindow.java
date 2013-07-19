@@ -14,6 +14,7 @@ import org.keyboardplaying.dailytasks.preferences.AppPreferences;
 public abstract class AppWindow extends JFrame {
 
 	/** Generated serial version UID. */
+	private static final long serialVersionUID = -4975217954201488541L;
 
 	/** The theme used for this window. */
 	private Theme theme;

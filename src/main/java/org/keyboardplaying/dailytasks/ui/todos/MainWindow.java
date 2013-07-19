@@ -2,12 +2,14 @@ package org.keyboardplaying.dailytasks.ui.todos;
 
 import java.awt.Container;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.util.Collection;
 
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -15,6 +17,7 @@ import javax.swing.JPanel;
 import org.keyboardplaying.dailytasks.model.Task;
 import org.keyboardplaying.dailytasks.preferences.AppPreferences;
 import org.keyboardplaying.dailytasks.ui.AppWindow;
+import org.keyboardplaying.dailytasks.ui.FontUtils;
 import org.keyboardplaying.dailytasks.ui.MessageBundle;
 
 /**
@@ -27,8 +30,8 @@ import org.keyboardplaying.dailytasks.ui.MessageBundle;
 public class MainWindow extends AppWindow implements ActionListener {
 
 	/** Generated serial version UID. */
+	private static final long serialVersionUID = 8150200260722524952L;
 
-	/** The theme applied to this window. */
 	/** The tasks displayed in this window. */
 	private Collection<Task> tasks;
 
@@ -73,14 +76,55 @@ public class MainWindow extends AppWindow implements ActionListener {
 		panel.setBackground(getTheme().getBgColor());
 		panel.setLayout(new GridBagLayout());
 
-		/* Add tasks. */
+		/* Prepare panel constraints. */
 		MainWindowConstraintsHandler ch = new MainWindowConstraintsHandler();
+
+		/* Add buttons. */
+		Insets btnMargins = new Insets(7, 0, 3, 1);
+		// wrench -> settings
+		addButtonToPanel(panel, "\uf0ad", ch, btnMargins);
+		// question-sign -> about
+		addButtonToPanel(panel, "\uf059", ch, btnMargins);
+
+		/* Add tasks. */
 		for (Task task : tasks) {
 			addTaskToPanel(panel, task, ch);
 		}
 
 		// Return the result
 		return panel;
+	}
+
+	/**
+	 * Adds a button to the toolbar.
+	 * <p/>
+	 * The button uses a FontAwesome glyph, and is transparent, blended on the
+	 * panel.
+	 * 
+	 * @param panel
+	 *            the {@link Container} for the panel
+	 * @param btnText
+	 *            the text to display on this button; this should be one unicode
+	 *            character recognized in FontAwesome
+	 * @param ch
+	 *            the handler accountable for the handling of constraints when
+	 *            adding a new component to the {@link GridBagLayout}
+	 * @param btnMargins
+	 *            the margins to use when adding the buttons
+	 */
+	private void addButtonToPanel(JPanel panel, String btnText,
+			MainWindowConstraintsHandler ch, Insets btnMargins) {
+		JButton btn = new JButton(btnText);
+		btn.setMargin(btnMargins);
+
+		/* Makes the button blend in the background. */
+		btn.setOpaque(false);
+		btn.setContentAreaFilled(false);
+		btn.setBorderPainted(false);
+
+		/* Use FontAwesome. */
+		btn.setFont(FontUtils.getFontAwesome());
+		panel.add(btn, ch.getToolbarConstraints());
 	}
 
 	/**
@@ -98,13 +142,12 @@ public class MainWindow extends AppWindow implements ActionListener {
 			MainWindowConstraintsHandler ch) {
 		/* Create the checkbox. */
 		JCheckBox cb = new JCheckBox(task.getTodo(), task.isDone());
-		cb.setForeground(getTheme().getTxtColor());
 		// blend checkbox into the pane
 		cb.setOpaque(false);
 		cb.addActionListener(this);
 
 		/* Add the line to the container. */
-		panel.add(cb, ch.getConstraints());
+		panel.add(cb, ch.getTaskConstraints());
 	}
 
 	/*
