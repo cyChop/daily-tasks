@@ -4,7 +4,7 @@ daily-tasks
 About
 -----
 
-For more information about Daily Tasks, please refer to the [project page](http://cychop.github.io/daily-tasks)
+For more information about Daily Tasks, please refer to the [project page](http://cychop.github.io/daily-tasks).
 
 License
 -------

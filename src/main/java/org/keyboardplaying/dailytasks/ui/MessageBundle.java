@@ -1,5 +1,6 @@
 package org.keyboardplaying.dailytasks.ui;
 
+import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -46,9 +47,7 @@ public class MessageBundle {
 		setInstanceLocale(AppPreferences.getLocale());
 	}
 
-	/**
-	 * Refreshes the locale from the preferences
-	 */
+	/** Refreshes the locale from the preferences */
 	public static void refreshLocale() {
 		getInstance().setInstanceLocale(AppPreferences.getLocale());
 	}
@@ -64,6 +63,21 @@ public class MessageBundle {
 	}
 
 	/**
+	 * Returns the {@link String} for the specified key and includes the
+	 * supplied arguments into the pattern.
+	 * 
+	 * @param key
+	 *            the key for the message
+	 * @param args
+	 *            the arguments to include inside the message pattern retrieved
+	 *            from the bundle
+	 * @return the message for the supplied key and arguments
+	 */
+	public static String get(String key, Object... args) {
+		return getInstance().getString(key, args);
+	}
+
+	/**
 	 * Returns the {@link String} for the specified key.
 	 * 
 	 * @param key
@@ -72,6 +86,26 @@ public class MessageBundle {
 	 */
 	public static String get(String key) {
 		return getInstance().getString(key);
+	}
+
+	/**
+	 * Returns the {@link String} for the specified key and includes the
+	 * supplied arguments into the pattern.
+	 * 
+	 * @param key
+	 *            the key for the message
+	 * @param args
+	 *            the arguments to include inside the message pattern retrieved
+	 *            from the bundle
+	 * @return the message for the supplied key and arguments
+	 */
+	protected String getString(String key, Object... args) {
+		if (args == null || args.length == 0) {
+			// MessageFormat.format is time-consuming
+			// Skip it if no use
+			return getString(key);
+		}
+		return MessageFormat.format(getString(key), args);
 	}
 
 	/**

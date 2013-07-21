@@ -12,12 +12,17 @@ import java.io.InputStream;
  */
 public final class FontUtils {
 
+	/** The version of FontAwesome we use. */
+	public static final String FONT_AWESOME_VERSION = "3.2.1";
+
 	/** The relative path to the directory containing all fonts. */
 	private static final String FONTS_RELATIVE_PATH = "fonts/";
+
 	/** The name of the FontAwesome file. */
 	// Using the OTF file should ensure maximal compatibility across machines
 	// running Java 6
-	private static final String FONT_AWESOME = "FontAwesome-3.2.1.otf";
+	private static final String FONT_AWESOME = "FontAwesome-"
+			+ FONT_AWESOME_VERSION + ".otf";
 
 	/** The iconic font used for glyphs. */
 	private static Font fontAwesome = null;

@@ -1,5 +1,7 @@
 package org.keyboardplaying.dailytasks.ui;
 
+import java.awt.Container;
+
 import javax.swing.JFrame;
 
 import org.keyboardplaying.dailytasks.preferences.AppPreferences;
@@ -68,4 +70,29 @@ public abstract class AppWindow extends JFrame {
 		// Make sure the associated thread is terminated when window is closed
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
+
+	/** Builds the window. */
+	protected void build() {
+		/* General styling. */
+		setAlwaysOnTop(AppPreferences.isAlwaysOnTop());
+		setResizable(false);
+		// Center on screen
+		setLocationRelativeTo(null);
+
+		/* Now, the content. */
+		Container contentPane = buildContentPane();
+		contentPane.setBackground(theme.getBgColor());
+		contentPane.setForeground(theme.getTxtColor());
+		setContentPane(contentPane);
+
+		/* Adapt size to the fittest. */
+		pack();
+	}
+
+	/**
+	 * Builds the content of the window.
+	 * 
+	 * @return the generated {@link Container}
+	 */
+	protected abstract Container buildContentPane();
 }

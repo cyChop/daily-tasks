@@ -4,14 +4,13 @@ import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-
 import org.keyboardplaying.dailytasks.messages.Message;
 import org.keyboardplaying.dailytasks.messages.MessageLevel;
 import org.keyboardplaying.dailytasks.model.Task;
+import org.keyboardplaying.dailytasks.preferences.AppPreferences;
 import org.keyboardplaying.dailytasks.properties.TaskProperties;
 import org.keyboardplaying.dailytasks.ui.DialogUtils;
+import org.keyboardplaying.dailytasks.ui.Theme;
 import org.keyboardplaying.dailytasks.ui.todos.MainWindow;
 
 /**
@@ -41,7 +40,7 @@ public class App {
 		TaskProperties prop = new TaskProperties(propertiesPath);
 
 		/* Apply the system L&F. */
-		applySystemLookAndFeel();
+		Theme.applyTheme(AppPreferences.getTheme());
 
 		/* Display each message in a pop-up. */
 		boolean noFatalError = displayEachMessageInADialog(prop.getMessages());
@@ -52,25 +51,6 @@ public class App {
 		 */
 		if (noFatalError) {
 			displayTaskWindow(prop);
-		}
-	}
-
-	/**
-	 * Loads and applies the system look and feel for better integration within
-	 * the environment.
-	 */
-	private static void applySystemLookAndFeel() {
-		try {
-			// Use system look & feel
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (UnsupportedLookAndFeelException e) {
-			DialogUtils.displayDialog(Message.LAF_LOADING_PROBLEM);
-		} catch (ClassNotFoundException e) {
-			DialogUtils.displayDialog(Message.LAF_LOADING_PROBLEM);
-		} catch (InstantiationException e) {
-			DialogUtils.displayDialog(Message.LAF_LOADING_PROBLEM);
-		} catch (IllegalAccessException e) {
-			DialogUtils.displayDialog(Message.LAF_LOADING_PROBLEM);
 		}
 	}
 

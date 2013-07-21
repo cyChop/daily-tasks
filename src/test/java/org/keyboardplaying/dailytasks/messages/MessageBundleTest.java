@@ -15,7 +15,7 @@ import org.keyboardplaying.dailytasks.ui.MessageBundle;
 public class MessageBundleTest {
 
 	/** The title field, used for locale testing. */
-	private static final String TITLE = "title";
+	private static final String TITLE = "app.title";
 	/** French value for the title. */
 	private static final String TITLE_FR = "Tâches";
 	/** English value for the title. */

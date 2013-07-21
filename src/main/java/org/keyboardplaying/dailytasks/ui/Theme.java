@@ -2,6 +2,9 @@ package org.keyboardplaying.dailytasks.ui;
 
 import java.awt.Color;
 
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 /**
  * A set of themes describing the general appearance of the task window.
  * 
@@ -95,5 +98,44 @@ public enum Theme {
 	 */
 	public String getIcon() {
 		return iconIdentifier;
+	}
+
+	/**
+	 * Loads the system look and feel and registers theme properties to avoid
+	 * manual manipulations.
+	 * <p/>
+	 * The choice of the system look and feel was made to integrate at best with
+	 * user's usual UI.
+	 * 
+	 * @param theme
+	 *            the theme which should be applied
+	 */
+	public static void applyTheme(Theme theme) {
+
+		/* Switch to native look & feel. */
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException e) {
+			// this is no custom look and feel and should not happen
+		} catch (InstantiationException e) {
+			// this is no custom look and feel and should not happen
+		} catch (IllegalAccessException e) {
+			// this is no custom look and feel and should not happen
+		} catch (UnsupportedLookAndFeelException e) {
+			// this is no custom look and feel and should not happen
+		}
+
+		/* Apply custom theme. */
+		// Some generalities
+		UIManager.put("Panel.background", theme.getBgColor());
+		UIManager.put("Button.background", theme.getBgColor());
+
+		// Texts
+		UIManager.put("CheckBox.foreground", theme.getTxtColor());
+		UIManager.put("Label.foreground", theme.getTxtColor());
+
+		// Dialogs
+		UIManager.put("OptionPane.background", theme.getBgColor());
+		UIManager.put("OptionPane.messageForeground", theme.getTxtColor());
 	}
 }

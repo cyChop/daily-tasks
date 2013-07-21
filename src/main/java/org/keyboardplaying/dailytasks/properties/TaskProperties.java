@@ -18,16 +18,6 @@ import org.keyboardplaying.dailytasks.messages.MessageLevel;
  * expected.
  * 
  * <pre>
- * # === GENERAL BEHAVIOUR === #
- * 
- * # true to display tasks on top of other windows
- * # false otherwise
- * #always.on.top=false
- * always.on.top=true
- * 
- * # Choose a theme from LIGHT, GRAY and DARK
- * theme=GRAY
- * 
  * # === TASKS === #
  * 
  * # change the separator if you need to
@@ -36,15 +26,12 @@ import org.keyboardplaying.dailytasks.messages.MessageLevel;
  * </pre>
  * 
  * @author cyChop (http://keyboardplaying.org/)
+ * @deprecated The properties file is to be dropped soon.
  */
+@Deprecated
 public class TaskProperties {
 
 	/* === PROPERTIES === */
-	/**
-	 * The field storing the minimal level for a message to be displayed in the
-	 * configuration file.
-	 */
-	private static final String PROPERTY_MSG_LEVEL = "msg.level";
 	/** The field storing the locale in the configuration file. */
 	private static final String PROPERTY_SEPARATOR = "tasks.separator";
 	/** The field storing the tasks in the configuration file. */
@@ -136,7 +123,6 @@ public class TaskProperties {
 	 */
 	private void parseProperties(InputStream stream) throws IOException {
 		Properties prop = loadProperties(stream);
-		parseMsgLvl(prop);
 		parseTasks(prop);
 	}
 
@@ -153,24 +139,6 @@ public class TaskProperties {
 		Properties properties = new Properties();
 		properties.load(stream);
 		return properties;
-	}
-
-	/**
-	 * Extracts and stores the minimum level for messages to be displayed, or
-	 * applies default if parsing is impossible.
-	 * 
-	 * @param prop
-	 *            the properties
-	 */
-	private void parseMsgLvl(Properties prop) {
-		String levelProp = (String) prop.get(PROPERTY_MSG_LEVEL);
-		if (levelProp != null) {
-			try {
-				msgLvl = MessageLevel.valueOf(levelProp);
-			} catch (IllegalArgumentException e) {
-				addMessage(Message.INCORRECT_MSG_LVL);
-			}
-		}
 	}
 
 	/**
