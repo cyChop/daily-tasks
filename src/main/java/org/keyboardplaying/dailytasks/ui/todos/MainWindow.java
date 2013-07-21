@@ -1,24 +1,22 @@
 package org.keyboardplaying.dailytasks.ui.todos;
 
+import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.util.Collection;
 
-import javax.swing.JButton;
+import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import org.keyboardplaying.dailytasks.model.Task;
 import org.keyboardplaying.dailytasks.ui.AppWindow;
-import org.keyboardplaying.dailytasks.ui.FontUtils;
 import org.keyboardplaying.dailytasks.ui.MessageBundle;
-import org.keyboardplaying.dailytasks.ui.about.AboutWindow;
+import org.keyboardplaying.dailytasks.ui.toolbar.AppToolbar;
 
 /**
  * The main window of the application. It displays the tasks.
@@ -59,90 +57,35 @@ public class MainWindow extends AppWindow implements ActionListener {
 	protected Container buildContentPane() {
 		/* Set the container. */
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridBagLayout());
+
+		panel.setLayout(new BorderLayout());
 
 		/* Prepare panel constraints. */
-		MainWindowConstraintsHandler ch = new MainWindowConstraintsHandler();
+		JPanel taskPanel = new JPanel();
+		taskPanel.setLayout(new BoxLayout(taskPanel, BoxLayout.Y_AXIS));
 
 		/* Add buttons. */
-		Insets btnMargins = new Insets(7, 0, 3, 1);
-		// wrench -> settings
-		addButtonToPanel(panel, "\uf0ad", null, ch, btnMargins);
-		// question-sign -> about
-		addButtonToPanel(panel, "\uf059", new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				final AboutWindow aboutWindow = new AboutWindow();
-				aboutWindow.setVisible(true);
-			}
-		}, ch, btnMargins);
 
 		/* Add tasks. */
 		for (Task task : tasks) {
-			addTaskToPanel(panel, task, ch);
+			addTaskToPanel(taskPanel, task);
 		}
 
+		panel.add(taskPanel, BorderLayout.CENTER);
+		panel.add(new AppToolbar(), BorderLayout.EAST);
 		// Return the result
 		return panel;
-	}
-
-	/**
-	 * Adds a button to the toolbar.
-	 * <p/>
-	 * The button uses a FontAwesome glyph, and is transparent, blended on the
-	 * panel.
-	 * 
-	 * @param panel
-	 *            the {@link Container} for the panel
-	 * @param btnText
-	 *            the text to display on this button; this should be one unicode
-	 *            character recognized in FontAwesome
-	 * @param listener
-	 *            the action to be activated on button click; {@code null} if
-	 *            none
-	 * @param ch
-	 *            the handler accountable for the handling of constraints when
-	 *            adding a new component to the {@link GridBagLayout}
-	 * @param btnMargins
-	 *            the margins to use when adding the buttons
-	 */
-	private void addButtonToPanel(JPanel panel, String btnText,
-			ActionListener listener, MainWindowConstraintsHandler ch,
-			Insets btnMargins) {
-		JButton btn = new JButton(btnText);
-		btn.setMargin(btnMargins);
-
-		/* Apply theme. */
-		btn.setForeground(getTheme().getTxtColor());
-
-		/* Makes the button blend in the background. */
-		btn.setOpaque(false);
-		btn.setContentAreaFilled(false);
-		btn.setBorderPainted(false);
-
-		if (listener != null) {
-			btn.addActionListener(listener);
-		}
-
-		/* Use FontAwesome. */
-		btn.setFont(FontUtils.getFontAwesome());
-		panel.add(btn, ch.getToolbarConstraints());
 	}
 
 	/**
 	 * Adds a check box representing the supplied task to the panel.
 	 * 
 	 * @param panel
-	 *            the {@link Container} for the panel
+	 *            the panel to add the checkbox to
 	 * @param task
 	 *            the task to display as a check box
-	 * @param ch
-	 *            the handler accountable for the handling of constraints when
-	 *            adding a new component to the {@link GridBagLayout}
 	 */
-	private void addTaskToPanel(Container panel, Task task,
-			MainWindowConstraintsHandler ch) {
+	private void addTaskToPanel(Container panel, Task task) {
 		/* Create the checkbox. */
 		JCheckBox cb = new JCheckBox(task.getTodo(), task.isDone());
 		// blend checkbox into the pane
@@ -150,7 +93,7 @@ public class MainWindow extends AppWindow implements ActionListener {
 		cb.addActionListener(this);
 
 		/* Add the line to the container. */
-		panel.add(cb, ch.getTaskConstraints());
+		panel.add(cb);
 	}
 
 	/*
