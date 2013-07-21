@@ -1,4 +1,4 @@
-package org.keyboardplaying.dailytasks.ui;
+package org.keyboardplaying.dailytasks.preferences;
 
 import java.awt.Color;
 

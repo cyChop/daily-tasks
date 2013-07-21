@@ -1,4 +1,4 @@
-package org.keyboardplaying.dailytasks.ui.toolbar;
+package org.keyboardplaying.dailytasks.ui;
 
 import java.awt.Color;
 import java.awt.Insets;
@@ -11,8 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import org.keyboardplaying.dailytasks.preferences.AppPreferences;
-import org.keyboardplaying.dailytasks.ui.FontUtils;
-import org.keyboardplaying.dailytasks.ui.about.AboutWindow;
+import org.keyboardplaying.dailytasks.ui.util.FontUtils;
 
 /**
  * The application toolbar.
@@ -22,10 +21,10 @@ import org.keyboardplaying.dailytasks.ui.about.AboutWindow;
  * 
  * @author cyChop (http://keyboardplaying.org/)
  */
-public class AppToolbar extends JPanel {
+public class Toolbar extends JPanel {
 
 	/** Generated serial version UID. */
-	private static final long serialVersionUID = 1770998280410314563L;
+	private static final long serialVersionUID = 9190817897980345216L;
 
 	/** The width of the empty border to apply around the toolbar. */
 	private static final int BORDER_WIDTH = 2;
@@ -35,7 +34,7 @@ public class AppToolbar extends JPanel {
 	 * 
 	 * @see #initPanel()
 	 */
-	public AppToolbar() {
+	public Toolbar() {
 		super();
 		initPanel();
 	}

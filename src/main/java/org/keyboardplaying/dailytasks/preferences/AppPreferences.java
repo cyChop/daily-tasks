@@ -4,9 +4,7 @@ import java.util.Locale;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
-import org.keyboardplaying.dailytasks.App;
 import org.keyboardplaying.dailytasks.model.TaskSet;
-import org.keyboardplaying.dailytasks.ui.Theme;
 import org.keyboardplaying.dailytasks.util.Serializer;
 
 /**
@@ -71,7 +69,7 @@ public class AppPreferences {
 
 	/** Creates a new instance. */
 	protected AppPreferences() {
-		prefs = Preferences.userRoot().node(App.class.getName());
+		prefs = Preferences.userRoot().node(getClass().getName());
 	}
 
 	/**

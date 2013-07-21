@@ -1,4 +1,4 @@
-package org.keyboardplaying.dailytasks.ui.about;
+package org.keyboardplaying.dailytasks.ui;
 
 import java.awt.Container;
 import java.awt.Font;
@@ -8,16 +8,15 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import org.keyboardplaying.dailytasks.ui.AppWindow;
-import org.keyboardplaying.dailytasks.ui.FontUtils;
-import org.keyboardplaying.dailytasks.ui.MessageBundle;
+import org.keyboardplaying.dailytasks.messages.MessageBundle;
+import org.keyboardplaying.dailytasks.ui.util.FontUtils;
 
 /**
  * A window to display informations about this application.
  * 
  * @author cyChop (http://keyboardplaying.org/)
  */
-public class AboutWindow extends AppWindow {
+public class AboutWindow extends AbstractWindow {
 
 	/** Generated serial version UID. */
 	private static final long serialVersionUID = -3845516318351486497L;

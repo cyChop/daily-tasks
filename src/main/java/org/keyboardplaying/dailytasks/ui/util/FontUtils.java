@@ -1,4 +1,4 @@
-package org.keyboardplaying.dailytasks.ui;
+package org.keyboardplaying.dailytasks.ui.util;
 
 import java.awt.Font;
 import java.awt.FontFormatException;

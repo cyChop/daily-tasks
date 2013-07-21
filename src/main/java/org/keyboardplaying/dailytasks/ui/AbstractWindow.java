@@ -4,7 +4,10 @@ import java.awt.Container;
 
 import javax.swing.JFrame;
 
+import org.keyboardplaying.dailytasks.messages.MessageBundle;
 import org.keyboardplaying.dailytasks.preferences.AppPreferences;
+import org.keyboardplaying.dailytasks.preferences.Theme;
+import org.keyboardplaying.dailytasks.ui.util.IconUtils;
 
 /**
  * Abstract parent for all windows in the application.
@@ -13,16 +16,16 @@ import org.keyboardplaying.dailytasks.preferences.AppPreferences;
  * 
  * @author cyChop (http://keyboardplaying.org/)
  */
-public abstract class AppWindow extends JFrame {
+public abstract class AbstractWindow extends JFrame {
 
 	/** Generated serial version UID. */
-	private static final long serialVersionUID = -4975217954201488541L;
+	private static final long serialVersionUID = -1535058140157572739L;
 
 	/** The theme used for this window. */
 	private Theme theme;
 
 	/** Creates a new instance. */
-	protected AppWindow() {
+	protected AbstractWindow() {
 		super();
 		initWindow();
 	}
@@ -34,7 +37,7 @@ public abstract class AppWindow extends JFrame {
 	 *            the key to the title of the current window in the
 	 *            {@link MessageBundle}
 	 */
-	protected AppWindow(String titleKey) {
+	protected AbstractWindow(String titleKey) {
 		super(MessageBundle.get(titleKey));
 		initWindow();
 	}

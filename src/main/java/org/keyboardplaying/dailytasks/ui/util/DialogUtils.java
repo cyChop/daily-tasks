@@ -1,8 +1,9 @@
-package org.keyboardplaying.dailytasks.ui;
+package org.keyboardplaying.dailytasks.ui.util;
 
 import javax.swing.JOptionPane;
 
 import org.keyboardplaying.dailytasks.messages.Message;
+import org.keyboardplaying.dailytasks.messages.MessageBundle;
 
 /**
  * Utility class for the display of dialogs.

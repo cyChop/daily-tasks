@@ -1,15 +1,16 @@
 package org.keyboardplaying.dailytasks;
 
+import org.keyboardplaying.dailytasks.messages.MessageBundle;
 import org.keyboardplaying.dailytasks.preferences.AppPreferences;
-import org.keyboardplaying.dailytasks.ui.Theme;
-import org.keyboardplaying.dailytasks.ui.todos.MainWindow;
+import org.keyboardplaying.dailytasks.preferences.Theme;
+import org.keyboardplaying.dailytasks.ui.ApplicationWindow;
 
 /**
  * Main class for the application.
  * 
  * @author cyChop (http://keyboardplaying.org/)
  */
-public class App {
+public class Launcher {
 
 	/**
 	 * Main method for the application.
@@ -20,18 +21,12 @@ public class App {
 	 */
 	public static void main(String... args) {
 
-		/* Apply the system L&F. */
+		/* Load the application settings. */
 		Theme.applyTheme(AppPreferences.getTheme());
+		MessageBundle.setLocale(AppPreferences.getLocale());
 
-		displayTaskWindow();
-	}
-
-	/**
-	 * Loads the tasks and displays them in a dedicated window.
-	 */
-	private static void displayTaskWindow() {
-		// Prepare the window and show
-		MainWindow window = new MainWindow(AppPreferences.getTasks());
-		window.setVisible(true);
+		/* Run application */
+		ApplicationWindow window = new ApplicationWindow();
+		window.run();
 	}
 }

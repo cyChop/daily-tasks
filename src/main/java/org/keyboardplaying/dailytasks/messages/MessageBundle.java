@@ -1,10 +1,8 @@
-package org.keyboardplaying.dailytasks.ui;
+package org.keyboardplaying.dailytasks.messages;
 
 import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
-
-import org.keyboardplaying.dailytasks.preferences.AppPreferences;
 
 /**
  * Utility class for the management of localized messages.
@@ -44,12 +42,17 @@ public class MessageBundle {
 
 	/** Creates a new instance, loading the preferred locale. */
 	protected MessageBundle() {
-		setInstanceLocale(AppPreferences.getLocale());
+		setInstanceLocale(Locale.getDefault());
 	}
 
-	/** Refreshes the locale from the preferences */
-	public static void refreshLocale() {
-		getInstance().setInstanceLocale(AppPreferences.getLocale());
+	/**
+	 * Reloads the bundle to match the specified locale.
+	 * 
+	 * @param locale
+	 *            the locale to use
+	 */
+	public static void setLocale(Locale locale) {
+		getInstance().setInstanceLocale(locale);
 	}
 
 	/**

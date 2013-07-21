@@ -1,4 +1,4 @@
-package org.keyboardplaying.dailytasks.ui;
+package org.keyboardplaying.dailytasks.ui.util;
 
 import java.awt.Image;
 import java.awt.Toolkit;

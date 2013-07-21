@@ -1,5 +1,7 @@
 package org.keyboardplaying.dailytasks;
 
+import static org.junit.Assert.fail;
+
 import java.io.IOException;
 
 import jdepend.framework.JDepend;
@@ -40,7 +42,7 @@ public class DependenciesTest {
 			}
 			log.warn(sb.toString());
 
-			// fail();
+			fail();
 		} else {
 			log.info("No package cycle detected.");
 		}

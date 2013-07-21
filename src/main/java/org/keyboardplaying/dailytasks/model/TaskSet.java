@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import org.keyboardplaying.dailytasks.ui.MessageBundle;
+import org.keyboardplaying.dailytasks.messages.MessageBundle;
 
 /**
  * A set of tasks.

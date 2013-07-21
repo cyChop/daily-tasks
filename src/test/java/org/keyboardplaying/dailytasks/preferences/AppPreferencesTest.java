@@ -12,11 +12,9 @@ import java.util.prefs.BackingStoreException;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.keyboardplaying.dailytasks.core.TaskManager;
 import org.keyboardplaying.dailytasks.messages.MessageBundle;
 import org.keyboardplaying.dailytasks.model.Task;
 import org.keyboardplaying.dailytasks.model.TaskSet;
-import org.keyboardplaying.dailytasks.ui.Theme;
 
 /**
  * Tests the {@link AppPreferences} class.
@@ -118,7 +116,7 @@ public class AppPreferencesTest {
 	 * @param tasks
 	 *            the task set to test
 	 * 
-	 * @see TaskManager#getDefault()
+	 * @see TaskSet#getDefault()
 	 */
 	private static void assertDefaultTaskSet(TaskSet tasks) {
 		assertEquals(1, tasks.size());
