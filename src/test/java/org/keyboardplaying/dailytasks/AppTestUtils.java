@@ -24,6 +24,7 @@ public class AppTestUtils {
 		URL propertiesUrl = AppTestUtils.class
 				.getResource("properties/tasks.properties");
 		AppPreferences.setTheme(Theme.DARK);
+		AppPreferences.setLocale("en");
 		App.main(propertiesUrl.getPath());
 	}
 }

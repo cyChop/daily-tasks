@@ -1,10 +1,13 @@
 package org.keyboardplaying.dailytasks.preferences;
 
 import java.util.Locale;
+import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
 import org.keyboardplaying.dailytasks.App;
+import org.keyboardplaying.dailytasks.model.TaskSet;
 import org.keyboardplaying.dailytasks.ui.Theme;
+import org.keyboardplaying.dailytasks.util.Serializer;
 
 /**
  * Utility class for the management of preferences.
@@ -36,6 +39,8 @@ public class AppPreferences {
 	private static final String FLD_ON_TOP = FLD_PREFIX + "ontop";
 	/** The field storing the selected theme. */
 	private static final String FLD_THEME = FLD_PREFIX + "theme";
+	/** The field storing the tasks. */
+	private static final String FLD_TASKS = FLD_PREFIX + "tasks";
 
 	/**
 	 * The default preference specifying if the todo-list should remain on top
@@ -67,6 +72,28 @@ public class AppPreferences {
 	/** Creates a new instance. */
 	protected AppPreferences() {
 		prefs = Preferences.userRoot().node(App.class.getName());
+	}
+
+	/**
+	 * Clears all the preferences which were stored on the running system.
+	 * 
+	 * @throws BackingStoreException
+	 *             if this operation cannot be completed due to a failure in the
+	 *             backing store, or inability to communicate with it
+	 */
+	public static void clear() throws BackingStoreException {
+		getInstance().clearInstance();
+	}
+
+	/**
+	 * Clears all the preferences which were stored on the running system.
+	 * 
+	 * @throws BackingStoreException
+	 *             if this operation cannot be completed due to a failure in the
+	 *             backing store, or inability to communicate with it
+	 */
+	public void clearInstance() throws BackingStoreException {
+		prefs.clear();
 	}
 
 	/**
@@ -245,5 +272,59 @@ public class AppPreferences {
 	 */
 	protected void setInstanceAlwaysOnTop(boolean alwaysOnTop) {
 		prefs.putBoolean(FLD_ON_TOP, alwaysOnTop);
+	}
+
+	/**
+	 * Returns the tasks stored as a preference, or the default set if none.
+	 * 
+	 * @return the tasks
+	 * 
+	 * @see TaskSet#getDefault()
+	 */
+	public static TaskSet getTasks() {
+		return getInstance().getInstanceTasks();
+	}
+
+	/**
+	 * Returns the tasks stored as a preference, or the default set if none.
+	 * 
+	 * @return the tasks
+	 * 
+	 * @see TaskSet#getDefault()
+	 */
+	protected TaskSet getInstanceTasks() {
+		TaskSet result;
+
+		byte[] byteArray = prefs.getByteArray(FLD_TASKS, null);
+		if (byteArray == null) {
+			result = TaskSet.getDefault();
+		} else {
+			result = Serializer.deserialize(byteArray);
+			if (result == null || result.isEmpty()) {
+				result = TaskSet.getDefault();
+			}
+		}
+
+		return result;
+	}
+
+	/**
+	 * Stores the specified {@link TaskSet} as a preference.
+	 * 
+	 * @param tasks
+	 *            the tasks to save
+	 */
+	public static void setTasks(TaskSet tasks) {
+		getInstance().setInstanceTasks(tasks);
+	}
+
+	/**
+	 * Stores the specified {@link TaskSet} as a preference.
+	 * 
+	 * @param tasks
+	 *            the tasks to save
+	 */
+	protected void setInstanceTasks(TaskSet tasks) {
+		prefs.putByteArray(FLD_TASKS, Serializer.serialize(tasks));
 	}
 }

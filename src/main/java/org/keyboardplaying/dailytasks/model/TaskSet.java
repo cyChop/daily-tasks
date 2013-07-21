@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.keyboardplaying.dailytasks.ui.MessageBundle;
+
 /**
  * A set of tasks.
  * <p/>
@@ -21,7 +23,7 @@ import java.util.Set;
 public class TaskSet implements Serializable, Iterable<Task> {
 
 	/** Generated serial version UID. */
-	private static final long serialVersionUID = 325943211601291141L;
+	private static final long serialVersionUID = -1091318559849096033L;
 
 	/** The tasks of this instance. */
 	private Set<Task> tasks = new LinkedHashSet<Task>();
@@ -121,5 +123,17 @@ public class TaskSet implements Serializable, Iterable<Task> {
 	@Override
 	public Iterator<Task> iterator() {
 		return tasks.iterator();
+	}
+
+	/**
+	 * Creates a default {@link TaskSet} containing only one {@link Task}
+	 * proposing to create more.
+	 * 
+	 * @return the default {@link TaskSet}
+	 */
+	public static TaskSet getDefault() {
+		TaskSet set = new TaskSet();
+		set.addTask(new Task(MessageBundle.get("task.default")));
+		return set;
 	}
 }

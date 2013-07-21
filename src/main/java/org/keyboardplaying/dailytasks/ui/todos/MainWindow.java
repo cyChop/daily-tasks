@@ -6,7 +6,6 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
-import java.util.Collection;
 
 import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
@@ -14,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import org.keyboardplaying.dailytasks.model.Task;
+import org.keyboardplaying.dailytasks.model.TaskSet;
 import org.keyboardplaying.dailytasks.ui.AppWindow;
 import org.keyboardplaying.dailytasks.ui.MessageBundle;
 import org.keyboardplaying.dailytasks.ui.toolbar.AppToolbar;
@@ -31,7 +31,7 @@ public class MainWindow extends AppWindow implements ActionListener {
 	private static final long serialVersionUID = -3510718848122843486L;
 
 	/** The tasks displayed in this window. */
-	private Collection<Task> tasks;
+	private TaskSet tasks;
 
 	/**
 	 * Creates a new instance.
@@ -39,7 +39,7 @@ public class MainWindow extends AppWindow implements ActionListener {
 	 * @param tasks
 	 *            the tasks this window should display
 	 */
-	public MainWindow(Collection<Task> tasks) {
+	public MainWindow(TaskSet tasks) {
 		super("app.title");
 
 		// Save parameters
