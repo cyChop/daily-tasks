@@ -3,9 +3,9 @@ package org.keyboardplaying.dailytasks.messages;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.Locale;
+
 import org.junit.Test;
-import org.keyboardplaying.dailytasks.preferences.AppPreferences;
-import org.keyboardplaying.dailytasks.ui.MessageBundle;
 
 /**
  * Test class for {@link MessageBundle}.
@@ -31,33 +31,24 @@ public class MessageBundleTest {
 		/* Test the various locale switching. */
 		// Assume the testing machine has an English locale (this should be more
 		// widespread than French-localed testing machines)
-		AppPreferences.setLocale("fr", "CA");
-		MessageBundle.refreshLocale();
+		MessageBundle.setLocale(new Locale("fr", "CA"));
 		assertEquals(TITLE_FR, MessageBundle.get(TITLE));
-		AppPreferences.setLocale("en", "US");
+		MessageBundle.setLocale(new Locale("en", "US"));
 		// Should not work without a refresh.
-		assertEquals(TITLE_FR, MessageBundle.get(TITLE));
-		MessageBundle.refreshLocale();
 		assertEquals(TITLE_EN, MessageBundle.get(TITLE));
-		AppPreferences.setLocale("fr");
-		MessageBundle.refreshLocale();
+		MessageBundle.setLocale(new Locale("fr"));
 		assertEquals(TITLE_FR, MessageBundle.get(TITLE));
-		AppPreferences.setLocale("en");
-		MessageBundle.refreshLocale();
+		MessageBundle.setLocale(new Locale("en"));
 		assertEquals(TITLE_EN, MessageBundle.get(TITLE));
 
 		/* Test with some extravagant cases, just to make sure. */
-		AppPreferences.setLocale("fR", "Fr");
-		MessageBundle.refreshLocale();
+		MessageBundle.setLocale(new Locale("fR", "Fr"));
 		assertEquals(TITLE_FR, MessageBundle.get(TITLE));
-		AppPreferences.setLocale("EN", "uK");
-		MessageBundle.refreshLocale();
+		MessageBundle.setLocale(new Locale("EN", "uK"));
 		assertEquals(TITLE_EN, MessageBundle.get(TITLE));
-		AppPreferences.setLocale("FR");
-		MessageBundle.refreshLocale();
+		MessageBundle.setLocale(new Locale("FR"));
 		assertEquals(TITLE_FR, MessageBundle.get(TITLE));
-		AppPreferences.setLocale("En");
-		MessageBundle.refreshLocale();
+		MessageBundle.setLocale(new Locale("En"));
 		assertEquals(TITLE_EN, MessageBundle.get(TITLE));
 	}
 }

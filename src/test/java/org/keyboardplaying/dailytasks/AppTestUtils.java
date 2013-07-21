@@ -1,6 +1,6 @@
 package org.keyboardplaying.dailytasks;
 
-import java.net.URL;
+import java.util.prefs.BackingStoreException;
 
 import org.keyboardplaying.dailytasks.preferences.AppPreferences;
 import org.keyboardplaying.dailytasks.ui.Theme;
@@ -19,12 +19,12 @@ public class AppTestUtils {
 	 * 
 	 * @param args
 	 *            optional arguments, unused
+	 * @throws BackingStoreException
 	 */
-	public static void main(String[] args) {
-		URL propertiesUrl = AppTestUtils.class
-				.getResource("properties/tasks.properties");
+	public static void main(String[] args) throws BackingStoreException {
+		AppPreferences.clear();
 		AppPreferences.setTheme(Theme.DARK);
-		AppPreferences.setLocale("en");
-		App.main(propertiesUrl.getPath());
+		AppPreferences.setLocale("fr");
+		App.main();
 	}
 }
