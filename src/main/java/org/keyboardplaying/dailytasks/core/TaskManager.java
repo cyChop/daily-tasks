@@ -26,21 +26,24 @@ public class TaskManager {
 		return this.tasks;
 	}
 
-	public void updateTask(String todo, boolean done) {
+	public Task updateTask(String todo, boolean done) {
 		// Retrieve the task in the list and update it
-		updateTaskState(todo, done);
+		Task task = updateTaskState(todo, done);
 
 		// Persist data
 		saveTasks();
+
+		return task;
 	}
 
-	private void updateTaskState(String todo, boolean done) {
+	private Task updateTaskState(String todo, boolean done) {
 		for (Task task : tasks) {
 			if (task.getTodo().equals(todo)) {
 				task.setDone(done);
-				break;
+				return task;
 			}
 		}
+		return null;
 	}
 
 	private void saveTasks() {

@@ -1,4 +1,4 @@
 /**
- * Contains the application core business logic.
+ * Contains the application's core business logic.
  */
 package org.keyboardplaying.dailytasks.core;
