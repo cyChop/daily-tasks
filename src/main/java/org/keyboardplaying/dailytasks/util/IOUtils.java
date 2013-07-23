@@ -14,33 +14,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.keyboardplaying.dailytasks;
+package org.keyboardplaying.dailytasks.util;
 
-import java.util.prefs.BackingStoreException;
-
-import org.keyboardplaying.dailytasks.preferences.AppPreferences;
-import org.keyboardplaying.dailytasks.preferences.Theme;
+import java.io.Closeable;
+import java.io.IOException;
 
 /**
- * This class is not properly speaking a unit test class. It is a utility to run
- * the {@link Launcher} program with a local properties file from within your
- * IDE, without having to perform a full package.
+ * A reimplementation of some methods from commons-io.IOUtils
  * 
  * @author cyChop (http://keyboardplaying.org/)
  */
-public class LauncherTestUtils {
+public class IOUtils {
 
 	/**
-	 * Runs the application.
+	 * Unconditionnally closes a {@link Closeable}.
 	 * 
-	 * @param args
-	 *            optional arguments, unused
-	 * @throws BackingStoreException
+	 * @param closeable
+	 *            the object to close, may be {@code null} or already closed
 	 */
-	public static void main(String[] args) throws BackingStoreException {
-		AppPreferences.clear();
-		AppPreferences.setTheme(Theme.DARK);
-		AppPreferences.setLocale("fr");
-		Launcher.main();
+	public static void closeQuietly(Closeable closeable) {
+		try {
+			if (closeable != null) {
+				closeable.close();
+			}
+		} catch (IOException e) {
+			// ignore
+		}
 	}
 }

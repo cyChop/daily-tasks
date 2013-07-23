@@ -7,8 +7,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import org.apache.commons.io.IOUtils;
-
 /**
  * A utility class to convert {@link Serializable} objects to byte arrays and
  * back.

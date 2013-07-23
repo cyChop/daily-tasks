@@ -1,20 +1,44 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.keyboardplaying.dailytasks.model;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 
 /**
  * A basic representation of a task and its state.
  * <p/>
- * The task's label is used as an identifier (two tasks with the same label will
- * be considered to be equal).
+ * The task contains an integer identifier generated upon instantiation. This ID
+ * will be used to ensure equality. <strong>Warning:</strong> The IDs will not
+ * be serialised and will be valid only for current session.
  * 
  * @author cyChop (http://keyboardplaying.org/)
  */
 public class Task implements Serializable {
 
 	/** Generated serial version UID. */
-	private static final long serialVersionUID = -7606638946156111184L;
+	private static final long serialVersionUID = 6770842266859911969L;
 
+	/** A sequence used to generate a unique ID for each task. */
+	public static int sequence = 0;
+
+	/** The task's identifier. */
+	private transient int id = ++sequence;
 	/** The task's label and identifier. */
 	private String todo;
 	/** The task state (finished or not). */
@@ -53,6 +77,15 @@ public class Task implements Serializable {
 	}
 
 	/**
+	 * Returns the task's ID.
+	 * 
+	 * @return the task's ID
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
 	 * Returns the task's state.
 	 * 
 	 * @return {@code true} if the task is finished, {@code false} otherwise
@@ -78,11 +111,7 @@ public class Task implements Serializable {
 	 */
 	@Override
 	public int hashCode() {
-		int hashcode = 0;
-		if (this.getTodo() != null) {
-			hashcode = this.getTodo().hashCode();
-		}
-		return hashcode;
+		return id;
 	}
 
 	/*
@@ -92,18 +121,7 @@ public class Task implements Serializable {
 	 */
 	@Override
 	public boolean equals(Object o) {
-		boolean result = false;
-
-		if (o == null) {
-			result = this.getTodo() == null;
-		} else if (o instanceof Task) {
-			result = this.getTodo() == null && ((Task) o).getTodo() == null
-					|| this.getTodo().equals(((Task) o).getTodo());
-		} else if (o instanceof String) {
-			result = o.equals(this.getTodo());
-		}
-
-		return result;
+		return o instanceof Task && ((Task) o).getId() == this.getId();
 	}
 
 	/*
@@ -114,5 +132,23 @@ public class Task implements Serializable {
 	@Override
 	public String toString() {
 		return "[" + (isDone() ? "X" : " ") + "] " + getTodo();
+	}
+
+	/**
+	 * Invoked when deserializing an instance.
+	 * 
+	 * @param ois
+	 *            the deserializer
+	 * @throws ClassNotFoundException
+	 *             when the class is not found
+	 * @throws IOException
+	 *             when an exception occurs
+	 */
+	private void readObject(ObjectInputStream ois)
+			throws ClassNotFoundException, IOException {
+		// default deserialization
+		ois.defaultReadObject();
+		// initialize ID
+		id = ++sequence;
 	}
 }

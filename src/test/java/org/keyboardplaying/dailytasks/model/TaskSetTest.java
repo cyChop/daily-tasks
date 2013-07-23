@@ -1,3 +1,19 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.keyboardplaying.dailytasks.model;
 
 import static org.junit.Assert.assertEquals;
@@ -22,7 +38,7 @@ public class TaskSetTest {
 	@Test
 	public void testSetManipulation() throws UnexpectedException {
 		Task task1 = new Task("Common label", true);
-		Task task2 = new Task("Common label", false);
+		Task task2 = new Task("Common label", true);
 		Task task3 = new Task("Different label", false);
 
 		TaskSet set = new TaskSet();
@@ -45,23 +61,31 @@ public class TaskSetTest {
 		}
 
 		// Add an equal task > no change.
-		set.addTask(task2);
+		task1.setDone(false);
+		set.addTask(task1);
 		assertEquals(1, set.size());
-		assertTrue(isTaskDone(set, task1));
+		// state has changed has the first version was overwritten
+		assertFalse(isTaskDone(set, task1));
+
+		// Can have two tasks with the same label and state, does not make them
+		// equal.
+		set.addTask(task2);
+		assertEquals(2, set.size());
+		assertTrue(isTaskDone(set, task2));
 
 		// Add another task.
 		set.addTask(task3);
-		assertEquals(2, set.size());
+		assertEquals(3, set.size());
 
 		// Update task.
 		assertFalse(isTaskDone(set, task3));
-		set.updateTaskState(task3, true);
+		set.updateTaskState(task3.getId(), true);
 		assertTrue(isTaskDone(set, task3));
 
 		// Remove a task.
-		assertEquals(2, set.size());
+		assertEquals(3, set.size());
 		set.removeTask(task3);
-		assertEquals(1, set.size());
+		assertEquals(2, set.size());
 	}
 
 	/**
@@ -90,7 +114,7 @@ public class TaskSetTest {
 	public void testTaskSetSerialization() {
 		// Some randomization to make things even better...
 		TaskSet original = new TaskSet();
-		int nbTasks = (int) (100 * Math.random()) + 1;
+		int nbTasks = (int) (20 * Math.random()) + 1;
 		for (int i = 0; i < nbTasks; i++) {
 			Task randomTask = new Task(UUID.randomUUID().toString(),
 					Math.random() < 0.5 ? false : true);

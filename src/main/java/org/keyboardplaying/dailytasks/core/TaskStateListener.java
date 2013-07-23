@@ -1,12 +1,24 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.keyboardplaying.dailytasks.core;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JCheckBox;
 
 import org.keyboardplaying.dailytasks.model.Task;
 import org.keyboardplaying.dailytasks.ui.MainWindow;
+import org.keyboardplaying.dailytasks.ui.components.todos.TaskStateChangeListener;
 
 /**
  * A class to persist the tasks' states and provide appropriate processing on
@@ -14,7 +26,7 @@ import org.keyboardplaying.dailytasks.ui.MainWindow;
  * 
  * @author cyChop (http://keyboardplaying.org/)
  */
-public abstract class TaskStateListener implements ActionListener {
+public abstract class TaskStateListener implements TaskStateChangeListener {
 
 	/** The window this listener controls. */
 	private MainWindow mainWindow;
@@ -53,19 +65,18 @@ public abstract class TaskStateListener implements ActionListener {
 	 * <p/>
 	 * After saving the task's state, an additional processing can be performed.
 	 * 
-	 * @param e
+	 * @param taskId
+	 *            {@inheritDoc}
+	 * @param done
 	 *            {@inheritDoc}
 	 */
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		JCheckBox cb = (JCheckBox) e.getSource();
-
+	public void updateTaskState(int taskId, boolean done) {
 		// Update task
-		Task task = TaskManager.getInstance().updateTask(cb.getText(),
-				cb.isSelected());
+		Task updTask = TaskManager.getInstance().updateTask(taskId, done);
 
 		// Additional processing
-		processTaskAfterStateSaved(task);
+		processTaskAfterStateSaved(updTask);
 	}
 
 	/**

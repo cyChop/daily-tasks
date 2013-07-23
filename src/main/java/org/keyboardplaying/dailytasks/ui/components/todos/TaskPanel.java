@@ -1,10 +1,23 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.keyboardplaying.dailytasks.ui.components.todos;
-
-import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
-import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
 import org.keyboardplaying.dailytasks.model.Task;
@@ -18,7 +31,7 @@ import org.keyboardplaying.dailytasks.model.TaskSet;
 public class TaskPanel extends JPanel {
 
 	/** Generated serial version UID. */
-	private static final long serialVersionUID = 6314379694565949226L;
+	private static final long serialVersionUID = 4237334615830374030L;
 
 	/** The width of the empty border to apply around the toolbar. */
 	private static final int BORDER_WIDTH = 2;
@@ -33,7 +46,7 @@ public class TaskPanel extends JPanel {
 	 * 
 	 * @see #initPanel()
 	 */
-	public TaskPanel(TaskSet tasks, ActionListener listener) {
+	public TaskPanel(TaskSet tasks, TaskStateChangeListener listener) {
 		super();
 		initPanel(tasks, listener);
 	}
@@ -46,7 +59,7 @@ public class TaskPanel extends JPanel {
 	 * @param listener
 	 *            the object which listens on task state change
 	 */
-	private void initPanel(TaskSet tasks, ActionListener listener) {
+	private void initPanel(TaskSet tasks, TaskStateChangeListener listener) {
 		/* Initialize layout. */
 		this.setBorder(BorderFactory.createEmptyBorder(BORDER_WIDTH,
 				BORDER_WIDTH, BORDER_WIDTH, BORDER_WIDTH));
@@ -54,26 +67,8 @@ public class TaskPanel extends JPanel {
 
 		/* Now add tasks. */
 		for (Task task : tasks) {
-			addTaskToPanel(task, listener);
+			// Create the checkbox and add it to the container.
+			this.add(new TaskCheckBox(task, listener));
 		}
-	}
-
-	/**
-	 * Adds a check box representing the supplied task to the panel.
-	 * 
-	 * @param task
-	 *            the task to display as a check box
-	 * @param listener
-	 *            the object which listens on task state change
-	 */
-	private void addTaskToPanel(Task task, ActionListener listener) {
-		/* Create the checkbox. */
-		JCheckBox cb = new JCheckBox(task.getTodo(), task.isDone());
-		// blend checkbox into the pane
-		cb.setOpaque(false);
-		cb.addActionListener(listener);
-
-		/* Add the line to the container. */
-		this.add(cb);
 	}
 }

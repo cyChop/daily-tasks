@@ -1,3 +1,19 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.keyboardplaying.dailytasks.model;
 
 import java.io.Serializable;
@@ -56,23 +72,40 @@ public class TaskSet implements Serializable, Iterable<Task> {
 	 *            the state to apply
 	 */
 	public void updateTaskState(Task task, boolean done) {
-		boolean found = false;
+		updateTaskState(task.getId(), done);
+	}
+
+	/**
+	 * Updates the {@link Task#isDone()} value of a collection in the set.
+	 * 
+	 * @param taskId
+	 *            the id of the task to update
+	 * @param done
+	 *            the state to apply
+	 * 
+	 * @return the updated {@link Task}
+	 */
+	public Task updateTaskState(int taskId, boolean done) {
+		Task result = null;
 
 		/* Search for the task. */
-		for (Task taskInSet : tasks) {
-			if (taskInSet.equals(task)) {
+		for (Task task : tasks) {
+			if (task.getId() == taskId) {
 				/* Update the task. */
-				taskInSet.setDone(done);
-				found = true;
+				task.setDone(done);
+				result = task;
+
 				break;
 			}
 		}
 
 		/* The task does not exist in the collection. */
-		if (!found) {
+		if (result == null) {
 			// TODO throw a meaningful exception
 			throw new RuntimeException();
 		}
+
+		return result;
 	}
 
 	/**
@@ -84,7 +117,7 @@ public class TaskSet implements Serializable, Iterable<Task> {
 	 *            the task to update
 	 */
 	public void updateTaskState(Task task) {
-		updateTaskState(task, task.isDone());
+		updateTaskState(task.getId(), task.isDone());
 	}
 
 	/**

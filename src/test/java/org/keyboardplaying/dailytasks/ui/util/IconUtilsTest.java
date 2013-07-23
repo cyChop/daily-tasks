@@ -14,41 +14,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.keyboardplaying.dailytasks.model;
+package org.keyboardplaying.dailytasks.ui.util;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+
+import java.awt.Image;
+import java.util.List;
 
 import org.junit.Test;
-import org.keyboardplaying.dailytasks.util.Serializer;
+import org.keyboardplaying.dailytasks.preferences.Theme;
 
 /**
- * Tests the {@link Task} class, along with the {@link Serializer} methods.
+ * Tests for the {@link IconUtils} class.
  * 
  * @author cyChop (http://keyboardplaying.org/)
  */
-public class TaskTest {
+public class IconUtilsTest {
 
+	/** Ensures {@link IconUtils} is still capable of retrieving icons. */
 	@Test
-	public void testTaskEquals() {
-		Task task1 = new Task("Common label", true);
-		Task task2 = new Task("Common label", false);
-		Task task3 = new Task("Different label", false);
-
-		assertEquals(task1, task1);
-		assertFalse(task1.equals(task2));
-		assertFalse(task1.equals(task3));
-		assertFalse(task2.equals(task3));
-		assertFalse(task2.equals(null));
-	}
-
-	@Test
-	public void testTaskSerialization() {
-		Task original = new Task("Some label", true);
-		byte[] serialized = Serializer.serialize(original);
-		Task result = Serializer.deserialize(serialized);
-
-		assertEquals(original.getTodo(), result.getTodo());
-		assertEquals(original.isDone(), result.isDone());
+	public void testIconFetching() {
+		List<Image> defaultWindowIcon = IconUtils.getWindowIconImages(
+				Theme.ORANGE.getIcon(), ".png");
+		assertNotNull(defaultWindowIcon);
+		assertFalse(defaultWindowIcon.isEmpty());
 	}
 }

@@ -14,33 +14,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.keyboardplaying.dailytasks;
+package org.keyboardplaying.dailytasks.ui.util;
 
-import java.util.prefs.BackingStoreException;
+import static org.junit.Assert.assertNotNull;
 
-import org.keyboardplaying.dailytasks.preferences.AppPreferences;
-import org.keyboardplaying.dailytasks.preferences.Theme;
+import org.junit.Test;
 
 /**
- * This class is not properly speaking a unit test class. It is a utility to run
- * the {@link Launcher} program with a local properties file from within your
- * IDE, without having to perform a full package.
+ * Tests for the {@link FontUtils} class.
  * 
  * @author cyChop (http://keyboardplaying.org/)
  */
-public class LauncherTestUtils {
+public class FontUtilsTest {
 
-	/**
-	 * Runs the application.
-	 * 
-	 * @param args
-	 *            optional arguments, unused
-	 * @throws BackingStoreException
-	 */
-	public static void main(String[] args) throws BackingStoreException {
-		AppPreferences.clear();
-		AppPreferences.setTheme(Theme.DARK);
-		AppPreferences.setLocale("fr");
-		Launcher.main();
+	/** Ensures {@link FontUtils} is still capable of retrieving FontAwesome. */
+	@Test
+	public void testFontFetching() {
+		assertNotNull(FontUtils.getFontAwesome());
 	}
 }

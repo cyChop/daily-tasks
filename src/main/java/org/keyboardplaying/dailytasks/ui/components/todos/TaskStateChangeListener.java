@@ -14,33 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.keyboardplaying.dailytasks;
-
-import java.util.prefs.BackingStoreException;
-
-import org.keyboardplaying.dailytasks.preferences.AppPreferences;
-import org.keyboardplaying.dailytasks.preferences.Theme;
+package org.keyboardplaying.dailytasks.ui.components.todos;
 
 /**
- * This class is not properly speaking a unit test class. It is a utility to run
- * the {@link Launcher} program with a local properties file from within your
- * IDE, without having to perform a full package.
+ * An interface for when task's state changes.
  * 
  * @author cyChop (http://keyboardplaying.org/)
  */
-public class LauncherTestUtils {
+public interface TaskStateChangeListener {
 
 	/**
-	 * Runs the application.
+	 * This method is called in the {@link TaskCheckBox} when the box is checked
+	 * or unchecked.
 	 * 
-	 * @param args
-	 *            optional arguments, unused
-	 * @throws BackingStoreException
+	 * @param taskId
+	 *            the ID of the updated task
+	 * @param done
+	 *            the new state of the task
 	 */
-	public static void main(String[] args) throws BackingStoreException {
-		AppPreferences.clear();
-		AppPreferences.setTheme(Theme.DARK);
-		AppPreferences.setLocale("fr");
-		Launcher.main();
-	}
+	void updateTaskState(int taskId, boolean done);
 }
