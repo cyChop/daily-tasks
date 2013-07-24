@@ -28,6 +28,7 @@ import org.junit.Test;
 public class FontUtilsTest {
 
 	/** Ensures {@link FontUtils} is still capable of retrieving FontAwesome. */
+	// FIXME FontAwesome does not work with Java6 JVM...
 	@Test
 	public void testFontFetching() {
 		assertNotNull(FontUtils.getFontAwesome());

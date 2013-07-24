@@ -34,11 +34,15 @@ public final class FontUtils {
 	/** The relative path to the directory containing all fonts. */
 	private static final String FONTS_RELATIVE_PATH = "../fonts/";
 
-	/** The name of the FontAwesome file. */
+	/** The name of the FontAwesome OTF file. */
 	// Using the OTF (CCF internally) file should ensure maximal compatibility
-	// across machines running Java 6
-	private static final String FONT_AWESOME = "FontAwesome-"
+	// across machines running Java 7
+	private static final String FONT_AWESOME_OTF = "FontAwesome-"
 			+ FONT_AWESOME_VERSION + ".otf";
+	/** The name of the FontAwesome TTF file. */
+	// TTF fallback for Sun Java 6
+	private static final String FONT_AWESOME_TTF = "FontAwesome-"
+			+ FONT_AWESOME_VERSION + ".ttf";
 
 	/** The iconic font used for glyphs. */
 	private static Font fontAwesome = null;
@@ -56,28 +60,67 @@ public final class FontUtils {
 		return fontAwesome;
 	}
 
-	/** Creates the iconic font for glyphs. */
+	/**
+	 * Creates the iconic font for glyphs.
+	 * <p/>
+	 * Default file should be an OTF file (CCF internally), which should work
+	 * fine for all systems using Java 7. In case OTF is not supported, a fall
+	 * back to a TTF file is performed.
+	 */
 	private synchronized static void createFontAwesome() {
 		if (fontAwesome == null) {
 			try {
-				InputStream fontStream = FontUtils.class
-						.getResourceAsStream(FONTS_RELATIVE_PATH + FONT_AWESOME);
-				System.out.println(fontStream);
-				// Using TYPE1 for OTF, CCF internally
-				Font font = Font.createFont(Font.TRUETYPE_FONT, fontStream);
-				System.out.println(font);
-				// the standard font is too small, make it bigger
-				fontAwesome = font.deriveFont(8F);
-				System.out.println(fontAwesome);
+				createFontAwesome(FONT_AWESOME_OTF, 8F);
 			} catch (FontFormatException e) {
-				// font is inside the jar, this should not happen
-				// ugly logging just in case
-				e.printStackTrace();
+
+				// Sun Java 6 cannot read OTF, fall back to TTF
+				createFontAwesomeTTF();
+
 			} catch (IOException e) {
 				// font is inside the jar, this should not happen
 				// ugly logging just in case
 				e.printStackTrace();
 			}
 		}
+	}
+
+	/**
+	 * Fail-safe method: creates the iconic font for glyphs using a TTF version
+	 * for systems not supporting OTF.
+	 */
+	private static void createFontAwesomeTTF() {
+		try {
+			createFontAwesome(FONT_AWESOME_TTF, 14F);
+		} catch (FontFormatException e1) {
+			// TODO TTF on Linux's Sun Java 6?
+			// If yes, should provide a post script version, or a
+			// fallback to graphical icons
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// font is inside the jar, this should not happen
+			// ugly logging just in case
+			e1.printStackTrace();
+		}
+	}
+
+	/**
+	 * Creates the iconic font for glyphs.
+	 * 
+	 * @param fontFile
+	 *            the font file to use
+	 * @param size
+	 *            the size magnification to use (depends on the file)
+	 * @throws FontFormatException
+	 *             if the fontStream data does not contain the required font
+	 *             tables for the specified format
+	 * @throws IOException
+	 *             if the font file cannot be read
+	 */
+	private static void createFontAwesome(String fontFile, float size)
+			throws FontFormatException, IOException {
+		InputStream fontStream = FontUtils.class
+				.getResourceAsStream(FONTS_RELATIVE_PATH + fontFile);
+		fontAwesome = Font.createFont(Font.TRUETYPE_FONT, fontStream)
+				.deriveFont(size);
 	}
 }
