@@ -26,7 +26,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import org.keyboardplaying.dailytasks.preferences.AppPreferences;
+import org.keyboardplaying.dailytasks.model.UIPreferences;
 import org.keyboardplaying.dailytasks.ui.util.FontUtils;
 
 /**
@@ -40,18 +40,26 @@ import org.keyboardplaying.dailytasks.ui.util.FontUtils;
 public class Toolbar extends JPanel {
 
 	/** Generated serial version UID. */
-	private static final long serialVersionUID = 9190817897980345216L;
+	private static final long serialVersionUID = -4207500879723146092L;
 
 	/** The width of the empty border to apply around the toolbar. */
 	private static final int BORDER_WIDTH = 2;
 
+	/** The UI preferences to use when opening a new window. */
+	private UIPreferences prefs;
+
 	/**
 	 * Creates a new instance and initializes layout and content.
 	 * 
+	 * @param prefs
+	 *            the UI preferences to use when opening a new window from this
+	 *            toolbar
+	 * 
 	 * @see #initPanel()
 	 */
-	public Toolbar() {
+	public Toolbar(UIPreferences prefs) {
 		super();
+		this.prefs = prefs;
 		initPanel();
 	}
 
@@ -65,7 +73,7 @@ public class Toolbar extends JPanel {
 		/* Now add buttons. */
 		// Prepare styling options
 		Insets btnMargins = new Insets(5, 0, 0, 0);
-		Color btnTxtColor = AppPreferences.getTheme().getTxtColor();
+		Color btnTxtColor = prefs.getTheme().getTxtColor();
 
 		// \uf0ad=icon-wrench
 		// -> settings
@@ -77,7 +85,7 @@ public class Toolbar extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				AboutWindow aboutWindow = new AboutWindow();
+				AboutWindow aboutWindow = new AboutWindow(prefs);
 				aboutWindow.setVisible(true);
 			}
 		}, btnMargins);

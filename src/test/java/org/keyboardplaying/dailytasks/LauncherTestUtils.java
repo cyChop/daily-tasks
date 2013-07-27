@@ -18,8 +18,8 @@ package org.keyboardplaying.dailytasks;
 
 import java.util.prefs.BackingStoreException;
 
-import org.keyboardplaying.dailytasks.preferences.AppPreferences;
-import org.keyboardplaying.dailytasks.preferences.Theme;
+import org.keyboardplaying.dailytasks.core.PreferencesManager;
+import org.keyboardplaying.dailytasks.ui.theme.Theme;
 
 /**
  * This class is not properly speaking a unit test class. It is a utility to run
@@ -38,9 +38,9 @@ public class LauncherTestUtils {
 	 * @throws BackingStoreException
 	 */
 	public static void main(String[] args) throws BackingStoreException {
-		AppPreferences.clear();
-		AppPreferences.setTheme(Theme.DARK);
-		AppPreferences.setLocale("fr");
+		PreferencesManager.clear();
+		PreferencesManager.setTheme(Theme.DARK);
+		PreferencesManager.setLocale("fr");
 		Launcher.main();
 	}
 }

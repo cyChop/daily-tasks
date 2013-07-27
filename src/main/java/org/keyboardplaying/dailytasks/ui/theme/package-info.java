@@ -14,30 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.keyboardplaying.dailytasks.ui.util;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-
-import java.awt.Image;
-import java.util.List;
-
-import org.junit.Test;
-import org.keyboardplaying.dailytasks.ui.theme.Theme;
-
 /**
- * Tests for the {@link IconUtils} class.
- * 
- * @author cyChop (http://keyboardplaying.org/)
+ * Contains the theme configuration and theme manager of the application.
  */
-public class IconUtilsTest {
-
-	/** Ensures {@link IconUtils} is still capable of retrieving icons. */
-	@Test
-	public void testIconFetching() {
-		List<Image> defaultWindowIcon = IconUtils.getWindowIconImages(
-				Theme.ORANGE.getIcon(), ".png");
-		assertNotNull(defaultWindowIcon);
-		assertFalse(defaultWindowIcon.isEmpty());
-	}
-}
+package org.keyboardplaying.dailytasks.ui.theme;

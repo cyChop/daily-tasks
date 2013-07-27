@@ -17,14 +17,15 @@
 package org.keyboardplaying.dailytasks;
 
 import org.keyboardplaying.dailytasks.core.ApplicationClosingListener;
+import org.keyboardplaying.dailytasks.core.PreferencesManager;
 import org.keyboardplaying.dailytasks.core.TaskCompletionListener;
 import org.keyboardplaying.dailytasks.core.TaskManager;
 import org.keyboardplaying.dailytasks.core.TaskStateListener;
 import org.keyboardplaying.dailytasks.messages.MessageBundle;
 import org.keyboardplaying.dailytasks.model.TaskSet;
-import org.keyboardplaying.dailytasks.preferences.AppPreferences;
-import org.keyboardplaying.dailytasks.preferences.Theme;
+import org.keyboardplaying.dailytasks.model.UIPreferences;
 import org.keyboardplaying.dailytasks.ui.MainWindow;
+import org.keyboardplaying.dailytasks.ui.theme.ThemeManager;
 
 /**
  * Main class for the application.
@@ -43,15 +44,16 @@ public class Launcher {
 	public static void main(String... args) {
 
 		/* Load the application settings. */
-		Theme.applyTheme(AppPreferences.getTheme());
-		MessageBundle.setLocale(AppPreferences.getLocale());
+		UIPreferences prefs = PreferencesManager.getUIPreferences();
+		ThemeManager.applyTheme(prefs.getTheme());
+		MessageBundle.setLocale(prefs.getLocale());
 
 		/* Run application */
 		TaskSet tasks = TaskManager.getInstance().getTasks();
 
 		TaskStateListener taskStateListener = new TaskCompletionListener();
 
-		MainWindow window = new MainWindow(tasks, taskStateListener);
+		MainWindow window = new MainWindow(prefs, tasks, taskStateListener);
 		taskStateListener.setMainWindow(window);
 
 		ApplicationClosingListener.register(window);

@@ -25,6 +25,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.keyboardplaying.dailytasks.messages.MessageBundle;
+import org.keyboardplaying.dailytasks.model.UIPreferences;
 import org.keyboardplaying.dailytasks.ui.util.FontUtils;
 
 /**
@@ -35,14 +36,19 @@ import org.keyboardplaying.dailytasks.ui.util.FontUtils;
 public class AboutWindow extends AbstractWindow {
 
 	/** Generated serial version UID. */
-	private static final long serialVersionUID = -3845516318351486497L;
+	private static final long serialVersionUID = 497622675922185629L;
 
 	/** The margin surrounding the text in the about window. */
 	private static final int WINDOW_MARGIN = 20;
 
-	/** Creates a new instance. */
-	public AboutWindow() {
-		super("app.about");
+	/**
+	 * Creates a new instance.
+	 * 
+	 * @param prefs
+	 *            the UI preferences for this window
+	 */
+	public AboutWindow(UIPreferences prefs) {
+		super(prefs, "app.about");
 
 		build();
 	}

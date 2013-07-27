@@ -21,8 +21,7 @@ import java.awt.Container;
 import javax.swing.JFrame;
 
 import org.keyboardplaying.dailytasks.messages.MessageBundle;
-import org.keyboardplaying.dailytasks.preferences.AppPreferences;
-import org.keyboardplaying.dailytasks.preferences.Theme;
+import org.keyboardplaying.dailytasks.model.UIPreferences;
 import org.keyboardplaying.dailytasks.ui.util.IconUtils;
 
 /**
@@ -35,36 +34,33 @@ import org.keyboardplaying.dailytasks.ui.util.IconUtils;
 public abstract class AbstractWindow extends JFrame {
 
 	/** Generated serial version UID. */
-	private static final long serialVersionUID = -1535058140157572739L;
+	private static final long serialVersionUID = 2595887968484253180L;
 
-	/** The theme used for this window. */
-	private Theme theme;
-
-	/** Creates a new instance. */
-	protected AbstractWindow() {
-		super();
-		initWindow();
-	}
+	/** The UI preferences. */
+	private UIPreferences prefs;
 
 	/**
 	 * Creates a new instance.
 	 * 
+	 * @param prefs
+	 *            the UI preferences for this window
 	 * @param titleKey
 	 *            the key to the title of the current window in the
 	 *            {@link MessageBundle}
 	 */
-	protected AbstractWindow(String titleKey) {
+	protected AbstractWindow(UIPreferences prefs, String titleKey) {
 		super(MessageBundle.get(titleKey));
+		this.prefs = prefs;
 		initWindow();
 	}
 
 	/**
-	 * Returns the theme used for this window.
+	 * Returns the UI preferences for this window.
 	 * 
-	 * @return the theme used for this window
+	 * @return the UI preferences for this window
 	 */
-	protected Theme getTheme() {
-		return theme;
+	protected UIPreferences getUIPreferences() {
+		return prefs;
 	}
 
 	/**
@@ -79,12 +75,9 @@ public abstract class AbstractWindow extends JFrame {
 	 * </ul>
 	 */
 	private void initWindow() {
-		// Load theme from preferences
-		// Store the theme to avoid parsing from prefs each time (caching)
-		theme = AppPreferences.getTheme();
-
 		// Set icon from theme
-		setIconImages(IconUtils.getWindowIconImages(theme.getIcon(), ".png"));
+		setIconImages(IconUtils.getWindowIconImages(prefs.getTheme().getIcon(),
+				".png"));
 
 		// Make sure the associated thread is terminated when window is closed
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -93,16 +86,13 @@ public abstract class AbstractWindow extends JFrame {
 	/** Builds the window. */
 	protected void build() {
 		/* General styling. */
-		setAlwaysOnTop(AppPreferences.isAlwaysOnTop());
+		setAlwaysOnTop(prefs.isAlwaysOnTop());
 		setResizable(false);
 		// Center on screen
 		setLocationRelativeTo(null);
 
 		/* Now, the content. */
-		Container contentPane = buildContentPane();
-		contentPane.setBackground(theme.getBgColor());
-		contentPane.setForeground(theme.getTxtColor());
-		setContentPane(contentPane);
+		setContentPane(buildContentPane());
 
 		/* Adapt size to the fittest. */
 		pack();

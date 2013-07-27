@@ -18,7 +18,6 @@ package org.keyboardplaying.dailytasks.core;
 
 import org.keyboardplaying.dailytasks.model.Task;
 import org.keyboardplaying.dailytasks.model.TaskSet;
-import org.keyboardplaying.dailytasks.preferences.AppPreferences;
 
 // XXX Javadoc
 /**
@@ -33,7 +32,7 @@ public class TaskManager {
 	public static synchronized TaskManager getInstance() {
 		if (instance == null) {
 			instance = new TaskManager();
-			instance.tasks = AppPreferences.getTasks();
+			instance.tasks = PreferencesManager.getTasks();
 		}
 		return instance;
 	}
@@ -57,7 +56,7 @@ public class TaskManager {
 	}
 
 	private void saveTasks() {
-		AppPreferences.setTasks(tasks);
+		PreferencesManager.setTasks(tasks);
 	}
 
 	public boolean areAllTasksDone() {

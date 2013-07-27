@@ -24,6 +24,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JPanel;
 
 import org.keyboardplaying.dailytasks.model.TaskSet;
+import org.keyboardplaying.dailytasks.model.UIPreferences;
 import org.keyboardplaying.dailytasks.ui.components.todos.TaskPanel;
 import org.keyboardplaying.dailytasks.ui.components.todos.TaskStateChangeListener;
 
@@ -36,7 +37,7 @@ import org.keyboardplaying.dailytasks.ui.components.todos.TaskStateChangeListene
 public class MainWindow extends AbstractWindow {
 
 	/** Generated serial version UID. */
-	private static final long serialVersionUID = 5931987982513289624L;
+	private static final long serialVersionUID = 7355206010448309664L;
 
 	/** The panel displaying the tasks. */
 	private TaskPanel taskPanel;
@@ -44,13 +45,16 @@ public class MainWindow extends AbstractWindow {
 	/**
 	 * Creates a new instance.
 	 * 
+	 * @param prefs
+	 *            the UI preferences for this window
 	 * @param tasks
 	 *            the tasks to display
 	 * @param taskStateListener
 	 *            the listener which should process the task's state change
 	 */
-	public MainWindow(TaskSet tasks, TaskStateChangeListener taskStateListener) {
-		super("app.title");
+	public MainWindow(UIPreferences prefs, TaskSet tasks,
+			TaskStateChangeListener taskStateListener) {
+		super(prefs, "app.title");
 
 		// Build UI
 		taskPanel = new TaskPanel(tasks, taskStateListener);
@@ -70,7 +74,7 @@ public class MainWindow extends AbstractWindow {
 
 		/* Add the content. */
 		panel.add(taskPanel, BorderLayout.CENTER);
-		panel.add(new Toolbar(), BorderLayout.EAST);
+		panel.add(new Toolbar(getUIPreferences()), BorderLayout.EAST);
 
 		/* Return the result. */
 		return panel;
