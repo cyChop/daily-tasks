@@ -22,10 +22,11 @@ import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
 
 import org.keyboardplaying.dailytasks.messages.MessageBundle;
-import org.keyboardplaying.dailytasks.ui.MainWindow;
+import org.keyboardplaying.dailytasks.ui.ApplicationWindow;
+import org.keyboardplaying.dailytasks.ui.panels.MainPanel;
 
 /**
- * This {@link WindowAdapter} applies to the application's {@link MainWindow}.
+ * This {@link WindowAdapter} applies to the application's {@link MainPanel}.
  * <p/>
  * It ensures two things:
  * <ul>
@@ -41,7 +42,7 @@ import org.keyboardplaying.dailytasks.ui.MainWindow;
 public class ApplicationClosingListener extends WindowAdapter {
 
 	/** The application's main window. */
-	private MainWindow mainWindow;
+	private ApplicationWindow mainWindow;
 
 	/**
 	 * Creates a new instance.
@@ -49,7 +50,7 @@ public class ApplicationClosingListener extends WindowAdapter {
 	 * @param mainWindow
 	 *            the application's main window
 	 */
-	private ApplicationClosingListener(MainWindow mainWindow) {
+	private ApplicationClosingListener(ApplicationWindow mainWindow) {
 		this.mainWindow = mainWindow;
 	}
 
@@ -101,13 +102,13 @@ public class ApplicationClosingListener extends WindowAdapter {
 	}
 
 	/**
-	 * Creates and attaches an instance to the {@link MainWindow}.
+	 * Creates and attaches an instance to the {@link MainPanel}.
 	 * 
 	 * @param mainWindow
 	 *            the window to control via an
 	 *            {@link ApplicationClosingListener}
 	 */
-	public static void register(MainWindow mainWindow) {
+	public static void register(ApplicationWindow mainWindow) {
 		ApplicationClosingListener instance = new ApplicationClosingListener(
 				mainWindow);
 		mainWindow.addWindowListener(instance);

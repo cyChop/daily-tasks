@@ -14,23 +14,5 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.keyboardplaying.dailytasks.ui.components.todos;
-
-/**
- * An interface for when task's state changes.
- * 
- * @author cyChop (http://keyboardplaying.org/)
- */
-public interface TaskStateChangeListener {
-
-	/**
-	 * This method is called in the {@link TaskCheckBox} when the box is checked
-	 * or unchecked.
-	 * 
-	 * @param taskId
-	 *            the ID of the updated task
-	 * @param done
-	 *            the new state of the task
-	 */
-	void updateTaskState(int taskId, boolean done);
-}
+/** Contains event-related interfaces. */
+package org.keyboardplaying.dailytasks.ui.events;

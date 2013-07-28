@@ -14,30 +14,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.keyboardplaying.dailytasks.ui.util;
+package org.keyboardplaying.dailytasks.ui.events;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-
-import java.awt.Image;
-import java.util.List;
-
-import org.junit.Test;
-import org.keyboardplaying.dailytasks.ui.theme.Theme;
+import org.keyboardplaying.dailytasks.ui.components.TaskCheckBox;
 
 /**
- * Tests for the {@link IconUtils} class.
+ * An interface for when task's state changes.
  * 
  * @author cyChop (http://keyboardplaying.org/)
  */
-public class IconUtilsTest {
+public interface TaskStateChangeListener {
 
-	/** Ensures {@link IconUtils} is still capable of retrieving icons. */
-	@Test
-	public void testIconFetching() {
-		List<Image> defaultWindowIcon = IconUtils
-				.getWindowIconImages(Theme.ORANGE);
-		assertNotNull(defaultWindowIcon);
-		assertFalse(defaultWindowIcon.isEmpty());
-	}
+	/**
+	 * This method is called in the {@link TaskCheckBox} when the box is checked
+	 * or unchecked.
+	 * 
+	 * @param taskId
+	 *            the ID of the updated task
+	 * @param done
+	 *            the new state of the task
+	 */
+	void updateTaskState(int taskId, boolean done);
 }

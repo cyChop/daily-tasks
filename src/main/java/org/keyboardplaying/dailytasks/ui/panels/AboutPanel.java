@@ -14,9 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.keyboardplaying.dailytasks.ui;
+package org.keyboardplaying.dailytasks.ui.panels;
 
-import java.awt.Container;
 import java.awt.Font;
 
 import javax.swing.BorderFactory;
@@ -33,10 +32,10 @@ import org.keyboardplaying.dailytasks.ui.util.FontUtils;
  * 
  * @author cyChop (http://keyboardplaying.org/)
  */
-public class AboutWindow extends AbstractWindow {
+public class AboutPanel extends JPanel {
 
 	/** Generated serial version UID. */
-	private static final long serialVersionUID = 497622675922185629L;
+	private static final long serialVersionUID = -692376388865380985L;
 
 	/** The margin surrounding the text in the about window. */
 	private static final int WINDOW_MARGIN = 20;
@@ -47,83 +46,62 @@ public class AboutWindow extends AbstractWindow {
 	 * @param prefs
 	 *            the UI preferences for this window
 	 */
-	public AboutWindow(UIPreferences prefs) {
-		super(prefs, "app.about");
+	public AboutPanel(UIPreferences prefs) {
 
-		build();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.keyboardplaying.dailytasks.ui.AppWindow#buildContentPane()
-	 */
-	@Override
-	protected Container buildContentPane() {
 		/* Set the container. */
-		JPanel panel = new JPanel();
-		// Use a box layout
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		super();
+		// Use a box layout to stack items vertically
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+		/* Styling */
 		// Looks better with an empty border
-		panel.setBorder(BorderFactory.createEmptyBorder(WINDOW_MARGIN,
-				WINDOW_MARGIN, WINDOW_MARGIN, WINDOW_MARGIN));
+		setBorder(BorderFactory.createEmptyBorder(WINDOW_MARGIN, WINDOW_MARGIN,
+				WINDOW_MARGIN, WINDOW_MARGIN));
 
 		/* Add the text to the window. */
-		buildTextContent(panel);
-
-		// Return the result
-		return panel;
+		buildTextContent();
 	}
 
-	/**
-	 * Adds the about text to the window.
-	 * 
-	 * @param panel
-	 *            the panel that contains the text
-	 */
-	private void buildTextContent(JPanel panel) {
+	/** Adds the about text to the panel. */
+	private void buildTextContent() {
 		/* A bold name and version. */
-		JLabel appNameAndVersion = addLabel(panel, "app.pom.name.full");
+		JLabel appNameAndVersion = addLabel("app.pom.name.full");
 		appNameAndVersion.setFont(appNameAndVersion.getFont().deriveFont(
 				Font.BOLD));
 
 		/* Some general information about the application. */
-		addLabel(panel, "app.pom.url");
-		addLabel(panel, "app.pom.description");
+		addLabel("app.pom.url");
+		addLabel("app.pom.description");
 
-		addEmptyLine(panel);
+		addEmptyLine();
 
 		/* About the author. */
-		addLabel(panel, "about.author");
-		addLabel(panel, "about.keyboardplaying.url");
+		addLabel("about.author");
+		addLabel("about.keyboardplaying.url");
 
-		addEmptyLine(panel);
+		addEmptyLine();
 
 		/* FontAwesome. */
-		addLabel(panel, "about.fontawesome", FontUtils.FONT_AWESOME_VERSION);
-		addLabel(panel, "about.fontawesome.url");
+		addLabel("about.fontawesome", FontUtils.FONT_AWESOME_VERSION);
+		addLabel("about.fontawesome.url");
 	}
 
 	/**
 	 * Adds a label from the message bundle to the panel.
 	 * 
-	 * @param panel
-	 *            the panel
 	 * @param messageKey
 	 *            the key for the message to add
 	 * @return the label which was added
 	 */
-	private JLabel addLabel(Container panel, String messageKey) {
+	private JLabel addLabel(String messageKey) {
 		JLabel label = new JLabel(MessageBundle.get(messageKey));
-		return addLabel(panel, label);
+		return addLabel(label);
 	}
 
 	/**
 	 * Adds a label from the message bundle to the panel and formats it with the
 	 * supplied additional arguments.
 	 * 
-	 * @param panel
-	 *            the panel
 	 * @param messageKey
 	 *            the key for the pattern for the message to add
 	 * @param args
@@ -132,34 +110,27 @@ public class AboutWindow extends AbstractWindow {
 	 * 
 	 * @see MessageBundle#get(String, Object...)
 	 */
-	private JLabel addLabel(Container panel, String messageKey, Object... args) {
+	private JLabel addLabel(String messageKey, Object... args) {
 		JLabel label = new JLabel(MessageBundle.get(messageKey, args));
-		return addLabel(panel, label);
+		return addLabel(label);
 	}
 
-	/**
-	 * Adds an empty line.
-	 * 
-	 * @param panel
-	 *            the panel
-	 */
-	private void addEmptyLine(Container panel) {
+	/** Adds an empty line. */
+	private void addEmptyLine() {
 		JLabel label = new JLabel(" ");
-		addLabel(panel, label);
+		addLabel(label);
 	}
 
 	/**
 	 * Adds a label to a panel.
 	 * 
-	 * @param panel
-	 *            the label
 	 * @param label
 	 *            the panel
 	 * @return the label which was added
 	 */
-	private JLabel addLabel(Container panel, JLabel label) {
+	private JLabel addLabel(JLabel label) {
 		label.setAlignmentX(CENTER_ALIGNMENT);
-		panel.add(label);
+		add(label);
 		return label;
 	}
 }

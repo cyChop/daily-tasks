@@ -22,6 +22,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.keyboardplaying.dailytasks.ui.theme.Theme;
+
 /**
  * A utility class to retrieve icons.
  * 
@@ -29,30 +31,30 @@ import java.util.List;
  */
 public final class IconUtils {
 
+	private static final String WINDOW_ICON_EXTENSION = ".png";
 	/** The relative path to the directory containing all icons. */
 	private static final String ICONS_RELATIVE_PATH = "../icons/";
 
 	/**
 	 * Returns a list of all icons with this name and extension.
 	 * 
-	 * @param iconName
-	 *            the name of the icon
-	 * @param iconExt
-	 *            the extension of the icon (should begin with {@code .})
+	 * @param theme
+	 *            the theme associated to the icon images to retrieve
+	 * 
 	 * @return a list of the requested icon in all available sizes
 	 * @see IconSize
 	 */
 	// WARNING TO THE DEVELOPER
 	// Any icon requested via this method should be available in all sizes.
-	public static List<Image> getWindowIconImages(String iconName,
-			String iconExt) {
+	public static List<Image> getWindowIconImages(Theme theme) {
 		List<Image> icons = new ArrayList<Image>();
 
 		for (IconSize size : IconSize.values()) {
 			// build path to icon
 			StringBuilder sb = new StringBuilder();
-			sb.append(ICONS_RELATIVE_PATH).append(iconName);
-			sb.append('-').append(size.getIdentifier()).append(iconExt);
+			sb.append(ICONS_RELATIVE_PATH).append(theme.getIcon());
+			sb.append('-').append(size.getIdentifier())
+					.append(WINDOW_ICON_EXTENSION);
 
 			// create Image
 			URL url = IconUtils.class.getResource(sb.toString());

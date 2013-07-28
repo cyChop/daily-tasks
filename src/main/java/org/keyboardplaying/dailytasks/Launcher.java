@@ -24,7 +24,8 @@ import org.keyboardplaying.dailytasks.core.TaskStateListener;
 import org.keyboardplaying.dailytasks.messages.MessageBundle;
 import org.keyboardplaying.dailytasks.model.TaskSet;
 import org.keyboardplaying.dailytasks.model.UIPreferences;
-import org.keyboardplaying.dailytasks.ui.MainWindow;
+import org.keyboardplaying.dailytasks.ui.ApplicationWindow;
+import org.keyboardplaying.dailytasks.ui.panels.WindowFactory;
 import org.keyboardplaying.dailytasks.ui.theme.ThemeManager;
 
 /**
@@ -53,7 +54,8 @@ public class Launcher {
 
 		TaskStateListener taskStateListener = new TaskCompletionListener();
 
-		MainWindow window = new MainWindow(prefs, tasks, taskStateListener);
+		ApplicationWindow window = WindowFactory.makeMainWindow(prefs, tasks,
+				taskStateListener);
 		taskStateListener.setMainWindow(window);
 
 		ApplicationClosingListener.register(window);

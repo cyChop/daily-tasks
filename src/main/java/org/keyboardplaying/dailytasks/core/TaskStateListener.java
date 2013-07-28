@@ -17,8 +17,8 @@
 package org.keyboardplaying.dailytasks.core;
 
 import org.keyboardplaying.dailytasks.model.Task;
-import org.keyboardplaying.dailytasks.ui.MainWindow;
-import org.keyboardplaying.dailytasks.ui.components.todos.TaskStateChangeListener;
+import org.keyboardplaying.dailytasks.ui.ApplicationWindow;
+import org.keyboardplaying.dailytasks.ui.events.TaskStateChangeListener;
 
 /**
  * A class to persist the tasks' states and provide appropriate processing on
@@ -29,7 +29,7 @@ import org.keyboardplaying.dailytasks.ui.components.todos.TaskStateChangeListene
 public abstract class TaskStateListener implements TaskStateChangeListener {
 
 	/** The window this listener controls. */
-	private MainWindow mainWindow;
+	private ApplicationWindow mainWindow;
 
 	/**
 	 * Creates a new instance.
@@ -46,7 +46,7 @@ public abstract class TaskStateListener implements TaskStateChangeListener {
 	 * @param mainWindow
 	 *            the window this listener controls
 	 */
-	public void setMainWindow(MainWindow mainWindow) {
+	public void setMainWindow(ApplicationWindow mainWindow) {
 		this.mainWindow = mainWindow;
 	}
 
@@ -55,7 +55,7 @@ public abstract class TaskStateListener implements TaskStateChangeListener {
 	 * 
 	 * @return the window this listener controls
 	 */
-	protected MainWindow getMainWindow() {
+	protected ApplicationWindow getMainWindow() {
 		return this.mainWindow;
 	}
 

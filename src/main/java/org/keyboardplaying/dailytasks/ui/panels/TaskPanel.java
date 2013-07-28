@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.keyboardplaying.dailytasks.ui.components.todos;
+package org.keyboardplaying.dailytasks.ui.panels;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -22,6 +22,8 @@ import javax.swing.JPanel;
 
 import org.keyboardplaying.dailytasks.model.Task;
 import org.keyboardplaying.dailytasks.model.TaskSet;
+import org.keyboardplaying.dailytasks.ui.components.TaskCheckBox;
+import org.keyboardplaying.dailytasks.ui.events.TaskStateChangeListener;
 
 /**
  * A panel to display the tasks.

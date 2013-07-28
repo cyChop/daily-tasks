@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.keyboardplaying.dailytasks.ui;
+package org.keyboardplaying.dailytasks.ui.panels;
 
 import java.awt.Color;
 import java.awt.Insets;
@@ -27,8 +27,10 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import org.keyboardplaying.dailytasks.model.UIPreferences;
+import org.keyboardplaying.dailytasks.ui.ApplicationWindow;
 import org.keyboardplaying.dailytasks.ui.util.FontUtils;
 
+// TODO refactor so that this does not have to remain in the same package as the WindowFactory
 /**
  * The application toolbar.
  * <p/>
@@ -85,8 +87,8 @@ public class Toolbar extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				AboutWindow aboutWindow = new AboutWindow(prefs);
-				aboutWindow.setVisible(true);
+				ApplicationWindow window = WindowFactory.makeAboutWindow(prefs);
+				window.setVisible(true);
 			}
 		}, btnMargins);
 	}

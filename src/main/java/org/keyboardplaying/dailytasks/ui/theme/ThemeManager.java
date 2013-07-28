@@ -20,10 +20,12 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 /**
+ * Manages the theme accross the application.
+ * 
  * @author cyChop (http://keyboardplaying.org/)
  */
 // TODO unit test in a headless environment
-public class ThemeManager {
+public final class ThemeManager {
 
 	/**
 	 * Loads the system look and feel and registers theme properties to avoid
