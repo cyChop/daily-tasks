@@ -14,5 +14,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/** Contains the application's core business logic. */
-package org.keyboardplaying.dailytasks.core;
+package org.keyboardplaying.dailytasks.ui.events;
+
+import org.keyboardplaying.dailytasks.model.UIPreferences;
+
+/**
+ * This interface defines a listener which will be called upon when UI
+ * preferences change.
+ * 
+ * @author cyChop (http://keyboardplaying.org/)
+ */
+public interface UIPreferencesChangeListener {
+
+	/**
+	 * Called when UI preferences change. Implementations of this method should
+	 * persist the UI preferences.
+	 * 
+	 * @param prefs
+	 *            the new values for the UI preferences
+	 */
+	void saveUIPreferences(UIPreferences prefs);
+}

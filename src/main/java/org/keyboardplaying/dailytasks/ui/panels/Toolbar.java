@@ -79,7 +79,15 @@ public class Toolbar extends JPanel {
 
 		// \uf0ad=icon-wrench
 		// -> settings
-		addButtonToPanel('\uf0ad', btnTxtColor, null, btnMargins);
+		addButtonToPanel('\uf0ad', btnTxtColor, new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ApplicationWindow window = WindowFactory
+						.makePreferencesWindow(prefs);
+				window.setVisible(true);
+			}
+		}, btnMargins);
 
 		// \uf059=icon-question-sign
 		// -> about

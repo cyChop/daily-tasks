@@ -46,6 +46,18 @@ public final class WindowFactory {
 	}
 
 	/**
+	 * Creates the window used to update the UI preferences.
+	 * 
+	 * @param prefs
+	 *            the UI preferences
+	 * @return the window
+	 */
+	public static ApplicationWindow makePreferencesWindow(UIPreferences prefs) {
+		return new ApplicationWindow(prefs, "app.settings",
+				new PreferencesPanel(prefs, null));
+	}
+
+	/**
 	 * Creates an "About" window.
 	 * 
 	 * @param prefs

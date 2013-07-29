@@ -22,6 +22,7 @@ import static org.junit.Assert.assertNotNull;
 import java.util.Locale;
 
 import org.junit.Test;
+import org.keyboardplaying.dailytasks.ui.theme.Theme;
 
 /**
  * Test class for {@link MessageBundle}.
@@ -66,5 +67,12 @@ public class MessageBundleTest {
 		assertEquals(TITLE_FR, MessageBundle.get(TITLE));
 		MessageBundle.setLocale(new Locale("En"));
 		assertEquals(TITLE_EN, MessageBundle.get(TITLE));
+	}
+
+	/** Tests the getting of a theme's name. */
+	@Test
+	public void testThemeNameGetting() {
+		MessageBundle.setLocale(new Locale("en"));
+		assertEquals("Dark", MessageBundle.get(Theme.DARK));
 	}
 }

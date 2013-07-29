@@ -39,7 +39,7 @@ public enum Theme {
 	/** A theme with a dark background. */
 	DARK(Color.DARK_GRAY, Color.LIGHT_GRAY),
 	/** A theme with a black background. */
-	BLACK(Color.BLACK, Color.GRAY),
+	BLACK(Color.BLACK, Color.LIGHT_GRAY),
 
 	/** A theme with a blue background. */
 	BLUE(Color.BLUE, Color.WHITE, "checkicon-blue"),

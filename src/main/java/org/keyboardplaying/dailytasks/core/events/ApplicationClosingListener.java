@@ -14,13 +14,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.keyboardplaying.dailytasks.core;
+package org.keyboardplaying.dailytasks.core.events;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JOptionPane;
 
+import org.keyboardplaying.dailytasks.core.TaskManager;
 import org.keyboardplaying.dailytasks.messages.MessageBundle;
 import org.keyboardplaying.dailytasks.ui.ApplicationWindow;
 import org.keyboardplaying.dailytasks.ui.panels.MainPanel;

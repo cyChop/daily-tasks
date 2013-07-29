@@ -16,11 +16,11 @@
  */
 package org.keyboardplaying.dailytasks;
 
-import org.keyboardplaying.dailytasks.core.ApplicationClosingListener;
 import org.keyboardplaying.dailytasks.core.PreferencesManager;
-import org.keyboardplaying.dailytasks.core.TaskCompletionListener;
 import org.keyboardplaying.dailytasks.core.TaskManager;
-import org.keyboardplaying.dailytasks.core.TaskStateListener;
+import org.keyboardplaying.dailytasks.core.events.ApplicationClosingListener;
+import org.keyboardplaying.dailytasks.core.events.TaskCompletionListener;
+import org.keyboardplaying.dailytasks.core.events.TaskStateListener;
 import org.keyboardplaying.dailytasks.messages.MessageBundle;
 import org.keyboardplaying.dailytasks.model.TaskSet;
 import org.keyboardplaying.dailytasks.model.UIPreferences;

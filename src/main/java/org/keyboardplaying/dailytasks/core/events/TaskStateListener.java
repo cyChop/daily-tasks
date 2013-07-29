@@ -14,8 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.keyboardplaying.dailytasks.core;
+package org.keyboardplaying.dailytasks.core.events;
 
+import org.keyboardplaying.dailytasks.core.TaskManager;
 import org.keyboardplaying.dailytasks.model.Task;
 import org.keyboardplaying.dailytasks.ui.ApplicationWindow;
 import org.keyboardplaying.dailytasks.ui.events.TaskStateChangeListener;

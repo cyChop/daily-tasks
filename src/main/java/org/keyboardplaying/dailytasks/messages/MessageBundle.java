@@ -20,15 +20,13 @@ import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import org.keyboardplaying.dailytasks.ui.theme.Theme;
+
 /**
  * Utility class for the management of localized messages.
  * <p/>
  * This classes uses the system locale as a default, but another locale can be
  * specified at any moment.
- * <p/>
- * Only static methods are exposed, but the class actually uses a Singleton
- * design-pattern, and all static methods refer to {@code protected} instance
- * methods which can be overridden or mocked for the purpose of unit-testing.
  * 
  * @author cyChop (http://keyboardplaying.org/)
  */
@@ -105,6 +103,17 @@ public class MessageBundle {
 	 */
 	public static String get(String key) {
 		return getInstance().getString(key);
+	}
+
+	/**
+	 * Returns the localized name of a {@link Theme}.
+	 * 
+	 * @param theme
+	 *            the theme
+	 * @return the name of the theme
+	 */
+	public static String get(Theme theme) {
+		return getInstance().getString("theme." + theme.name());
 	}
 
 	/**

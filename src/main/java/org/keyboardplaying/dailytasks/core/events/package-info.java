@@ -14,34 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.keyboardplaying.dailytasks.core;
-
-import org.keyboardplaying.dailytasks.model.Task;
-
-/**
- * An implementation of the {@link TaskStateController} which closes the
- * application once all the tasks have been completed.
- * 
- * @author cyChop (http://keyboardplaying.org/)
+/** 
+ * Contains implementations of event listeners required for interaction with
+ * the user interface. 
  */
-public class TaskCompletionListener extends TaskStateListener {
-
-	/** Creates a new instance. */
-	public TaskCompletionListener() {
-	}
-
-	/**
-	 * Closes the application if all tasks have been completed.
-	 * 
-	 * @param task
-	 *            {@inheritDoc}
-	 */
-	@Override
-	protected void processTaskAfterStateSaved(Task task) {
-		// Is job done?
-		if (TaskManager.getInstance().areAllTasksDone()) {
-			// Close the window
-			getMainWindow().triggerClosingEvent();
-		}
-	}
-}
+package org.keyboardplaying.dailytasks.core.events;
