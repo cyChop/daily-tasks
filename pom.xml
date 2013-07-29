@@ -101,6 +101,15 @@
 	</dependencies>
 
 	<!-- Project additional information -->
+	<scm>
+		<connection>scm:git:git@github.com:cyChop/daily-tasks.git</connection>
+		<url>scm:git:git@github.com:cyChop/daily-tasks.git</url>
+		<developerConnection>scm:git:git@github.com:cyChop/daily-tasks.git</developerConnection>
+	</scm>
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/cyChop/daily-tasks/issues</url>
+	</issueManagement>
 	<developers>
 		<developer>
 			<id>cyChop</id>
