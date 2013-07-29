@@ -28,7 +28,6 @@ import java.util.prefs.BackingStoreException;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.keyboardplaying.dailytasks.core.PreferencesManager;
 import org.keyboardplaying.dailytasks.messages.MessageBundle;
 import org.keyboardplaying.dailytasks.model.Task;
 import org.keyboardplaying.dailytasks.model.TaskSet;
@@ -159,7 +158,7 @@ public class PreferencesManagerTest {
 	 * @param tasks
 	 *            the task set to test
 	 * 
-	 * @see TaskSet#getDefault()
+	 * @see TaskManager#getDefaultTaskSet()
 	 */
 	private static void assertDefaultTaskSet(TaskSet tasks) {
 		assertEquals(1, tasks.size());

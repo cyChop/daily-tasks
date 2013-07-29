@@ -21,7 +21,6 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import org.keyboardplaying.dailytasks.messages.MessageBundle;
 
 /**
  * A set of tasks.
@@ -156,17 +155,5 @@ public class TaskSet implements Serializable, Iterable<Task> {
 	@Override
 	public Iterator<Task> iterator() {
 		return tasks.iterator();
-	}
-
-	/**
-	 * Creates a default {@link TaskSet} containing only one {@link Task}
-	 * proposing to create more.
-	 * 
-	 * @return the default {@link TaskSet}
-	 */
-	public static TaskSet getDefault() {
-		TaskSet set = new TaskSet();
-		set.addTask(new Task(MessageBundle.get("task.default")));
-		return set;
 	}
 }

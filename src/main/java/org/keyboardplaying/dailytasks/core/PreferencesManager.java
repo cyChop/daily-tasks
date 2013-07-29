@@ -317,7 +317,7 @@ public class PreferencesManager {
 	 * 
 	 * @return the tasks
 	 * 
-	 * @see TaskSet#getDefault()
+	 * @see TaskManager#getDefaultTaskSet()
 	 */
 	public static TaskSet getTasks() {
 		return getInstance().getInstanceTasks();
@@ -328,18 +328,18 @@ public class PreferencesManager {
 	 * 
 	 * @return the tasks
 	 * 
-	 * @see TaskSet#getDefault()
+	 * @see TaskManager#getDefaultTaskSet()
 	 */
 	protected TaskSet getInstanceTasks() {
 		TaskSet result;
 
 		byte[] byteArray = prefs.getByteArray(FLD_TASKS, null);
 		if (byteArray == null) {
-			result = TaskSet.getDefault();
+			result = TaskManager.getDefaultTaskSet();
 		} else {
 			result = Serializer.deserialize(byteArray);
 			if (result == null || result.isEmpty()) {
-				result = TaskSet.getDefault();
+				result = TaskManager.getDefaultTaskSet();
 			}
 		}
 
