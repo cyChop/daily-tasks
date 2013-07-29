@@ -80,14 +80,7 @@ public class ThemeComboBox extends JComboBox<Theme> {
 		public Component getListCellRendererComponent(
 				JList<? extends Theme> list, Theme theme, int index,
 				boolean isSelected, boolean cellHasFocus) {
-			/* Set the colors */
-			// if (isSelected) {
-			// setBackground(list.getSelectionBackground());
-			// setForeground(list.getSelectionForeground());
-			// } else {
-			// setBackground(list.getBackground());
-			// setForeground(list.getForeground());
-			// }
+			/* Set the colors. */
 			setBackground(theme.getBgColor());
 			setForeground(theme.getTxtColor());
 

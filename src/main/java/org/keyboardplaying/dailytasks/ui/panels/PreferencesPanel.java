@@ -21,7 +21,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
+import org.keyboardplaying.dailytasks.messages.MessageBundle;
 import org.keyboardplaying.dailytasks.model.UIPreferences;
+import org.keyboardplaying.dailytasks.ui.components.LocaleComboBox;
 import org.keyboardplaying.dailytasks.ui.components.ThemeComboBox;
 import org.keyboardplaying.dailytasks.ui.events.UIPreferencesChangeListener;
 
@@ -31,11 +33,22 @@ import org.keyboardplaying.dailytasks.ui.events.UIPreferencesChangeListener;
  */
 public class PreferencesPanel extends JPanel {
 
+	private ThemeComboBox themeCB;
+	private LocaleComboBox localeCB;
+
 	public PreferencesPanel(UIPreferences preferences,
 			UIPreferencesChangeListener listener) {
 		super();
 
-		this.add(new ThemeComboBox());
+		themeCB = new ThemeComboBox();
+		themeCB.setSelectedItem(preferences.getTheme());
+
+		localeCB = new LocaleComboBox();
+		localeCB.setSelectedItem(MessageBundle
+				.getClosestApplicableLocale(preferences.getLocale()));
+
+		this.add(themeCB);
+		this.add(localeCB);
 	}
 
 	private class SaveButtonListener implements ActionListener {

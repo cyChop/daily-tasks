@@ -16,7 +16,10 @@
  */
 package org.keyboardplaying.dailytasks.messages;
 
+import java.net.URL;
 import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -34,6 +37,8 @@ public class MessageBundle {
 
 	/** The base name of the message bundle. */
 	private static final String BUNDLE_BASE_NAME = "org.keyboardplaying.dailytasks.ui.messages.MessageBundle";
+	/** The locale of the default message bundle. */
+	private static final String DEFAULT_LANG = "en";
 
 	/** The unique instance of this object, using the Singleton design-pattern. */
 	private static MessageBundle instance;
@@ -145,5 +150,65 @@ public class MessageBundle {
 	 */
 	protected String getString(String key) {
 		return bundle.getString(key);
+	}
+
+	/**
+	 * Returns a list of all locales a bundle has been written for.
+	 * 
+	 * @return a list of all locales availables within the application
+	 */
+	public static List<Locale> getAvailableLocales() {
+
+		/* Convert base name to a path. */
+		String bundlePath = BUNDLE_BASE_NAME.replaceAll("\\.", "/")
+				+ "_%s.properties";
+
+		List<Locale> available = new ArrayList<Locale>();
+
+		/* Loop over all locales to find those we do support. */
+		// Get a list of all locales the JVM supports
+		Locale[] locales = Locale.getAvailableLocales();
+		// Loop over those to find available locales
+		for (Locale locale : locales) {
+			URL bundle = ClassLoader.getSystemResource(String.format(
+					bundlePath, locale.toString()));
+			if (bundle != null) {
+				available.add(locale);
+			}
+		}
+
+		/* Return the list. */
+		return available;
+	}
+
+	/**
+	 * Returns the closest applicable locale.
+	 * <p/>
+	 * If the supplied locale cannot be found in available locales, the closer
+	 * variation should be returned. If no variation corresponds to that
+	 * language, the locale of the default bundle should be returned.
+	 * 
+	 * @param locale
+	 *            the locale being searched for
+	 * @return the closest applicable locale
+	 */
+	public static Locale getClosestApplicableLocale(Locale locale) {
+		// List available locales
+		List<Locale> available = getAvailableLocales();
+
+		// Currently loaded locale
+		Locale current = locale;
+		if (!available.contains(current)) {
+			// Current locale is not available
+			// Keep only language
+			current = new Locale(current.getLanguage());
+			if (!available.contains(current)) {
+				// Not available
+				// Return default
+				current = new Locale(DEFAULT_LANG);
+			}
+		}
+
+		return current;
 	}
 }

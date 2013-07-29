@@ -18,7 +18,9 @@ package org.keyboardplaying.dailytasks.messages;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
+import java.util.List;
 import java.util.Locale;
 
 import org.junit.Test;
@@ -74,5 +76,30 @@ public class MessageBundleTest {
 	public void testThemeNameGetting() {
 		MessageBundle.setLocale(new Locale("en"));
 		assertEquals("Dark", MessageBundle.get(Theme.DARK));
+	}
+
+	/** Tests the listing of available locales. */
+	@Test
+	public void testAvailableLocales() {
+		List<Locale> locales = MessageBundle.getAvailableLocales();
+		assertEquals(2, locales.size());
+		assertTrue(locales.contains(new Locale("fr")));
+		assertTrue(locales.contains(new Locale("en")));
+	}
+
+	/** Tests the closest locale. */
+	@Test
+	public void testClosestApplicableLocale() {
+		Locale frLocale = new Locale("fr");
+		// available
+		assertEquals(frLocale,
+				MessageBundle.getClosestApplicableLocale(frLocale));
+		// closest variation found
+		assertEquals(frLocale,
+				MessageBundle
+						.getClosestApplicableLocale(new Locale("fr", "FR")));
+		// not available, default
+		assertEquals(new Locale("en"),
+				MessageBundle.getClosestApplicableLocale(new Locale("de")));
 	}
 }
