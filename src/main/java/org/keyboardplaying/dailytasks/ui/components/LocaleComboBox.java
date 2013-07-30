@@ -36,7 +36,7 @@ import org.keyboardplaying.dailytasks.messages.MessageBundle;
  * 
  * @author cyChop (http://keyboardplaying.org/)
  */
-public class LocaleComboBox extends JComboBox<Locale> {
+public class LocaleComboBox extends JComboBox {
 
 	/** Generated serial version UID. */
 	private static final long serialVersionUID = 4050125723828264998L;
@@ -102,11 +102,10 @@ public class LocaleComboBox extends JComboBox<Locale> {
 	 * 
 	 * @author cyChop (http://keyboardplaying.org/)
 	 */
-	private class ComboBoxRenderer extends JLabel implements
-			ListCellRenderer<Locale> {
+	private class ComboBoxRenderer extends JLabel implements ListCellRenderer {
 
 		/** Generated serial version UID. */
-		private static final long serialVersionUID = -1324708676798498741L;
+		private static final long serialVersionUID = -8575053093917857546L;
 
 		/** The horizontal margin for combo box values. */
 		private static final int MARGIN_HORIZONTAL = 10;
@@ -130,9 +129,9 @@ public class LocaleComboBox extends JComboBox<Locale> {
 		 * .JList, java.lang.Object, int, boolean, boolean)
 		 */
 		@Override
-		public Component getListCellRendererComponent(
-				JList<? extends Locale> list, Locale locale, int index,
-				boolean isSelected, boolean cellHasFocus) {
+		public Component getListCellRendererComponent(JList list,
+				Object locale, int index, boolean isSelected,
+				boolean cellHasFocus) {
 			/* Set the colors */
 			if (isSelected) {
 				setBackground(list.getSelectionBackground());
@@ -143,7 +142,7 @@ public class LocaleComboBox extends JComboBox<Locale> {
 			}
 
 			/* Set the panel renderer. */
-			setText(getLocaleDisplayName(locale));
+			setText(getLocaleDisplayName((Locale) locale));
 
 			return this;
 		}

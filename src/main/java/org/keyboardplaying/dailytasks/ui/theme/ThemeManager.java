@@ -58,8 +58,11 @@ public final class ThemeManager {
 		UIManager.put("Panel.background", theme.getBgColor());
 		UIManager.put("Button.background", theme.getBgColor());
 
-		// Texts
+		// Check boxes
+		UIManager.put("CheckBox.background", theme.getBgColor());
 		UIManager.put("CheckBox.foreground", theme.getTxtColor());
+
+		// Texts
 		UIManager.put("Label.foreground", theme.getTxtColor());
 
 		// Dialogs

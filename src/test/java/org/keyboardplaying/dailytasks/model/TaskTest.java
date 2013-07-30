@@ -20,15 +20,15 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
-import org.keyboardplaying.dailytasks.util.Serializer;
 
 /**
- * Tests the {@link Task} class, along with the {@link Serializer} methods.
+ * Tests the {@link Task} class.
  * 
  * @author cyChop (http://keyboardplaying.org/)
  */
 public class TaskTest {
 
+	/** Ensures the equals methods works as expected. */
 	@Test
 	public void testTaskEquals() {
 		Task task1 = new Task("Common label", true);
@@ -40,15 +40,5 @@ public class TaskTest {
 		assertFalse(task1.equals(task3));
 		assertFalse(task2.equals(task3));
 		assertFalse(task2.equals(null));
-	}
-
-	@Test
-	public void testTaskSerialization() {
-		Task original = new Task("Some label", true);
-		byte[] serialized = Serializer.serialize(original);
-		Task result = Serializer.deserialize(serialized);
-
-		assertEquals(original.getTodo(), result.getTodo());
-		assertEquals(original.isDone(), result.isDone());
 	}
 }

@@ -19,6 +19,7 @@ package org.keyboardplaying.dailytasks.ui.panels;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
 import org.keyboardplaying.dailytasks.messages.MessageBundle;
@@ -35,6 +36,7 @@ public class PreferencesPanel extends JPanel {
 
 	private ThemeComboBox themeCB;
 	private LocaleComboBox localeCB;
+	private JCheckBox onTopCheckBox;
 
 	public PreferencesPanel(UIPreferences preferences,
 			UIPreferencesChangeListener listener) {
@@ -47,8 +49,12 @@ public class PreferencesPanel extends JPanel {
 		localeCB.setSelectedItem(MessageBundle
 				.getClosestApplicableLocale(preferences.getLocale()));
 
+		onTopCheckBox = new JCheckBox(MessageBundle.get("pref.onTop"));
+		onTopCheckBox.setSelected(preferences.isAlwaysOnTop());
+
 		this.add(themeCB);
 		this.add(localeCB);
+		this.add(onTopCheckBox);
 	}
 
 	private class SaveButtonListener implements ActionListener {

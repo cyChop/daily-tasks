@@ -53,8 +53,8 @@ public class Task implements Serializable {
 	 *            {@code true} if the task is finished, {@code false} otherwise
 	 */
 	public Task(String todo, boolean done) {
-		this.todo = todo;
-		this.done = done;
+		this.setTodo(todo);
+		this.setDone(done);
 	}
 
 	/**
@@ -65,6 +65,16 @@ public class Task implements Serializable {
 	 */
 	public Task(String todo) {
 		this(todo, false);
+	}
+
+	/**
+	 * Sets the task's label.
+	 * 
+	 * @param todo
+	 *            the task's label
+	 */
+	protected void setTodo(String todo) {
+		this.todo = todo;
 	}
 
 	/**
@@ -137,17 +147,17 @@ public class Task implements Serializable {
 	/**
 	 * Invoked when deserializing an instance.
 	 * 
-	 * @param ois
+	 * @param in
 	 *            the deserializer
 	 * @throws ClassNotFoundException
 	 *             when the class is not found
 	 * @throws IOException
 	 *             when an exception occurs
 	 */
-	private void readObject(ObjectInputStream ois)
+	private void readObject(ObjectInputStream in)
 			throws ClassNotFoundException, IOException {
 		// default deserialization
-		ois.defaultReadObject();
+		in.defaultReadObject();
 		// initialize ID
 		id = ++sequence;
 	}

@@ -22,14 +22,11 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.rmi.UnexpectedException;
-import java.util.Iterator;
-import java.util.UUID;
 
 import org.junit.Test;
-import org.keyboardplaying.dailytasks.util.Serializer;
 
 /**
- * Tests the {@link TaskSet} class, along with the {@link Serializer} methods.
+ * Tests the {@link TaskSet} class.
  * 
  * @author cyChop (http://keyboardplaying.org/)
  */
@@ -108,31 +105,5 @@ public class TaskSetTest {
 		}
 		throw new UnexpectedException(
 				"The test class was poorly coded and an unexpected case arised.");
-	}
-
-	@Test
-	public void testTaskSetSerialization() {
-		// Some randomization to make things even better...
-		TaskSet original = new TaskSet();
-		int nbTasks = (int) (20 * Math.random()) + 1;
-		for (int i = 0; i < nbTasks; i++) {
-			Task randomTask = new Task(UUID.randomUUID().toString(),
-					Math.random() < 0.5 ? false : true);
-			original.addTask(randomTask);
-		}
-
-		byte[] serialized = Serializer.serialize(original);
-
-		TaskSet result = Serializer.deserialize(serialized);
-
-		assertEquals(original.size(), result.size());
-		Iterator<Task> iterL = original.iterator();
-		Iterator<Task> iterR = result.iterator();
-		while (iterL.hasNext()) {
-			Task left = iterL.next();
-			Task right = iterR.next();
-			assertEquals(left.getTodo(), right.getTodo());
-			assertEquals(left.isDone(), right.isDone());
-		}
 	}
 }

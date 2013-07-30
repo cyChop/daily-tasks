@@ -50,9 +50,6 @@ public class TaskCheckBox extends JCheckBox {
 		super(task.getTodo(), task.isDone());
 		this.taskId = task.getId();
 
-		// styling
-		this.setOpaque(false);
-
 		// action listener
 		this.addActionListener(new TaskCheckBoxListener(stateListener));
 	}
