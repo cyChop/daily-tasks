@@ -12,7 +12,9 @@
 	<url>http://cychop.github.io/daily-tasks</url>
 
 	<properties>
-		<project.java.version>1.6</project.java.version>
+		<!-- Specify Java version and encoding for the compiler plugin -->
+		<maven.compiler.source>1.6</maven.compiler.source>
+		<maven.compiler.target>1.6</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<!-- Dependencies and plugin versions -->
@@ -39,17 +41,6 @@
 		</resources>
 
 		<plugins>
-			<!-- Specify Java version -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-					<source>${project.java.version}</source>
-					<target>${project.java.version}</target>
-				</configuration>
-			</plugin>
-
 			<!-- Make JAR executable -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
