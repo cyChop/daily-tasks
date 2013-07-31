@@ -23,11 +23,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
-import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.ListCellRenderer;
 
 import org.keyboardplaying.dailytasks.messages.MessageBundle;
 
@@ -54,7 +51,7 @@ public class LocaleComboBox extends JComboBox {
 	 */
 	protected LocaleComboBox(List<Locale> locales) {
 		super(makeStoreFromList(locales));
-		setRenderer(new ComboBoxRenderer());
+		setRenderer(new LocaleComboBoxRenderer());
 	}
 
 	/**
@@ -102,23 +99,14 @@ public class LocaleComboBox extends JComboBox {
 	 * 
 	 * @author cyChop (http://keyboardplaying.org/)
 	 */
-	private class ComboBoxRenderer extends JLabel implements ListCellRenderer {
+	private class LocaleComboBoxRenderer extends PreferencesComboBoxRenderer {
 
 		/** Generated serial version UID. */
-		private static final long serialVersionUID = -8575053093917857546L;
-
-		/** The horizontal margin for combo box values. */
-		private static final int MARGIN_HORIZONTAL = 10;
-		/** The vertical margin for combo box values. */
-		private static final int MARGIN_VERTICAL = 5;
+		private static final long serialVersionUID = 2311317380952462670L;
 
 		/** Creates a new instance. */
-		public ComboBoxRenderer() {
-			setOpaque(true);
-			setBorder(BorderFactory.createEmptyBorder(MARGIN_VERTICAL,
-					MARGIN_HORIZONTAL, MARGIN_VERTICAL, MARGIN_HORIZONTAL));
-			setHorizontalAlignment(LEFT);
-			setVerticalAlignment(CENTER);
+		public LocaleComboBoxRenderer() {
+			super(LEFT);
 		}
 
 		/*

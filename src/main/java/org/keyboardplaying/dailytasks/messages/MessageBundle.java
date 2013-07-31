@@ -21,6 +21,7 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import org.keyboardplaying.dailytasks.ui.theme.Theme;
@@ -143,13 +144,19 @@ public class MessageBundle {
 
 	/**
 	 * Returns the {@link String} for the specified key.
+	 * <p/>
+	 * If the value was not found, the key will be returned instead.
 	 * 
 	 * @param key
 	 *            the key for the message
 	 * @return the message for the supplied key
 	 */
 	protected String getString(String key) {
-		return bundle.getString(key);
+		try {
+			return bundle.getString(key);
+		} catch (MissingResourceException e) {
+			return key;
+		}
 	}
 
 	/**

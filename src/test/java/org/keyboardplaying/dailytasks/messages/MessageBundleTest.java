@@ -71,6 +71,36 @@ public class MessageBundleTest {
 		assertEquals(TITLE_EN, MessageBundle.get(TITLE));
 	}
 
+	/** Tests different behaviours of messages with arguments. */
+	@Test
+	public void testMessageWithArguments() {
+		// the locale has been set to EN in the previous test, keep it
+		Object[] args = new Object[0];
+		assertEquals(TITLE_EN, MessageBundle.get(TITLE, args));
+
+		// passing non-required arguments should not cause an error
+		args = new Object[] { "arg1" };
+		assertEquals(TITLE_EN, MessageBundle.get(TITLE, args));
+
+		// now with actual formatting
+		assertEquals("This project uses FontAwesome v{0} by Dave Gandy.",
+				MessageBundle.get("about.fontawesome"));
+		assertEquals(
+				"This project uses FontAwesome vHello World! by Dave Gandy.",
+				MessageBundle.get("about.fontawesome", "Hello World!"));
+	}
+
+	/**
+	 * Tests the behaviour of the application if the supplied key is not defined
+	 * in the bundle.
+	 */
+	@Test
+	public void testUnavailableKey() {
+		String key = "some.key.not.defined.in.the.bundle";
+		assertEquals(key, MessageBundle.get(key));
+		assertEquals(key, MessageBundle.get(key, "useless additional argument"));
+	}
+
 	/** Tests the getting of a theme's name. */
 	@Test
 	public void testThemeNameGetting() {

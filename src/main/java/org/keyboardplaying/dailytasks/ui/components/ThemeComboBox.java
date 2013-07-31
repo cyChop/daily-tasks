@@ -18,11 +18,8 @@ package org.keyboardplaying.dailytasks.ui.components;
 
 import java.awt.Component;
 
-import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.ListCellRenderer;
 
 import org.keyboardplaying.dailytasks.messages.MessageBundle;
 import org.keyboardplaying.dailytasks.ui.theme.Theme;
@@ -40,7 +37,7 @@ public class ThemeComboBox extends JComboBox {
 	/** Creates a new instance. */
 	public ThemeComboBox() {
 		super(Theme.values());
-		setRenderer(new ComboBoxRenderer());
+		setRenderer(new ThemeComboBoxRenderer());
 	}
 
 	/**
@@ -49,23 +46,14 @@ public class ThemeComboBox extends JComboBox {
 	 * 
 	 * @author cyChop (http://keyboardplaying.org/)
 	 */
-	private class ComboBoxRenderer extends JLabel implements ListCellRenderer {
+	private class ThemeComboBoxRenderer extends PreferencesComboBoxRenderer {
 
 		/** Generated serial version UID. */
-		private static final long serialVersionUID = 1131328128632583433L;
-
-		/** The horizontal margin for combo box values. */
-		private static final int MARGIN_HORIZONTAL = 10;
-		/** The vertical margin for combo box values. */
-		private static final int MARGIN_VERTICAL = 5;
+		private static final long serialVersionUID = -7236746202586918818L;
 
 		/** Creates a new instance. */
-		public ComboBoxRenderer() {
-			setOpaque(true);
-			setBorder(BorderFactory.createEmptyBorder(MARGIN_VERTICAL,
-					MARGIN_HORIZONTAL, MARGIN_VERTICAL, MARGIN_HORIZONTAL));
-			setHorizontalAlignment(CENTER);
-			setVerticalAlignment(CENTER);
+		public ThemeComboBoxRenderer() {
+			super(CENTER);
 		}
 
 		/*
