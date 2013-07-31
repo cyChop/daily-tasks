@@ -102,12 +102,7 @@ public class LocaleComboBox extends JComboBox {
 	private class LocaleComboBoxRenderer extends PreferencesComboBoxRenderer {
 
 		/** Generated serial version UID. */
-		private static final long serialVersionUID = 2311317380952462670L;
-
-		/** Creates a new instance. */
-		public LocaleComboBoxRenderer() {
-			super(LEFT);
-		}
+		private static final long serialVersionUID = -1987303094512226601L;
 
 		/*
 		 * (non-Javadoc)

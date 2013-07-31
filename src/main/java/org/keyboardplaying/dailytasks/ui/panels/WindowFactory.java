@@ -16,12 +16,15 @@
  */
 package org.keyboardplaying.dailytasks.ui.panels;
 
-import java.awt.Window;
+import javax.swing.JFrame;
 
 import org.keyboardplaying.dailytasks.model.TaskSet;
 import org.keyboardplaying.dailytasks.model.UIPreferences;
-import org.keyboardplaying.dailytasks.ui.ApplicationWindow;
 import org.keyboardplaying.dailytasks.ui.events.TaskStateChangeListener;
+import org.keyboardplaying.dailytasks.ui.events.UIPreferencesChangeListener;
+import org.keyboardplaying.dailytasks.ui.util.WindowUtils;
+import org.keyboardplaying.dailytasks.ui.window.ApplicationWindow;
+import org.keyboardplaying.dailytasks.ui.window.WindowGetter;
 
 /**
  * Provides methods to create the required application windows.
@@ -45,17 +48,21 @@ public final class WindowFactory {
 	 * 
 	 * @param prefs
 	 *            the UI preferences
+	 * @param getter
+	 *            the object in charge of getting the windows on demand
 	 * @param tasks
 	 *            the tasks to display
 	 * @param taskStateListener
 	 *            the listener for tasks' state changes
 	 * @return the window
 	 */
-	public static Window makeMainWindow(UIPreferences prefs, TaskSet tasks,
+	public static JFrame makeMainWindow(UIPreferences prefs,
+			WindowGetter getter, TaskSet tasks,
 			TaskStateChangeListener taskStateListener) {
-		Window window = getVisibleWindowByName(NAME_PREFS);
+		JFrame window = WindowUtils.getVisibleWindowByName(NAME_PREFS);
 		if (window == null) {
-			MainPanel panel = new MainPanel(prefs, tasks, taskStateListener);
+			MainPanel panel = new MainPanel(prefs, getter, tasks,
+					taskStateListener);
 			window = new ApplicationWindow(prefs, "app.title", NAME_MAIN, panel);
 		}
 		return window;
@@ -66,13 +73,16 @@ public final class WindowFactory {
 	 * 
 	 * @param prefs
 	 *            the UI preferences
+	 * @param listener
+	 *            the object listening to changes of the tasks' states
 	 * @return the window
 	 */
-	public static Window makePreferencesWindow(UIPreferences prefs) {
-		Window window = getVisibleWindowByName(NAME_PREFS);
+	public static JFrame makePreferencesWindow(UIPreferences prefs,
+			UIPreferencesChangeListener listener) {
+		JFrame window = WindowUtils.getVisibleWindowByName(NAME_PREFS);
 		if (window == null) {
 			window = new ApplicationWindow(prefs, "app.settings", NAME_PREFS,
-					new PreferencesPanel(prefs, null));
+					new PreferencesPanel(prefs, listener));
 		}
 		return window;
 	}
@@ -84,36 +94,12 @@ public final class WindowFactory {
 	 *            the UI preferences
 	 * @return the window
 	 */
-	public static Window makeAboutWindow(UIPreferences prefs) {
-		Window window = getVisibleWindowByName(NAME_ABOUT);
+	public static JFrame makeAboutWindow(UIPreferences prefs) {
+		JFrame window = WindowUtils.getVisibleWindowByName(NAME_ABOUT);
 		if (window == null) {
 			window = new ApplicationWindow(prefs, "app.about", NAME_ABOUT,
 					new AboutPanel(prefs));
 		}
 		return window;
-	}
-
-	/**
-	 * Searches for a visible window with the supplied name.
-	 * 
-	 * @param name
-	 *            the name of the window to look for
-	 * @return the first visible window with the supplied name, or {@code null}
-	 *         if none
-	 */
-	public static Window getVisibleWindowByName(String name) {
-		Window result = null;
-
-		if (name != null) {
-			Window[] windows = Window.getWindows();
-			for (Window window : windows) {
-				if (window.isVisible() && name.equals(window.getName())) {
-					result = window;
-					break;
-				}
-			}
-		}
-
-		return result;
 	}
 }

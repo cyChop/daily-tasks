@@ -49,12 +49,7 @@ public class ThemeComboBox extends JComboBox {
 	private class ThemeComboBoxRenderer extends PreferencesComboBoxRenderer {
 
 		/** Generated serial version UID. */
-		private static final long serialVersionUID = -7236746202586918818L;
-
-		/** Creates a new instance. */
-		public ThemeComboBoxRenderer() {
-			super(CENTER);
-		}
+		private static final long serialVersionUID = 8668298417035583036L;
 
 		/*
 		 * (non-Javadoc)

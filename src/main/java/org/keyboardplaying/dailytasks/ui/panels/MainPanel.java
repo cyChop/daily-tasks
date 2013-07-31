@@ -22,7 +22,9 @@ import javax.swing.JPanel;
 
 import org.keyboardplaying.dailytasks.model.TaskSet;
 import org.keyboardplaying.dailytasks.model.UIPreferences;
+import org.keyboardplaying.dailytasks.ui.components.ApplicationToolbar;
 import org.keyboardplaying.dailytasks.ui.events.TaskStateChangeListener;
+import org.keyboardplaying.dailytasks.ui.window.WindowGetter;
 
 /**
  * The panel displaying both the tasks and application toolbar.
@@ -32,26 +34,28 @@ import org.keyboardplaying.dailytasks.ui.events.TaskStateChangeListener;
 public class MainPanel extends JPanel {
 
 	/** Generated serial version UID. */
-	private static final long serialVersionUID = -5075511488859228294L;
+	private static final long serialVersionUID = -4336792561919307416L;
 
 	/**
 	 * Creates a new instance.
 	 * 
 	 * @param prefs
 	 *            the UI preferences
+	 * @param getter
+	 *            the object in charge of getting the windows on demand
 	 * @param tasks
 	 *            the tasks to display
 	 * @param taskStateListener
 	 *            the object which listens to the tasks' state
 	 */
-	public MainPanel(UIPreferences prefs, TaskSet tasks,
-			TaskStateChangeListener taskStateListener) {
+	public MainPanel(UIPreferences prefs, WindowGetter getter,
+			TaskSet tasks, TaskStateChangeListener taskStateListener) {
 		super(new BorderLayout());
 
 		// Build UI
 		TaskPanel taskPanel = new TaskPanel(tasks, taskStateListener);
 		add(taskPanel, BorderLayout.CENTER);
-		add(new Toolbar(prefs), BorderLayout.EAST);
+		add(new ApplicationToolbar(prefs, getter), BorderLayout.EAST);
 		// build();
 	}
 }

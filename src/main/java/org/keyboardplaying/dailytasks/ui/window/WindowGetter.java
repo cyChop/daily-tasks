@@ -14,22 +14,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.keyboardplaying.dailytasks.ui.util;
+package org.keyboardplaying.dailytasks.ui.window;
 
-import static org.junit.Assert.assertNotNull;
-
-import org.junit.Test;
+import javax.swing.JFrame;
 
 /**
- * Tests for the {@link FontUtils} class.
+ * Gets the request windows.
  * 
  * @author cyChop (http://keyboardplaying.org/)
  */
-public class FontUtilsTest {
+public interface WindowGetter {
 
-	/** Ensures {@link FontUtils} is still capable of retrieving FontAwesome. */
-	@Test
-	public void testFontFetching() {
-		assertNotNull(FontUtils.getFontAwesome());
-	}
+	/**
+	 * Gets the main window, which displays tasks and the application toolbar.
+	 * 
+	 * @return the main window
+	 */
+	JFrame getMainWindow();
+
+	/**
+	 * Gets the preferences window, to update the application settings.
+	 * 
+	 * @return the preferences window
+	 */
+	JFrame getPreferencesWindow();
+
+	/**
+	 * Gets the about window, which gives some intel about the application.
+	 * 
+	 * @return the about window
+	 */
+	JFrame getAboutWindow();
 }

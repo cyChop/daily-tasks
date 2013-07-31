@@ -16,18 +16,15 @@
  */
 package org.keyboardplaying.dailytasks;
 
-import java.awt.Window;
+import javax.swing.JFrame;
 
 import org.keyboardplaying.dailytasks.core.PreferencesManager;
-import org.keyboardplaying.dailytasks.core.TaskManager;
 import org.keyboardplaying.dailytasks.core.events.ApplicationClosingListener;
-import org.keyboardplaying.dailytasks.core.events.TaskCompletionListener;
-import org.keyboardplaying.dailytasks.core.events.TaskStateListener;
+import org.keyboardplaying.dailytasks.core.events.ApplicationWindowGetter;
 import org.keyboardplaying.dailytasks.messages.MessageBundle;
-import org.keyboardplaying.dailytasks.model.TaskSet;
 import org.keyboardplaying.dailytasks.model.UIPreferences;
-import org.keyboardplaying.dailytasks.ui.panels.WindowFactory;
 import org.keyboardplaying.dailytasks.ui.theme.ThemeManager;
+import org.keyboardplaying.dailytasks.ui.window.WindowGetter;
 
 /**
  * Main class for the application.
@@ -51,13 +48,8 @@ public class Launcher {
 		MessageBundle.setLocale(prefs.getLocale());
 
 		/* Run application */
-		TaskSet tasks = TaskManager.getInstance().getTasks();
-
-		TaskStateListener taskStateListener = new TaskCompletionListener();
-
-		Window window = WindowFactory.makeMainWindow(prefs, tasks,
-				taskStateListener);
-		taskStateListener.setMainWindow(window);
+		WindowGetter getter = new ApplicationWindowGetter();
+		JFrame window = getter.getMainWindow();
 
 		ApplicationClosingListener.register(window);
 		window.setVisible(true);

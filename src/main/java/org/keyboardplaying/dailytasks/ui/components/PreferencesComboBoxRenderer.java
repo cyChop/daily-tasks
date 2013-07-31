@@ -32,24 +32,19 @@ public abstract class PreferencesComboBoxRenderer extends JLabel implements
 		ListCellRenderer {
 
 	/** Generated serial version UID. */
-	private static final long serialVersionUID = 3181770228834762042L;
+	private static final long serialVersionUID = 5057768568220733316L;
 
 	/** The horizontal margin for combo box values. */
 	private static final int MARGIN_HORIZONTAL = 10;
 	/** The vertical margin for combo box values. */
 	private static final int MARGIN_VERTICAL = 2;
 
-	/**
-	 * Creates a new instance.
-	 * 
-	 * @param hAlign
-	 *            the horizontal alignment to be used
-	 */
-	public PreferencesComboBoxRenderer(int hAlign) {
+	/** Creates a new instance. */
+	public PreferencesComboBoxRenderer() {
 		setOpaque(true);
 		setBorder(BorderFactory.createEmptyBorder(MARGIN_VERTICAL,
 				MARGIN_HORIZONTAL, MARGIN_VERTICAL, MARGIN_HORIZONTAL));
-		setHorizontalAlignment(hAlign);
+		setHorizontalAlignment(LEFT);
 		setVerticalAlignment(CENTER);
 	}
 }

@@ -20,7 +20,9 @@ import java.awt.Window;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 
 import org.keyboardplaying.dailytasks.core.TaskManager;
 import org.keyboardplaying.dailytasks.messages.MessageBundle;
@@ -105,13 +107,14 @@ public class ApplicationClosingListener extends WindowAdapter {
 	/**
 	 * Creates and attaches an instance to the {@link MainPanel}.
 	 * 
-	 * @param mainWindow
+	 * @param window
 	 *            the window to control via an
 	 *            {@link ApplicationClosingListener}
 	 */
-	public static void register(Window mainWindow) {
+	public static void register(JFrame window) {
 		ApplicationClosingListener instance = new ApplicationClosingListener(
-				mainWindow);
-		mainWindow.addWindowListener(instance);
+				window);
+		window.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+		window.addWindowListener(instance);
 	}
 }

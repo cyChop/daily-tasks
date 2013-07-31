@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.keyboardplaying.dailytasks.ui;
+package org.keyboardplaying.dailytasks.ui.window;
 
 import java.awt.Container;
 
@@ -65,7 +65,6 @@ public class ApplicationWindow extends JFrame {
 		setAlwaysOnTop(prefs.isAlwaysOnTop());
 		setResizable(false);
 		// center on screen
-		// XXX save and restore last position?
 		setLocationRelativeTo(null);
 
 		/* Now the content. */

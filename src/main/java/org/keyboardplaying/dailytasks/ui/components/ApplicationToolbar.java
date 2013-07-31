@@ -14,11 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.keyboardplaying.dailytasks.ui.panels;
+package org.keyboardplaying.dailytasks.ui.components;
 
 import java.awt.Color;
 import java.awt.Insets;
-import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -29,8 +28,8 @@ import javax.swing.JPanel;
 
 import org.keyboardplaying.dailytasks.model.UIPreferences;
 import org.keyboardplaying.dailytasks.ui.util.FontUtils;
+import org.keyboardplaying.dailytasks.ui.window.WindowGetter;
 
-// TODO refactor so that this does not have to remain in the same package as the WindowFactory
 /**
  * The application toolbar.
  * <p/>
@@ -39,34 +38,40 @@ import org.keyboardplaying.dailytasks.ui.util.FontUtils;
  * 
  * @author cyChop (http://keyboardplaying.org/)
  */
-public class Toolbar extends JPanel {
+public class ApplicationToolbar extends JPanel {
 
 	/** Generated serial version UID. */
-	private static final long serialVersionUID = -4207500879723146092L;
+	private static final long serialVersionUID = -4260357704040379221L;
+
+	/** The object in charge of getting the required windows on demand. */
+	private WindowGetter getter;
 
 	/** The width of the empty border to apply around the toolbar. */
 	private static final int BORDER_WIDTH = 2;
-
-	/** The UI preferences to use when opening a new window. */
-	private UIPreferences prefs;
 
 	/**
 	 * Creates a new instance and initializes layout and content.
 	 * 
 	 * @param prefs
-	 *            the UI preferences to use when opening a new window from this
-	 *            toolbar
+	 *            the UI preferences
+	 * @param getter
+	 *            the object in charge of getting the windows on demand
 	 * 
 	 * @see #initPanel()
 	 */
-	public Toolbar(UIPreferences prefs) {
+	public ApplicationToolbar(UIPreferences prefs, WindowGetter getter) {
 		super();
-		this.prefs = prefs;
-		initPanel();
+		this.getter = getter;
+		initPanel(prefs);
 	}
 
-	/** Initializes the toolbar layout and components. */
-	private void initPanel() {
+	/**
+	 * Initializes the toolbar layout and components.
+	 * 
+	 * @param prefs
+	 *            the UI preferences
+	 */
+	private void initPanel(UIPreferences prefs) {
 		/* Initialize layout. */
 		this.setBorder(BorderFactory.createEmptyBorder(BORDER_WIDTH,
 				BORDER_WIDTH, BORDER_WIDTH, BORDER_WIDTH));
@@ -83,8 +88,7 @@ public class Toolbar extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Window window = WindowFactory.makePreferencesWindow(prefs);
-				window.setVisible(true);
+				getter.getPreferencesWindow().setVisible(true);
 			}
 		}, btnMargins);
 
@@ -94,8 +98,7 @@ public class Toolbar extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Window window = WindowFactory.makeAboutWindow(prefs);
-				window.setVisible(true);
+				getter.getAboutWindow().setVisible(true);
 			}
 		}, btnMargins);
 	}

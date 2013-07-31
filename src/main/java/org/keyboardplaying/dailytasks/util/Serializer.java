@@ -40,7 +40,9 @@ public final class Serializer {
 
 		} catch (IOException e) {
 
-			// TODO throw an exception to display an appropriate message
+			// Designed for use within the application
+			// Should not happen
+			e.printStackTrace();
 			throw new RuntimeException();
 
 		} finally {
@@ -72,13 +74,16 @@ public final class Serializer {
 
 		} catch (IOException e) {
 
-			// TODO throw an exception to display an appropriate message
+			// Designed for use within the application
+			// Should not happen
 			e.printStackTrace();
 			throw new RuntimeException();
 
 		} catch (ClassNotFoundException e) {
 
-			// TODO throw an exception to display an appropriate message
+			// Designed for use within the application
+			// Should not happen
+			e.printStackTrace();
 			throw new RuntimeException();
 
 		} finally {
