@@ -16,9 +16,10 @@
  */
 package org.keyboardplaying.dailytasks.core.events;
 
+import java.awt.Window;
+
 import org.keyboardplaying.dailytasks.core.TaskManager;
 import org.keyboardplaying.dailytasks.model.Task;
-import org.keyboardplaying.dailytasks.ui.ApplicationWindow;
 import org.keyboardplaying.dailytasks.ui.events.TaskStateChangeListener;
 
 /**
@@ -30,7 +31,7 @@ import org.keyboardplaying.dailytasks.ui.events.TaskStateChangeListener;
 public abstract class TaskStateListener implements TaskStateChangeListener {
 
 	/** The window this listener controls. */
-	private ApplicationWindow mainWindow;
+	private Window mainWindow;
 
 	/**
 	 * Creates a new instance.
@@ -47,7 +48,7 @@ public abstract class TaskStateListener implements TaskStateChangeListener {
 	 * @param mainWindow
 	 *            the window this listener controls
 	 */
-	public void setMainWindow(ApplicationWindow mainWindow) {
+	public void setMainWindow(Window mainWindow) {
 		this.mainWindow = mainWindow;
 	}
 
@@ -56,7 +57,7 @@ public abstract class TaskStateListener implements TaskStateChangeListener {
 	 * 
 	 * @return the window this listener controls
 	 */
-	protected ApplicationWindow getMainWindow() {
+	protected Window getMainWindow() {
 		return this.mainWindow;
 	}
 

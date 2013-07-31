@@ -16,6 +16,10 @@
  */
 package org.keyboardplaying.dailytasks.core.events;
 
+import java.awt.Toolkit;
+import java.awt.Window;
+import java.awt.event.WindowEvent;
+
 import org.keyboardplaying.dailytasks.core.TaskManager;
 import org.keyboardplaying.dailytasks.model.Task;
 
@@ -42,7 +46,18 @@ public class TaskCompletionListener extends TaskStateListener {
 		// Is job done?
 		if (TaskManager.getInstance().areAllTasksDone()) {
 			// Close the window
-			getMainWindow().triggerClosingEvent();
+			triggerClosingEvent(getMainWindow());
 		}
+	}
+
+	/**
+	 * Emulates the click on the 'close' button of the supplied window.
+	 * 
+	 * @param window
+	 *            the window to close
+	 */
+	public static void triggerClosingEvent(Window window) {
+		WindowEvent wev = new WindowEvent(window, WindowEvent.WINDOW_CLOSING);
+		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);
 	}
 }

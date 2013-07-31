@@ -16,6 +16,8 @@
  */
 package org.keyboardplaying.dailytasks;
 
+import java.awt.Window;
+
 import org.keyboardplaying.dailytasks.core.PreferencesManager;
 import org.keyboardplaying.dailytasks.core.TaskManager;
 import org.keyboardplaying.dailytasks.core.events.ApplicationClosingListener;
@@ -24,7 +26,6 @@ import org.keyboardplaying.dailytasks.core.events.TaskStateListener;
 import org.keyboardplaying.dailytasks.messages.MessageBundle;
 import org.keyboardplaying.dailytasks.model.TaskSet;
 import org.keyboardplaying.dailytasks.model.UIPreferences;
-import org.keyboardplaying.dailytasks.ui.ApplicationWindow;
 import org.keyboardplaying.dailytasks.ui.panels.WindowFactory;
 import org.keyboardplaying.dailytasks.ui.theme.ThemeManager;
 
@@ -54,7 +55,7 @@ public class Launcher {
 
 		TaskStateListener taskStateListener = new TaskCompletionListener();
 
-		ApplicationWindow window = WindowFactory.makeMainWindow(prefs, tasks,
+		Window window = WindowFactory.makeMainWindow(prefs, tasks,
 				taskStateListener);
 		taskStateListener.setMainWindow(window);
 

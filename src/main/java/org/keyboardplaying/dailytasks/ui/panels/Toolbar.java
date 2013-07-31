@@ -18,6 +18,7 @@ package org.keyboardplaying.dailytasks.ui.panels;
 
 import java.awt.Color;
 import java.awt.Insets;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -27,7 +28,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import org.keyboardplaying.dailytasks.model.UIPreferences;
-import org.keyboardplaying.dailytasks.ui.ApplicationWindow;
 import org.keyboardplaying.dailytasks.ui.util.FontUtils;
 
 // TODO refactor so that this does not have to remain in the same package as the WindowFactory
@@ -83,8 +83,7 @@ public class Toolbar extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ApplicationWindow window = WindowFactory
-						.makePreferencesWindow(prefs);
+				Window window = WindowFactory.makePreferencesWindow(prefs);
 				window.setVisible(true);
 			}
 		}, btnMargins);
@@ -95,7 +94,7 @@ public class Toolbar extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ApplicationWindow window = WindowFactory.makeAboutWindow(prefs);
+				Window window = WindowFactory.makeAboutWindow(prefs);
 				window.setVisible(true);
 			}
 		}, btnMargins);

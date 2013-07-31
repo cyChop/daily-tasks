@@ -17,8 +17,6 @@
 package org.keyboardplaying.dailytasks.ui;
 
 import java.awt.Container;
-import java.awt.Toolkit;
-import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 
@@ -37,7 +35,7 @@ import org.keyboardplaying.dailytasks.ui.util.IconUtils;
 public class ApplicationWindow extends JFrame {
 
 	/** Generated serial version UID. */
-	private static final long serialVersionUID = 3031951572624643029L;
+	private static final long serialVersionUID = 4252438013136158101L;
 
 	/**
 	 * Creates a new instance.
@@ -46,14 +44,19 @@ public class ApplicationWindow extends JFrame {
 	 *            the application UI preferences
 	 * @param titleKey
 	 *            the key for this window's title in the {@link MessageBundle}
+	 * @param windowName
+	 *            the name of the window
 	 * @param contentPane
 	 *            the window's content
 	 */
 	public ApplicationWindow(UIPreferences prefs, String titleKey,
-			Container contentPane) {
+			String windowName, Container contentPane) {
 		/* Title and icon. */
 		super(MessageBundle.get(titleKey));
 		setIconImages(IconUtils.getWindowIconImages(prefs.getTheme()));
+
+		/* Save window's name */
+		setName(windowName);
 
 		/* Make sure thread is ended on close. */
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -70,11 +73,5 @@ public class ApplicationWindow extends JFrame {
 
 		/* Adapt size to fit the content. */
 		pack();
-	}
-
-	/** Emulates the click on the 'close' button of this window. */
-	public void triggerClosingEvent() {
-		WindowEvent wev = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
-		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);
 	}
 }
