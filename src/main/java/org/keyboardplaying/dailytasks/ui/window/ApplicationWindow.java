@@ -21,39 +21,39 @@ import java.awt.Container;
 import javax.swing.JFrame;
 
 import org.keyboardplaying.dailytasks.messages.MessageBundle;
-import org.keyboardplaying.dailytasks.model.UIPreferences;
 import org.keyboardplaying.dailytasks.ui.util.IconUtils;
 
 /**
  * A standard window for all the application's screen.
  * <p/>
- * The constructor requires the {@link UIPreferences}, a key for the title in
- * the message bundle and the content pane.
+ * The constructor requires a key for the title in the message bundle, a unique
+ * name for this window and the content pane.
  * 
  * @author cyChop (http://keyboardplaying.org/)
  */
 public class ApplicationWindow extends JFrame {
 
 	/** Generated serial version UID. */
-	private static final long serialVersionUID = 4252438013136158101L;
+	private static final long serialVersionUID = -2522196280489071421L;
 
 	/**
 	 * Creates a new instance.
 	 * 
-	 * @param prefs
-	 *            the application UI preferences
 	 * @param titleKey
 	 *            the key for this window's title in the {@link MessageBundle}
 	 * @param windowName
 	 *            the name of the window
 	 * @param contentPane
 	 *            the window's content
+	 * @param alwaysOnTop
+	 *            {@code true} if window should always remain on top of other
+	 *            windows
 	 */
-	public ApplicationWindow(UIPreferences prefs, String titleKey,
-			String windowName, Container contentPane) {
+	public ApplicationWindow(String titleKey, String windowName,
+			Container contentPane, boolean alwaysOnTop) {
 		/* Title and icon. */
 		super(MessageBundle.get(titleKey));
-		setIconImages(IconUtils.getWindowIconImages(prefs.getTheme()));
+		setIconImages(IconUtils.getWindowIconImages());
 
 		/* Save window's name */
 		setName(windowName);
@@ -62,7 +62,7 @@ public class ApplicationWindow extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		/* General styling */
-		setAlwaysOnTop(prefs.isAlwaysOnTop());
+		setAlwaysOnTop(alwaysOnTop);
 		setResizable(false);
 		// center on screen
 		setLocationRelativeTo(null);

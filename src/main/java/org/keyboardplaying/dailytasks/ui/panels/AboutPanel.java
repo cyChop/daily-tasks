@@ -24,7 +24,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.keyboardplaying.dailytasks.messages.MessageBundle;
-import org.keyboardplaying.dailytasks.model.UIPreferences;
 import org.keyboardplaying.dailytasks.ui.util.FontUtils;
 
 /**
@@ -35,18 +34,13 @@ import org.keyboardplaying.dailytasks.ui.util.FontUtils;
 public class AboutPanel extends JPanel {
 
 	/** Generated serial version UID. */
-	private static final long serialVersionUID = -692376388865380985L;
+	private static final long serialVersionUID = 6838253013008799433L;
 
 	/** The margin surrounding the text in the about window. */
 	private static final int WINDOW_MARGIN = 20;
 
-	/**
-	 * Creates a new instance.
-	 * 
-	 * @param prefs
-	 *            the UI preferences for this window
-	 */
-	public AboutPanel(UIPreferences prefs) {
+	/** Creates a new instance. */
+	public AboutPanel() {
 
 		/* Set the container. */
 		super();

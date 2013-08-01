@@ -22,7 +22,7 @@ import org.keyboardplaying.dailytasks.core.PreferencesManager;
 import org.keyboardplaying.dailytasks.core.TaskManager;
 import org.keyboardplaying.dailytasks.model.TaskSet;
 import org.keyboardplaying.dailytasks.model.UIPreferences;
-import org.keyboardplaying.dailytasks.ui.panels.WindowFactory;
+import org.keyboardplaying.dailytasks.ui.WindowFactory;
 import org.keyboardplaying.dailytasks.ui.window.WindowGetter;
 
 /**
@@ -41,8 +41,8 @@ public class ApplicationWindowGetter implements WindowGetter {
 	public JFrame getMainWindow() {
 		TaskSet tasks = TaskManager.getInstance().getTasks();
 		TaskCompletionListener taskStateListener = new TaskCompletionListener();
-		JFrame window = WindowFactory.makeMainWindow(getUIPrefs(), this, tasks,
-				taskStateListener);
+		JFrame window = WindowFactory.makeMainWindow(getUIPrefs()
+				.isAlwaysOnTop(), this, tasks, taskStateListener);
 		taskStateListener.setMainWindow(window);
 		return window;
 	}
@@ -55,8 +55,9 @@ public class ApplicationWindowGetter implements WindowGetter {
 	 */
 	@Override
 	public JFrame getPreferencesWindow() {
-		return WindowFactory.makePreferencesWindow(getUIPrefs(),
-				new UIPreferencesSaver());
+		UIPreferences prefs = getUIPrefs();
+		return WindowFactory.makePreferencesWindow(prefs.isAlwaysOnTop(),
+				prefs, new UIPreferencesSaver());
 	}
 
 	/*
@@ -66,7 +67,7 @@ public class ApplicationWindowGetter implements WindowGetter {
 	 */
 	@Override
 	public JFrame getAboutWindow() {
-		return WindowFactory.makeAboutWindow(getUIPrefs());
+		return WindowFactory.makeAboutWindow(getUIPrefs().isAlwaysOnTop());
 	}
 
 	/**

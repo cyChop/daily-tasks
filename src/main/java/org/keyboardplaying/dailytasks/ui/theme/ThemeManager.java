@@ -20,7 +20,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 /**
- * Manages the theme accross the application.
+ * Manages the theme across the application.
  * 
  * @author cyChop (http://keyboardplaying.org/)
  */
@@ -52,8 +52,7 @@ public final class ThemeManager {
 			// this is no custom look and feel and should not happen
 		}
 
-		/* Apply custom theme. */
-		// TODO extend to make sure everything is fine
+		/* Apply custom theme - AWT/Swing components. */
 		// Some generalities
 		UIManager.put("Panel.background", theme.getBgColor());
 		UIManager.put("Button.background", theme.getBgColor());
@@ -68,5 +67,12 @@ public final class ThemeManager {
 		// Dialogs
 		UIManager.put("OptionPane.background", theme.getBgColor());
 		UIManager.put("OptionPane.messageForeground", theme.getTxtColor());
+
+		/* Apply custom theme - custom components. */
+		// Application window
+		UIManager.put("ApplicationWindow.icon.prefix", theme.getIcon());
+
+		// Glyph buttons
+		UIManager.put("GlyphButton.foreground", theme.getTxtColor());
 	}
 }

@@ -16,7 +16,6 @@
  */
 package org.keyboardplaying.dailytasks.ui.components;
 
-import java.awt.Color;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,8 +25,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import org.keyboardplaying.dailytasks.model.UIPreferences;
-import org.keyboardplaying.dailytasks.ui.util.FontUtils;
 import org.keyboardplaying.dailytasks.ui.window.WindowGetter;
 
 /**
@@ -41,7 +38,7 @@ import org.keyboardplaying.dailytasks.ui.window.WindowGetter;
 public class ApplicationToolbar extends JPanel {
 
 	/** Generated serial version UID. */
-	private static final long serialVersionUID = -4260357704040379221L;
+	private static final long serialVersionUID = 2257174746245010479L;
 
 	/** The object in charge of getting the required windows on demand. */
 	private WindowGetter getter;
@@ -52,26 +49,19 @@ public class ApplicationToolbar extends JPanel {
 	/**
 	 * Creates a new instance and initializes layout and content.
 	 * 
-	 * @param prefs
-	 *            the UI preferences
 	 * @param getter
 	 *            the object in charge of getting the windows on demand
 	 * 
 	 * @see #initPanel()
 	 */
-	public ApplicationToolbar(UIPreferences prefs, WindowGetter getter) {
+	public ApplicationToolbar(WindowGetter getter) {
 		super();
 		this.getter = getter;
-		initPanel(prefs);
+		initPanel();
 	}
 
-	/**
-	 * Initializes the toolbar layout and components.
-	 * 
-	 * @param prefs
-	 *            the UI preferences
-	 */
-	private void initPanel(UIPreferences prefs) {
+	/** Initializes the toolbar layout and components. */
+	private void initPanel() {
 		/* Initialize layout. */
 		this.setBorder(BorderFactory.createEmptyBorder(BORDER_WIDTH,
 				BORDER_WIDTH, BORDER_WIDTH, BORDER_WIDTH));
@@ -80,11 +70,10 @@ public class ApplicationToolbar extends JPanel {
 		/* Now add buttons. */
 		// Prepare styling options
 		Insets btnMargins = new Insets(5, 0, 0, 0);
-		Color btnTxtColor = prefs.getTheme().getTxtColor();
 
 		// \uf0ad=icon-wrench
 		// -> settings
-		addButtonToPanel('\uf0ad', btnTxtColor, new ActionListener() {
+		addButtonToPanel('\uf0ad', new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -94,7 +83,7 @@ public class ApplicationToolbar extends JPanel {
 
 		// \uf059=icon-question-sign
 		// -> about
-		addButtonToPanel('\uf059', btnTxtColor, new ActionListener() {
+		addButtonToPanel('\uf059', new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -112,32 +101,19 @@ public class ApplicationToolbar extends JPanel {
 	 * @param btnText
 	 *            the text to display on this button; this should be a Unicode
 	 *            character recognized in FontAwesome
-	 * @param fontColor
-	 *            the color the glyph should be
 	 * @param listener
 	 *            the action to be activated on button click; {@code null} if
 	 *            none
 	 * @param btnMargins
 	 *            the margins to use when adding the buttons
 	 */
-	private void addButtonToPanel(char btnText, Color fontColor,
-			ActionListener listener, Insets btnMargins) {
-		JButton btn = new JButton(String.valueOf(btnText));
+	private void addButtonToPanel(char btnText, ActionListener listener,
+			Insets btnMargins) {
+		JButton btn = new GlyphButton(btnText);
+
+		btn.addActionListener(listener);
+
 		btn.setMargin(btnMargins);
-
-		/* Apply theme. */
-		btn.setForeground(fontColor);
-
-		/* Makes the button blend in the background. */
-		btn.setContentAreaFilled(false);
-		btn.setBorderPainted(false);
-
-		if (listener != null) {
-			btn.addActionListener(listener);
-		}
-
-		/* Use FontAwesome. */
-		btn.setFont(FontUtils.getFontAwesome());
 		this.add(btn);
 	}
 }

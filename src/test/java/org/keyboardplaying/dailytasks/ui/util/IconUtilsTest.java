@@ -24,6 +24,7 @@ import java.util.List;
 
 import org.junit.Test;
 import org.keyboardplaying.dailytasks.ui.theme.Theme;
+import org.keyboardplaying.dailytasks.ui.theme.ThemeManager;
 
 /**
  * Tests for the {@link IconUtils} class.
@@ -35,8 +36,11 @@ public class IconUtilsTest {
 	/** Ensures {@link IconUtils} is still capable of retrieving icons. */
 	@Test
 	public void testIconFetching() {
-		List<Image> defaultWindowIcon = IconUtils
-				.getWindowIconImages(Theme.ORANGE);
+		// Set the UI manager
+		ThemeManager.applyTheme(Theme.ORANGE);
+
+		// Test
+		List<Image> defaultWindowIcon = IconUtils.getWindowIconImages();
 		assertNotNull(defaultWindowIcon);
 		assertFalse(defaultWindowIcon.isEmpty());
 	}
