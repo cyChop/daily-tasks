@@ -22,6 +22,7 @@ import javax.swing.JButton;
 import javax.swing.UIManager;
 
 import org.keyboardplaying.dailytasks.ui.util.FontUtils;
+import org.keyboardplaying.dailytasks.ui.util.FontUtils.FontAwesomeGlyph;
 
 /**
  * A button displaying only a glyph from the Font Awesome iconic font. This
@@ -33,7 +34,7 @@ import org.keyboardplaying.dailytasks.ui.util.FontUtils;
 public class GlyphButton extends JButton {
 
 	/** Generated serial version UID. */
-	private static final long serialVersionUID = 8595679302936643635L;
+	private static final long serialVersionUID = 6819853527671593836L;
 
 	/**
 	 * Creates a new instance.
@@ -41,8 +42,8 @@ public class GlyphButton extends JButton {
 	 * @param glyph
 	 *            the glyph to display
 	 */
-	public GlyphButton(char glyph) {
-		super(String.valueOf(glyph));
+	public GlyphButton(FontAwesomeGlyph glyph) {
+		super(glyph.toString());
 		/* Load Font Awesome to display a glyph. */
 		setFont(FontUtils.getFontAwesome());
 		/* Apply theme color to glyph. */

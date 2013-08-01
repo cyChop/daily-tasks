@@ -48,6 +48,52 @@ public final class FontUtils {
 	private static Font fontAwesome = null;
 
 	/**
+	 * A list of FontAwesome glyphs which can be used in the application.
+	 * 
+	 * @author cyChop (http://keyboardplaying.org/)
+	 */
+	public static enum FontAwesomeGlyph {
+
+		/** A wrench icon. */
+		WRENCH('\uf0ad'),
+		/** A question mark in a round sign. */
+		QUESTION_SIGN('\uf059');
+
+		/** The character corresponding to this glyph in Font Awesome's font. */
+		private char character;
+
+		/**
+		 * Creates a new instance.
+		 * 
+		 * @param character
+		 *            the character corresponding to this glyph
+		 */
+		private FontAwesomeGlyph(char character) {
+			this.character = character;
+		}
+
+		/**
+		 * Returns the character corresponding to this glyph.
+		 * 
+		 * @return the character corresponding to this glyph
+		 */
+		public char getChar() {
+			return character;
+		}
+
+		/**
+		 * Returns the character from the Font Awesome font to be used when this
+		 * glyph is wished
+		 * 
+		 * @return the character corresponding to this glyph
+		 */
+		@Override
+		public String toString() {
+			return String.valueOf(character);
+		}
+	}
+
+	/**
 	 * Returns the iconic font used for glyphs.
 	 * 
 	 * @return the iconic font to use for glyphs

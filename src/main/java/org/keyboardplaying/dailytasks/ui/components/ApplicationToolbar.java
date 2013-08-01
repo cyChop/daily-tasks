@@ -25,6 +25,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import org.keyboardplaying.dailytasks.ui.util.FontUtils.FontAwesomeGlyph;
 import org.keyboardplaying.dailytasks.ui.window.WindowGetter;
 
 /**
@@ -71,9 +72,8 @@ public class ApplicationToolbar extends JPanel {
 		// Prepare styling options
 		Insets btnMargins = new Insets(5, 0, 0, 0);
 
-		// \uf0ad=icon-wrench
-		// -> settings
-		addButtonToPanel('\uf0ad', new ActionListener() {
+		// Settings
+		addButtonToPanel(FontAwesomeGlyph.WRENCH, new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -81,9 +81,8 @@ public class ApplicationToolbar extends JPanel {
 			}
 		}, btnMargins);
 
-		// \uf059=icon-question-sign
-		// -> about
-		addButtonToPanel('\uf059', new ActionListener() {
+		// About
+		addButtonToPanel(FontAwesomeGlyph.QUESTION_SIGN, new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -98,18 +97,17 @@ public class ApplicationToolbar extends JPanel {
 	 * The button uses a FontAwesome glyph as text. The button is transparent in
 	 * order to blend on the background.
 	 * 
-	 * @param btnText
-	 *            the text to display on this button; this should be a Unicode
-	 *            character recognized in FontAwesome
+	 * @param glyph
+	 *            the glyph to display on this button
 	 * @param listener
 	 *            the action to be activated on button click; {@code null} if
 	 *            none
 	 * @param btnMargins
 	 *            the margins to use when adding the buttons
 	 */
-	private void addButtonToPanel(char btnText, ActionListener listener,
-			Insets btnMargins) {
-		JButton btn = new GlyphButton(btnText);
+	private void addButtonToPanel(FontAwesomeGlyph glyph,
+			ActionListener listener, Insets btnMargins) {
+		JButton btn = new GlyphButton(glyph);
 
 		btn.addActionListener(listener);
 
