@@ -24,6 +24,7 @@ import org.keyboardplaying.dailytasks.core.events.ApplicationWindowGetter;
 import org.keyboardplaying.dailytasks.messages.MessageBundle;
 import org.keyboardplaying.dailytasks.model.UIPreferences;
 import org.keyboardplaying.dailytasks.ui.theme.ThemeManager;
+import org.keyboardplaying.dailytasks.ui.util.WindowUtils;
 import org.keyboardplaying.dailytasks.ui.window.WindowGetter;
 
 /**
@@ -33,6 +34,9 @@ import org.keyboardplaying.dailytasks.ui.window.WindowGetter;
  */
 public class Launcher {
 
+	/** The object in charge of creating the windows on demand. */
+	private static WindowGetter getter = new ApplicationWindowGetter();
+
 	/**
 	 * Main method for the application.
 	 * 
@@ -41,17 +45,26 @@ public class Launcher {
 	 *            path to the properties file
 	 */
 	public static void main(String... args) {
+		start();
+	}
 
+	/** Applies the UI preferences and starts the application. */
+	private static void start() {
 		/* Load the application settings. */
 		UIPreferences prefs = PreferencesManager.getUIPreferences();
 		ThemeManager.applyTheme(prefs.getTheme());
 		MessageBundle.setLocale(prefs.getLocale());
 
 		/* Run application */
-		WindowGetter getter = new ApplicationWindowGetter();
 		JFrame window = getter.getMainWindow();
 
 		ApplicationClosingListener.register(window);
 		window.setVisible(true);
+	}
+
+	/** Closes all windows and restarts the application. */
+	public static void restart() {
+		WindowUtils.disposeAllWindows();
+		start();
 	}
 }

@@ -65,4 +65,15 @@ public final class WindowUtils {
 
 		return result;
 	}
+
+	/**
+	 * Calls {@link Frame#dispose()} for all windows currently existing in the
+	 * application.
+	 */
+	public static void disposeAllWindows() {
+		Frame[] windows = JFrame.getFrames();
+		for (Frame window : windows) {
+			window.dispose();
+		}
+	}
 }

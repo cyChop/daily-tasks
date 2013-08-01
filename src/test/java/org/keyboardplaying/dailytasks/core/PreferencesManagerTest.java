@@ -100,6 +100,10 @@ public class PreferencesManagerTest {
 	public void testUIPreferences() {
 		/* Ensure retrieval is correct. */
 		UIPreferences prefs = PreferencesManager.getUIPreferences();
+		// FIXME Travis-CI sometimes breaks here, retrieving en_US. Why?!
+		// Probably the default locale of the system. It should retrieve what
+		// was stored on previous test however.
+		// Idea: maybe due to OpenJDK?
 		assertEquals(new Locale("en"), prefs.getLocale());
 		assertSame(Theme.DARK, prefs.getTheme());
 		assertTrue(prefs.isAlwaysOnTop());
