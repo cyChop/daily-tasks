@@ -18,11 +18,12 @@ package org.keyboardplaying.dailytasks.core.events;
 
 import javax.swing.JFrame;
 
-import org.keyboardplaying.dailytasks.core.PreferencesManager;
-import org.keyboardplaying.dailytasks.core.TaskManager;
+import org.keyboardplaying.dailytasks.core.managers.PreferencesManager;
+import org.keyboardplaying.dailytasks.core.managers.TaskManager;
 import org.keyboardplaying.dailytasks.model.TaskSet;
 import org.keyboardplaying.dailytasks.model.UIPreferences;
 import org.keyboardplaying.dailytasks.ui.WindowFactory;
+import org.keyboardplaying.dailytasks.ui.events.ApplicationController;
 import org.keyboardplaying.dailytasks.ui.window.WindowGetter;
 
 /**
@@ -31,6 +32,19 @@ import org.keyboardplaying.dailytasks.ui.window.WindowGetter;
  * @author cyChop (http://keyboardplaying.org/)
  */
 public class ApplicationWindowGetter implements WindowGetter {
+
+	/** An {@link ApplicationController}. */
+	private ApplicationController controller;
+
+	/**
+	 * Creates a new instance.
+	 * 
+	 * @param controller
+	 *            the application controller
+	 */
+	public ApplicationWindowGetter(ApplicationController controller) {
+		this.controller = controller;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -57,7 +71,7 @@ public class ApplicationWindowGetter implements WindowGetter {
 	public JFrame getPreferencesWindow() {
 		UIPreferences prefs = getUIPrefs();
 		return WindowFactory.makePreferencesWindow(prefs.isAlwaysOnTop(),
-				prefs, new UIPreferencesSaver());
+				prefs, new UIPreferencesSaver(), controller);
 	}
 
 	/*

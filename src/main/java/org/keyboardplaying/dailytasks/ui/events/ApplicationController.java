@@ -14,28 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.keyboardplaying.dailytasks.core.events;
-
-import org.keyboardplaying.dailytasks.core.managers.PreferencesManager;
-import org.keyboardplaying.dailytasks.model.UIPreferences;
-import org.keyboardplaying.dailytasks.ui.events.UIPreferencesChangeListener;
+package org.keyboardplaying.dailytasks.ui.events;
 
 /**
- * Implementation of the {@link UIPreferencesChangeListener} using the
- * {@link PreferencesManager}.
+ * This interface should provide control over the whole application for some
+ * advanced behaviors.
  * 
  * @author cyChop (http://keyboardplaying.org/)
  */
-public class UIPreferencesSaver implements UIPreferencesChangeListener {
+public interface ApplicationController {
 
-	/**
-	 * Saves the updated UI preferences using the {@link PreferencesManager}.
-	 * 
-	 * @param prefs
-	 *            {@inheritDoc}
-	 */
-	@Override
-	public void saveUIPreferences(UIPreferences prefs) {
-		PreferencesManager.setUIPreferences(prefs);
-	}
+	/** Closes all windows and restart the application. */
+	void restart();
+
+	/** Closes all windows and ends the process. */
+	void terminate();
 }

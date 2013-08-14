@@ -14,28 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.keyboardplaying.dailytasks.core.events;
-
-import org.keyboardplaying.dailytasks.core.managers.PreferencesManager;
-import org.keyboardplaying.dailytasks.model.UIPreferences;
-import org.keyboardplaying.dailytasks.ui.events.UIPreferencesChangeListener;
-
 /**
- * Implementation of the {@link UIPreferencesChangeListener} using the
- * {@link PreferencesManager}.
- * 
- * @author cyChop (http://keyboardplaying.org/)
+ * Contains manager objects, handling minimal saving and retrieving of session objects.
+ * <p/>
+ * The logic embedded inside managers should be minimal.
  */
-public class UIPreferencesSaver implements UIPreferencesChangeListener {
-
-	/**
-	 * Saves the updated UI preferences using the {@link PreferencesManager}.
-	 * 
-	 * @param prefs
-	 *            {@inheritDoc}
-	 */
-	@Override
-	public void saveUIPreferences(UIPreferences prefs) {
-		PreferencesManager.setUIPreferences(prefs);
-	}
-}
+package org.keyboardplaying.dailytasks.core.managers;

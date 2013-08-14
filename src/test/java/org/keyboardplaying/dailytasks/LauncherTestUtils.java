@@ -18,7 +18,7 @@ package org.keyboardplaying.dailytasks;
 
 import java.util.prefs.BackingStoreException;
 
-import org.keyboardplaying.dailytasks.core.PreferencesManager;
+import org.keyboardplaying.dailytasks.core.managers.PreferencesManager;
 import org.keyboardplaying.dailytasks.ui.theme.Theme;
 
 /**

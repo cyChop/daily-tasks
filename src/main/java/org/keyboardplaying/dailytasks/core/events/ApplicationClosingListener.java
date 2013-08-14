@@ -16,16 +16,14 @@
  */
 package org.keyboardplaying.dailytasks.core.events;
 
-import java.awt.Window;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.WindowConstants;
 
-import org.keyboardplaying.dailytasks.core.TaskManager;
+import org.keyboardplaying.dailytasks.core.managers.TaskManager;
 import org.keyboardplaying.dailytasks.messages.MessageBundle;
+import org.keyboardplaying.dailytasks.ui.events.ApplicationController;
 import org.keyboardplaying.dailytasks.ui.panels.MainPanel;
 
 /**
@@ -44,17 +42,17 @@ import org.keyboardplaying.dailytasks.ui.panels.MainPanel;
  */
 public class ApplicationClosingListener extends WindowAdapter {
 
-	/** The application's main window. */
-	private Window mainWindow;
+	/** The application controller. */
+	private ApplicationController appController;
 
 	/**
 	 * Creates a new instance.
 	 * 
-	 * @param mainWindow
-	 *            the application's main window
+	 * @param controller
+	 *            an application controller
 	 */
-	private ApplicationClosingListener(Window mainWindow) {
-		this.mainWindow = mainWindow;
+	public ApplicationClosingListener(ApplicationController controller) {
+		this.appController = controller;
 	}
 
 	/**
@@ -73,7 +71,7 @@ public class ApplicationClosingListener extends WindowAdapter {
 	public void windowClosing(WindowEvent e) {
 		if (TaskManager.getInstance().areAllTasksDone()) {
 
-			closeWindowAndTermineProgram(e);
+			closeWindowAndTerminateProgram(e);
 
 		} else {
 
@@ -81,13 +79,13 @@ public class ApplicationClosingListener extends WindowAdapter {
 			 * For window closing, if some tasks are not yet completed, ask for
 			 * confirmation.
 			 */
-			int exit = JOptionPane.showConfirmDialog(mainWindow,
+			int exit = JOptionPane.showConfirmDialog(e.getComponent(),
 					MessageBundle.get("confirm.skip.unfinished.body"),
 					MessageBundle.get("confirm.skip.unfinished.title"),
 					JOptionPane.YES_NO_OPTION);
 
 			if (exit == JOptionPane.YES_OPTION) {
-				closeWindowAndTermineProgram(e);
+				closeWindowAndTerminateProgram(e);
 			}
 		}
 	}
@@ -98,23 +96,9 @@ public class ApplicationClosingListener extends WindowAdapter {
 	 * @param e
 	 *            the closing window event
 	 */
-	private void closeWindowAndTermineProgram(WindowEvent e) {
+	private void closeWindowAndTerminateProgram(WindowEvent e) {
 		super.windowClosing(e);
 		// Terminate program (make sure all other windows are closed)
-		System.exit(0);
-	}
-
-	/**
-	 * Creates and attaches an instance to the {@link MainPanel}.
-	 * 
-	 * @param window
-	 *            the window to control via an
-	 *            {@link ApplicationClosingListener}
-	 */
-	public static void register(JFrame window) {
-		ApplicationClosingListener instance = new ApplicationClosingListener(
-				window);
-		window.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-		window.addWindowListener(instance);
+		appController.terminate();
 	}
 }

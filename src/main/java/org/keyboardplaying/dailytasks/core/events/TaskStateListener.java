@@ -18,7 +18,7 @@ package org.keyboardplaying.dailytasks.core.events;
 
 import java.awt.Window;
 
-import org.keyboardplaying.dailytasks.core.TaskManager;
+import org.keyboardplaying.dailytasks.core.managers.TaskManager;
 import org.keyboardplaying.dailytasks.model.Task;
 import org.keyboardplaying.dailytasks.ui.events.TaskStateChangeListener;
 

@@ -20,6 +20,7 @@ import javax.swing.JFrame;
 
 import org.keyboardplaying.dailytasks.model.TaskSet;
 import org.keyboardplaying.dailytasks.model.UIPreferences;
+import org.keyboardplaying.dailytasks.ui.events.ApplicationController;
 import org.keyboardplaying.dailytasks.ui.events.TaskStateChangeListener;
 import org.keyboardplaying.dailytasks.ui.events.UIPreferencesChangeListener;
 import org.keyboardplaying.dailytasks.ui.panels.AboutPanel;
@@ -82,15 +83,20 @@ public final class WindowFactory {
 	 *            the UI preferences
 	 * @param listener
 	 *            the object listening to changes of the tasks' states
+	 * @param controller
+	 *            the controller in charge of restarting the application if need
+	 *            be
 	 * 
 	 * @return the window
 	 */
 	public static JFrame makePreferencesWindow(boolean alwaysOnTop,
-			UIPreferences prefs, UIPreferencesChangeListener listener) {
+			UIPreferences prefs, UIPreferencesChangeListener listener,
+			ApplicationController controller) {
 		JFrame window = WindowUtils.getVisibleWindowByName(NAME_PREFS);
 		if (window == null) {
 			window = new ApplicationWindow("app.settings", NAME_PREFS,
-					new PreferencesPanel(prefs, listener), alwaysOnTop);
+					new PreferencesPanel(prefs, listener, controller),
+					alwaysOnTop);
 		}
 		return window;
 	}

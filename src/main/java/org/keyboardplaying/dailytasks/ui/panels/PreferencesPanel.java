@@ -26,12 +26,14 @@ import javax.swing.GroupLayout.SequentialGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import org.keyboardplaying.dailytasks.messages.MessageBundle;
 import org.keyboardplaying.dailytasks.model.UIPreferences;
 import org.keyboardplaying.dailytasks.ui.components.LocaleComboBox;
 import org.keyboardplaying.dailytasks.ui.components.ThemeComboBox;
+import org.keyboardplaying.dailytasks.ui.events.ApplicationController;
 import org.keyboardplaying.dailytasks.ui.events.UIPreferencesChangeListener;
 import org.keyboardplaying.dailytasks.ui.theme.Theme;
 import org.keyboardplaying.dailytasks.ui.util.WindowUtils;
@@ -44,7 +46,7 @@ import org.keyboardplaying.dailytasks.ui.util.WindowUtils;
 public class PreferencesPanel extends JPanel {
 
 	/** Generated serial version UID. */
-	private static final long serialVersionUID = -4100240338628399119L;
+	private static final long serialVersionUID = 6933364975990748589L;
 
 	/** The value selector for the locale to use. */
 	private LocaleComboBox localeCB;
@@ -63,12 +65,16 @@ public class PreferencesPanel extends JPanel {
 	 *            the current value for the UI preferences
 	 * @param listener
 	 *            the object listening for changes to the current preferences
+	 * @param controller
+	 *            the controller in charge of restarting the application if need
+	 *            be
 	 */
 	public PreferencesPanel(UIPreferences preferences,
-			UIPreferencesChangeListener listener) {
+			UIPreferencesChangeListener listener,
+			ApplicationController controller) {
 		super();
 		initSettingComponents(preferences);
-		initWindow(listener);
+		initWindow(listener, controller);
 	}
 
 	/**
@@ -95,8 +101,12 @@ public class PreferencesPanel extends JPanel {
 	 * 
 	 * @param listener
 	 *            the object listening for changes to the preferences
+	 * @param controller
+	 *            the controller in charge of restarting the application if need
+	 *            be
 	 */
-	private final void initWindow(UIPreferencesChangeListener listener) {
+	private final void initWindow(UIPreferencesChangeListener listener,
+			ApplicationController controller) {
 		/* Create minor components. */
 		JLabel themeLabel = new JLabel(MessageBundle.get("pref.theme"));
 		themeLabel.setLabelFor(themeCB);
@@ -105,7 +115,7 @@ public class PreferencesPanel extends JPanel {
 		localeLabel.setLabelFor(localeCB);
 
 		JButton saveBtn = new JButton(MessageBundle.get("action.save"));
-		saveBtn.addActionListener(new SaveButtonListener(listener));
+		saveBtn.addActionListener(new SaveButtonListener(listener, controller));
 		JButton cancelBtn = new JButton(MessageBundle.get("action.cancel"));
 		cancelBtn.addActionListener(new CancelButtonListener());
 
@@ -163,15 +173,22 @@ public class PreferencesPanel extends JPanel {
 
 		/** The object listening for changes of the preferences. */
 		private UIPreferencesChangeListener listener;
+		/** The controller in charge of restarting the application if need be. */
+		private ApplicationController controller;
 
 		/**
 		 * Creates a new instance.
 		 * 
 		 * @param listener
 		 *            the object listening for changes of the preferences
+		 * @param controller
+		 *            the controller in charge of restarting the application if
+		 *            need be
 		 */
-		public SaveButtonListener(UIPreferencesChangeListener listener) {
+		public SaveButtonListener(UIPreferencesChangeListener listener,
+				ApplicationController controller) {
 			this.listener = listener;
+			this.controller = controller;
 		}
 
 		/*
@@ -188,9 +205,21 @@ public class PreferencesPanel extends JPanel {
 					(Theme) themeCB.getSelectedItem(),
 					onTopCheckBox.isSelected());
 			listener.saveUIPreferences(newPrefs);
-			// TODO propose auto-restart
-			WindowUtils.triggerClosingEvent((Window) PreferencesPanel.this
-					.getTopLevelAncestor());
+
+			// propose auto-restart
+			int exit = JOptionPane.showConfirmDialog(PreferencesPanel.this,
+					MessageBundle.get("confirm.restart.to.apply.prefs"),
+					MessageBundle.get("confirm.restart.title"),
+					JOptionPane.YES_NO_OPTION);
+
+			if (exit == JOptionPane.YES_OPTION) {
+				// restart the whole application
+				controller.restart();
+			} else {
+				// close the window containing this panel
+				WindowUtils.triggerClosingEvent((Window) PreferencesPanel.this
+						.getTopLevelAncestor());
+			}
 		}
 	}
 

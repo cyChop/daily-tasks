@@ -16,26 +16,18 @@
  */
 package org.keyboardplaying.dailytasks;
 
-import javax.swing.JFrame;
-
-import org.keyboardplaying.dailytasks.core.PreferencesManager;
-import org.keyboardplaying.dailytasks.core.events.ApplicationClosingListener;
+import org.keyboardplaying.dailytasks.core.Application;
 import org.keyboardplaying.dailytasks.core.events.ApplicationWindowGetter;
-import org.keyboardplaying.dailytasks.messages.MessageBundle;
-import org.keyboardplaying.dailytasks.model.UIPreferences;
-import org.keyboardplaying.dailytasks.ui.theme.ThemeManager;
-import org.keyboardplaying.dailytasks.ui.util.WindowUtils;
-import org.keyboardplaying.dailytasks.ui.window.WindowGetter;
 
 /**
  * Main class for the application.
+ * <p/>
+ * This class is a mindless launcher which will instantiate and start the
+ * application.
  * 
  * @author cyChop (http://keyboardplaying.org/)
  */
 public class Launcher {
-
-	/** The object in charge of creating the windows on demand. */
-	private static WindowGetter getter = new ApplicationWindowGetter();
 
 	/**
 	 * Main method for the application.
@@ -45,26 +37,8 @@ public class Launcher {
 	 *            path to the properties file
 	 */
 	public static void main(String... args) {
-		start();
-	}
-
-	/** Applies the UI preferences and starts the application. */
-	private static void start() {
-		/* Load the application settings. */
-		UIPreferences prefs = PreferencesManager.getUIPreferences();
-		ThemeManager.applyTheme(prefs.getTheme());
-		MessageBundle.setLocale(prefs.getLocale());
-
-		/* Run application */
-		JFrame window = getter.getMainWindow();
-
-		ApplicationClosingListener.register(window);
-		window.setVisible(true);
-	}
-
-	/** Closes all windows and restarts the application. */
-	public static void restart() {
-		WindowUtils.disposeAllWindows();
-		start();
+		Application app = new Application();
+		app.setWindowGetter(new ApplicationWindowGetter(app));
+		app.start();
 	}
 }

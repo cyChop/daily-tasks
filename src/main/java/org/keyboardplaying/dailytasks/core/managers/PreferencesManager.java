@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.keyboardplaying.dailytasks.core;
+package org.keyboardplaying.dailytasks.core.managers;
 
 import java.util.Locale;
 import java.util.prefs.BackingStoreException;

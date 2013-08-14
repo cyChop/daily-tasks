@@ -36,6 +36,7 @@ import org.junit.Test;
  */
 public class DependenciesTest {
 
+	/** Static logger for this class. */
 	private static Log log = LogFactory.getLog(DependenciesTest.class);
 
 	/** Ensure there is no package cycle. */
@@ -48,11 +49,17 @@ public class DependenciesTest {
 
 		if (jdepend.containsCycles()) {
 			StringBuilder sb = new StringBuilder(
-					"The following packages contain cycles. Please remove them to avoid future test refusal.");
+					"The following packages contain cycles which should be removed.");
 
 			for (Object element : jdepend.getPackages()) {
 				JavaPackage pack = (JavaPackage) element;
 				if (pack.containsCycle()) {
+					/*
+					 * Append chars to avoid instantiating strings.
+					 * 
+					 * Micro-optimisation in a test class _is_ ridiculous, don't
+					 * you think? You are allowed to laugh at me on this one.
+					 */
 					sb.append('\n').append('\t').append(pack.getName());
 				}
 			}
