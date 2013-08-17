@@ -23,7 +23,9 @@ import javax.swing.JPanel;
 import org.keyboardplaying.dailytasks.model.Task;
 import org.keyboardplaying.dailytasks.model.TaskSet;
 import org.keyboardplaying.dailytasks.ui.components.TaskCheckBox;
+import org.keyboardplaying.dailytasks.ui.components.TaskTitleBar;
 import org.keyboardplaying.dailytasks.ui.events.TaskStateChangeListener;
+import org.keyboardplaying.dailytasks.ui.util.FontUtils.FontAwesomeGlyph;
 
 /**
  * A panel to display the tasks.
@@ -66,6 +68,11 @@ public class TaskPanel extends JPanel {
 		this.setBorder(BorderFactory.createEmptyBorder(BORDER_WIDTH,
 				BORDER_WIDTH, BORDER_WIDTH, BORDER_WIDTH));
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+		TaskTitleBar title = new TaskTitleBar(FontAwesomeGlyph.PUSHPIN,
+				"tasks.tasks");
+		title.setAlignmentX(LEFT_ALIGNMENT);
+		this.add(title);
 
 		/* Now add tasks. */
 		for (Task task : tasks) {

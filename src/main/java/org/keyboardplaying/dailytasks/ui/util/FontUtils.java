@@ -54,10 +54,14 @@ public final class FontUtils {
 	 */
 	public static enum FontAwesomeGlyph {
 
+		/** A pushpin icon. */
+		PUSHPIN('\uf08d'),
 		/** A wrench icon. */
 		WRENCH('\uf0ad'),
 		/** A question mark in a round sign. */
-		QUESTION_SIGN('\uf059');
+		QUESTION_SIGN('\uf059'),
+		/** A plus icon. */
+		PLUS('\uf067');
 
 		/** The character corresponding to this glyph in Font Awesome's font. */
 		private char character;
