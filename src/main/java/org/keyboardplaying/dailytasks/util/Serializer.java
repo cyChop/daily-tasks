@@ -17,6 +17,10 @@ import java.io.Serializable;
  */
 public final class Serializer {
 
+	/** Private constructor for utility class. */
+	private Serializer() {
+	}
+
 	/**
 	 * Marshals a {@link Serializable} object to a byte array.
 	 * 
@@ -43,7 +47,7 @@ public final class Serializer {
 			// Designed for use within the application
 			// Should not happen
 			e.printStackTrace();
-			throw new RuntimeException();
+			throw new RuntimeException(e);
 
 		} finally {
 
@@ -77,14 +81,14 @@ public final class Serializer {
 			// Designed for use within the application
 			// Should not happen
 			e.printStackTrace();
-			throw new RuntimeException();
+			throw new RuntimeException(e);
 
 		} catch (ClassNotFoundException e) {
 
 			// Designed for use within the application
 			// Should not happen
 			e.printStackTrace();
-			throw new RuntimeException();
+			throw new RuntimeException(e);
 
 		} finally {
 

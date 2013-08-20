@@ -48,6 +48,12 @@ public class PreferencesPanel extends JPanel {
 	/** Generated serial version UID. */
 	private static final long serialVersionUID = 6933364975990748589L;
 
+	/**
+	 * The standard gap for separating semantically different buttons in the
+	 * layout.
+	 */
+	private static final int STD_GAP = 30;
+
 	/** The value selector for the locale to use. */
 	private LocaleComboBox localeCB;
 	/** The value selector for the theme to use. */
@@ -84,7 +90,7 @@ public class PreferencesPanel extends JPanel {
 	 * @param preferences
 	 *            the current value for the UI preferences
 	 */
-	private final void initSettingComponents(UIPreferences preferences) {
+	private void initSettingComponents(UIPreferences preferences) {
 		localeCB = new LocaleComboBox();
 		localeCB.setSelectedItem(MessageBundle
 				.getClosestApplicableLocale(preferences.getLocale()));
@@ -105,7 +111,7 @@ public class PreferencesPanel extends JPanel {
 	 *            the controller in charge of restarting the application if need
 	 *            be
 	 */
-	private final void initWindow(UIPreferencesChangeListener listener,
+	private void initWindow(UIPreferencesChangeListener listener,
 			ApplicationController controller) {
 		/* Create minor components. */
 		JLabel themeLabel = new JLabel(MessageBundle.get("pref.theme"));
@@ -140,7 +146,7 @@ public class PreferencesPanel extends JPanel {
 								GroupLayout.Alignment.LEADING)
 								.addGroup(comboBoxesHorizontalGroup)
 								.addComponent(onTopCheckBox))
-				.addGap(30)
+				.addGap(STD_GAP)
 				.addGroup(
 						layout.createParallelGroup().addComponent(saveBtn)
 								.addComponent(cancelBtn)));

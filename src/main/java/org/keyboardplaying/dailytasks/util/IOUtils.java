@@ -26,6 +26,10 @@ import java.io.IOException;
  */
 public class IOUtils {
 
+	/** Private constructor for utility class. */
+	private IOUtils() {
+	}
+
 	/**
 	 * Unconditionnally closes a {@link Closeable}.
 	 * 

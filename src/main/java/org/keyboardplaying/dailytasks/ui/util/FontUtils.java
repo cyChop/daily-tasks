@@ -43,6 +43,10 @@ public final class FontUtils {
 	// TTF fallback for Sun Java 6
 	private static final String FONT_AWESOME_TTF = "FontAwesome-"
 			+ FONT_AWESOME_VERSION + ".ttf";
+	/** The font size to apply when using the OTF file. */
+	private static final float FONT_SIZE_OTF = 8F;
+	/** The font size to apply when using the TTF file. */
+	private static final float FONT_SIZE_TTF = 14F;
 
 	/** The iconic font used for glyphs. */
 	private static Font fontAwesome = null;
@@ -97,6 +101,10 @@ public final class FontUtils {
 		}
 	}
 
+	/** Private constructor for utility class. */
+	private FontUtils() {
+	}
+
 	/**
 	 * Returns the iconic font used for glyphs.
 	 * 
@@ -117,10 +125,10 @@ public final class FontUtils {
 	 * fine for all systems using Java 7. In case OTF is not supported, a fall
 	 * back to a TTF file is performed.
 	 */
-	private synchronized static void createFontAwesome() {
+	private static synchronized void createFontAwesome() {
 		if (fontAwesome == null) {
 			try {
-				createFontAwesome(FONT_AWESOME_OTF, 8F);
+				createFontAwesome(FONT_AWESOME_OTF, FONT_SIZE_OTF);
 			} catch (FontFormatException e) {
 
 				// Sun Java 6 cannot read OTF, fall back to TTF
@@ -140,7 +148,7 @@ public final class FontUtils {
 	 */
 	private static void createFontAwesomeTTF() {
 		try {
-			createFontAwesome(FONT_AWESOME_TTF, 14F);
+			createFontAwesome(FONT_AWESOME_TTF, FONT_SIZE_TTF);
 		} catch (FontFormatException e1) {
 			// TODO TTF on Linux's Sun Java 6?
 			// If yes, should provide a post script version, or a

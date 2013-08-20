@@ -41,11 +41,13 @@ public class ApplicationToolbar extends JPanel {
 	/** Generated serial version UID. */
 	private static final long serialVersionUID = 2257174746245010479L;
 
-	/** The object in charge of getting the required windows on demand. */
-	private WindowGetter getter;
-
 	/** The width of the empty border to apply around the toolbar. */
 	private static final int BORDER_WIDTH = 2;
+	/** The margin to apply at the top of each button. */
+	private static final int BTN_TOP_MARGIN = 5;
+
+	/** The object in charge of getting the required windows on demand. */
+	private WindowGetter getter;
 
 	/**
 	 * Creates a new instance and initializes layout and content.
@@ -70,7 +72,7 @@ public class ApplicationToolbar extends JPanel {
 
 		/* Now add buttons. */
 		// Prepare styling options
-		Insets btnMargins = new Insets(5, 0, 0, 0);
+		Insets btnMargins = new Insets(BTN_TOP_MARGIN, 0, 0, 0);
 
 		// Settings
 		addButtonToPanel(FontAwesomeGlyph.WRENCH, new ActionListener() {

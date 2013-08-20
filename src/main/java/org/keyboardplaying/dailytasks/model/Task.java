@@ -35,7 +35,7 @@ public class Task implements Serializable {
 	private static final long serialVersionUID = 6770842266859911969L;
 
 	/** A sequence used to generate a unique ID for each task. */
-	public static int sequence = 0;
+	private static int sequence = 0;
 
 	/** The task's identifier. */
 	private transient int id = ++sequence;
@@ -53,8 +53,8 @@ public class Task implements Serializable {
 	 *            {@code true} if the task is finished, {@code false} otherwise
 	 */
 	public Task(String todo, boolean done) {
-		this.setTodo(todo);
-		this.setDone(done);
+		this.todo = todo;
+		this.done = done;
 	}
 
 	/**

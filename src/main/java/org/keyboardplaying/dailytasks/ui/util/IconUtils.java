@@ -36,6 +36,10 @@ public final class IconUtils {
 	/** The relative path to the directory containing all icons. */
 	private static final String ICONS_RELATIVE_PATH = "../icons/";
 
+	/** Private constructor for utility class. */
+	private IconUtils() {
+	}
+
 	/**
 	 * Returns a list of all icons with this name and extension.
 	 * <p/>

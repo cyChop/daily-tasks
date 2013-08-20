@@ -27,6 +27,10 @@ import javax.swing.UnsupportedLookAndFeelException;
 // TODO unit test in a headless environment
 public final class ThemeManager {
 
+	/** Private constructor for utility class. */
+	private ThemeManager() {
+	}
+
 	/**
 	 * Loads the system look and feel and registers theme properties to avoid
 	 * manual manipulations.

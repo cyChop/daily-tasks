@@ -53,7 +53,7 @@ public class MessageBundle {
 	 * 
 	 * @return the single instance of this object
 	 */
-	protected synchronized static MessageBundle getInstance() {
+	protected static synchronized MessageBundle getInstance() {
 		if (instance == null) {
 			instance = new MessageBundle();
 		}
@@ -81,7 +81,7 @@ public class MessageBundle {
 	 * @param locale
 	 *            the locale to use
 	 */
-	protected void setInstanceLocale(Locale locale) {
+	protected final void setInstanceLocale(Locale locale) {
 		bundle = ResourceBundle.getBundle(BUNDLE_BASE_NAME, locale);
 	}
 

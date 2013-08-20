@@ -65,7 +65,7 @@ public class TaskCheckBox extends JCheckBox {
 	 * 
 	 * @author cyChop (http://keyboardplaying.org/)
 	 */
-	private static class TaskCheckBoxListener implements ActionListener {
+	private static final class TaskCheckBoxListener implements ActionListener {
 
 		/** The related {@link TaskStateChangeListener}. */
 		private TaskStateChangeListener stateListener;

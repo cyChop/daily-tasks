@@ -47,6 +47,10 @@ public final class WindowFactory {
 	/** The name for the about window. */
 	private static final String NAME_ABOUT = "windowAbout";
 
+	/** Private constructor for utility class. */
+	private WindowFactory() {
+	}
+
 	/**
 	 * Creates the main window of the application.
 	 * 

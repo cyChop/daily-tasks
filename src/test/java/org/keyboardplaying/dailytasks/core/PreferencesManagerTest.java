@@ -26,8 +26,10 @@ import java.util.Locale;
 import java.util.prefs.BackingStoreException;
 
 import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.keyboardplaying.dailytasks.core.managers.PreferencesManager;
 import org.keyboardplaying.dailytasks.core.managers.TaskManager;
 import org.keyboardplaying.dailytasks.messages.MessageBundle;
@@ -41,13 +43,19 @@ import org.keyboardplaying.dailytasks.ui.theme.Theme;
  * 
  * @author cyChop (http://keyboardplaying.org/)
  */
+@FixMethodOrder(MethodSorters.DEFAULT)
 public class PreferencesManagerTest {
 
-	/** Clears the whole preferences set before and after testing. */
-	@BeforeClass
+	/** Clears the whole preferences once testing is done. */
 	@AfterClass
-	public static void cleaning() throws BackingStoreException {
+	public static void staticClean() throws BackingStoreException {
 		PreferencesManager.clear();
+	}
+
+	/** Clears the whole preferences set before each test. */
+	@Before
+	public void clean() throws BackingStoreException {
+		staticClean();
 	}
 
 	/** Tests the locale setting. */
@@ -100,15 +108,7 @@ public class PreferencesManagerTest {
 	 */
 	@Test
 	public void testUIPreferences() {
-		/* Ensure retrieval is correct. */
 		UIPreferences prefs = PreferencesManager.getUIPreferences();
-		// FIXME Travis-CI sometimes breaks here, retrieving en_US. Why?!
-		// Probably the default locale of the system. It should retrieve what
-		// was stored on previous test however.
-		// Idea: maybe due to OpenJDK?
-		assertEquals(new Locale("en"), prefs.getLocale());
-		assertSame(Theme.DARK, prefs.getTheme());
-		assertTrue(prefs.isAlwaysOnTop());
 
 		/* Update preferences. */
 		prefs.setLocale(new Locale("fr", "CH"));

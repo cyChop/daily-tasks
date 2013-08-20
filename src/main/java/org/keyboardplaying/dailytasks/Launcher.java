@@ -27,7 +27,11 @@ import org.keyboardplaying.dailytasks.core.events.ApplicationWindowGetter;
  * 
  * @author cyChop (http://keyboardplaying.org/)
  */
-public class Launcher {
+public final class Launcher {
+
+	/** Private constructor for utility class. */
+	private Launcher() {
+	}
 
 	/**
 	 * Main method for the application.

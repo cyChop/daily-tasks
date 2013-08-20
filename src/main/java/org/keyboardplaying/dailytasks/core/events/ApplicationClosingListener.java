@@ -24,10 +24,10 @@ import javax.swing.JOptionPane;
 import org.keyboardplaying.dailytasks.core.managers.TaskManager;
 import org.keyboardplaying.dailytasks.messages.MessageBundle;
 import org.keyboardplaying.dailytasks.ui.events.ApplicationController;
-import org.keyboardplaying.dailytasks.ui.panels.MainPanel;
 
 /**
- * This {@link WindowAdapter} applies to the application's {@link MainPanel}.
+ * This {@link WindowAdapter} applies to the application's
+ * {@link org.keyboardplaying.dailytasks.ui.panels.MainPanel}.
  * <p/>
  * It ensures two things:
  * <ul>

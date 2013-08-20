@@ -30,6 +30,10 @@ import javax.swing.JFrame;
  */
 public final class WindowUtils {
 
+	/** Private constructor for utility class. */
+	private WindowUtils() {
+	}
+
 	/**
 	 * Emulates the click on the 'close' button of the supplied window.
 	 * 

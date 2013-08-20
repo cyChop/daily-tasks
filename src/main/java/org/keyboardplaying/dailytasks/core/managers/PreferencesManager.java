@@ -78,7 +78,7 @@ public class PreferencesManager {
 	 * 
 	 * @return the single instance of this object
 	 */
-	protected synchronized static PreferencesManager getInstance() {
+	protected static synchronized PreferencesManager getInstance() {
 		if (instance == null) {
 			instance = new PreferencesManager();
 		}
