@@ -25,6 +25,7 @@ import jdepend.framework.JavaPackage;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -39,14 +40,26 @@ public class DependenciesTest {
 	/** Static logger for this class. */
 	private static Log log = LogFactory.getLog(DependenciesTest.class);
 
-	/** Ensure there is no package cycle. */
-	@Test
-	public void testCycles() throws IOException {
-		JDepend jdepend = new JDepend();
+	/** The {@link JDepend} instance used to run tests. */
+	private JDepend jdepend;
+
+	/**
+	 * Initializes {@link #jdepend}.
+	 * 
+	 * @throws IOException
+	 *             when initialization fails
+	 */
+	@Before
+	public void initJdepend() throws IOException {
+		jdepend = new JDepend();
 		jdepend.addDirectory("target/classes");
 
 		jdepend.analyze();
+	}
 
+	/** Ensure there is no package cycle. */
+	@Test
+	public void testCycles() {
 		if (jdepend.containsCycles()) {
 			StringBuilder sb = new StringBuilder(
 					"The following packages contain cycles which should be removed.");
