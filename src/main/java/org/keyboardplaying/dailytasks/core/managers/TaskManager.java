@@ -16,6 +16,10 @@
  */
 package org.keyboardplaying.dailytasks.core.managers;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.keyboardplaying.dailytasks.exception.TaskNotFoundException;
 import org.keyboardplaying.dailytasks.messages.MessageBundle;
 import org.keyboardplaying.dailytasks.model.Task;
 import org.keyboardplaying.dailytasks.model.TaskSet;
@@ -72,7 +76,19 @@ public class TaskManager {
 	 */
 	public Task updateTask(int taskId, boolean done) {
 		// Retrieve the task in the list and update it
-		Task task = updateTaskState(taskId, done);
+		Task task;
+		try {
+			task = updateTaskState(taskId, done);
+		} catch (TaskNotFoundException e) {
+			// ignore task, it will not be saved
+			task = null;
+			// log something
+			Logger.getLogger(getClass().getName())
+					.log(Level.WARNING,
+							String.format(
+									"Update task #%d (to done = %b) could not be performed.",
+									taskId, done), e);
+		}
 
 		// Persist data
 		saveTasks();
@@ -88,8 +104,11 @@ public class TaskManager {
 	 * @param done
 	 *            the completion state of the task
 	 * @return the updated task
+	 * @throws TaskNotFoundException
+	 *             when the supplied task ID could not be found in the set
 	 */
-	private Task updateTaskState(int taskId, boolean done) {
+	private Task updateTaskState(int taskId, boolean done)
+			throws TaskNotFoundException {
 		return tasks.updateTaskState(taskId, done);
 	}
 

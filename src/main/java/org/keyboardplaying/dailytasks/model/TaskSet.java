@@ -21,6 +21,7 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.keyboardplaying.dailytasks.exception.TaskNotFoundException;
 
 /**
  * A set of tasks.
@@ -69,8 +70,11 @@ public class TaskSet implements Serializable, Iterable<Task> {
 	 *            the task to update
 	 * @param done
 	 *            the state to apply
+	 * @throws TaskNotFoundException
+	 *             when the supplied task ID could not be found in the set
 	 */
-	public void updateTaskState(Task task, boolean done) {
+	public void updateTaskState(Task task, boolean done)
+			throws TaskNotFoundException {
 		updateTaskState(task.getId(), done);
 	}
 
@@ -83,8 +87,11 @@ public class TaskSet implements Serializable, Iterable<Task> {
 	 *            the state to apply
 	 * 
 	 * @return the updated {@link Task}
+	 * @throws TaskNotFoundException
+	 *             when the supplied task ID could not be found in the set
 	 */
-	public Task updateTaskState(int taskId, boolean done) {
+	public Task updateTaskState(int taskId, boolean done)
+			throws TaskNotFoundException {
 		Task result = null;
 
 		/* Search for the task. */
@@ -100,8 +107,8 @@ public class TaskSet implements Serializable, Iterable<Task> {
 
 		/* The task does not exist in the collection. */
 		if (result == null) {
-			// TODO throw a meaningful exception
-			throw new RuntimeException();
+			throw new TaskNotFoundException(String.format(
+					"Task with id %d could not be found.", taskId));
 		}
 
 		return result;
@@ -114,8 +121,10 @@ public class TaskSet implements Serializable, Iterable<Task> {
 	 * 
 	 * @param task
 	 *            the task to update
+	 * @throws TaskNotFoundException
+	 *             when the supplied task ID could not be found in the set
 	 */
-	public void updateTaskState(Task task) {
+	public void updateTaskState(Task task) throws TaskNotFoundException {
 		updateTaskState(task.getId(), task.isDone());
 	}
 

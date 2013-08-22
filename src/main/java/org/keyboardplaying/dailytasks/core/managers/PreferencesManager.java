@@ -20,9 +20,12 @@ import java.util.Locale;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
+import org.keyboardplaying.dailytasks.exception.DeserializationException;
+import org.keyboardplaying.dailytasks.exception.SerializationException;
 import org.keyboardplaying.dailytasks.model.TaskSet;
 import org.keyboardplaying.dailytasks.model.UIPreferences;
 import org.keyboardplaying.dailytasks.ui.theme.Theme;
+import org.keyboardplaying.dailytasks.util.ExceptionUtils;
 import org.keyboardplaying.dailytasks.util.Serializer;
 
 /**
@@ -337,9 +340,16 @@ public class PreferencesManager {
 		if (byteArray == null) {
 			result = TaskManager.getDefaultTaskSet();
 		} else {
-			result = Serializer.deserialize(byteArray);
-			if (result == null || result.isEmpty()) {
-				result = TaskManager.getDefaultTaskSet();
+			try {
+				result = Serializer.deserialize(byteArray);
+				if (result == null || result.isEmpty()) {
+					result = TaskManager.getDefaultTaskSet();
+				}
+			} catch (DeserializationException e) {
+				result = null;
+				// this should never happen, as the Serializer is used in a
+				// controlled environment
+				ExceptionUtils.handleUnexpectedException(this, e);
 			}
 		}
 
@@ -363,6 +373,12 @@ public class PreferencesManager {
 	 *            the tasks to save
 	 */
 	protected void setInstanceTasks(TaskSet tasks) {
-		prefs.putByteArray(FLD_TASKS, Serializer.serialize(tasks));
+		try {
+			prefs.putByteArray(FLD_TASKS, Serializer.serialize(tasks));
+		} catch (SerializationException e) {
+			// this should never happen, as the Serializer is used in a
+			// controlled environment
+			ExceptionUtils.handleUnexpectedException(this, e);
+		}
 	}
 }

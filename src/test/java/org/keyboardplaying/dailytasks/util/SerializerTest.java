@@ -8,6 +8,8 @@ import java.util.Iterator;
 import java.util.UUID;
 
 import org.junit.Test;
+import org.keyboardplaying.dailytasks.exception.DeserializationException;
+import org.keyboardplaying.dailytasks.exception.SerializationException;
 import org.keyboardplaying.dailytasks.model.DailyTask;
 import org.keyboardplaying.dailytasks.model.Task;
 import org.keyboardplaying.dailytasks.model.TaskSet;
@@ -22,7 +24,8 @@ public class SerializerTest {
 
 	/** Tests serialization and deserialization of {@link Task}. */
 	@Test
-	public void testTaskSerialization() {
+	public void testTaskSerialization() throws SerializationException,
+			DeserializationException {
 		Task original = new Task("Some label", true);
 		byte[] serialized = Serializer.serialize(original);
 		Task deserialized = Serializer.deserialize(serialized);
@@ -36,7 +39,8 @@ public class SerializerTest {
 
 	/** Tests serialization and deserialization of dailies. */
 	@Test
-	public void testDailySerialization() {
+	public void testDailySerialization() throws SerializationException,
+			DeserializationException {
 		DailyTask original = new DailyTask("Some label", false);
 		byte[] serialized = Serializer.serialize(original);
 		DailyTask deserialized = Serializer.deserialize(serialized);
@@ -64,7 +68,8 @@ public class SerializerTest {
 
 	/** Tests serialization and deserialization of {@link Task}. */
 	@Test
-	public void testTaskSetSerialization() {
+	public void testTaskSetSerialization() throws SerializationException,
+			DeserializationException {
 		// Some randomization to make things even better...
 		TaskSet original = new TaskSet();
 		int nbTasks = (int) (20 * Math.random()) + 1;

@@ -24,6 +24,7 @@ import static org.junit.Assert.fail;
 import java.rmi.UnexpectedException;
 
 import org.junit.Test;
+import org.keyboardplaying.dailytasks.exception.TaskNotFoundException;
 
 /**
  * Tests the {@link TaskSet} class.
@@ -33,7 +34,8 @@ import org.junit.Test;
 public class TaskSetTest {
 
 	@Test
-	public void testSetManipulation() throws UnexpectedException {
+	public void testSetManipulation() throws UnexpectedException,
+			TaskNotFoundException {
 		Task task1 = new Task("Common label", true);
 		Task task2 = new Task("Common label", true);
 		Task task3 = new Task("Different label", false);
@@ -52,8 +54,7 @@ public class TaskSetTest {
 		try {
 			set.updateTaskState(task3);
 			fail();
-		} catch (Exception e) {
-			// TODO make a catch selective for the expected exceptions
+		} catch (TaskNotFoundException e) {
 			// this is expected
 		}
 

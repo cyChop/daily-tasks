@@ -7,6 +7,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+import org.keyboardplaying.dailytasks.exception.DeserializationException;
+import org.keyboardplaying.dailytasks.exception.SerializationException;
+
 /**
  * A utility class to convert {@link Serializable} objects to byte arrays and
  * back.
@@ -27,8 +30,11 @@ public final class Serializer {
 	 * @param object
 	 *            the object to serialize
 	 * @return the object serialized as a byte array
+	 * @throws SerializationException
+	 *             if serialization fails
 	 */
-	public static <T extends Serializable> byte[] serialize(T object) {
+	public static <T extends Serializable> byte[] serialize(T object)
+			throws SerializationException {
 		ObjectOutputStream oos = null;
 
 		try {
@@ -44,10 +50,10 @@ public final class Serializer {
 
 		} catch (IOException e) {
 
-			// Designed for use within the application
-			// Should not happen
-			e.printStackTrace();
-			throw new RuntimeException(e);
+			throw new SerializationException(
+					String.format(
+							"An error occurred while serializing an object of type %s: <%s>",
+							object.getClass().getName(), object.toString()), e);
 
 		} finally {
 
@@ -62,9 +68,12 @@ public final class Serializer {
 	 * @param serialized
 	 *            the serialized object
 	 * @return the deserialized object
+	 * @throws DeserializationException
+	 *             if deserialization fails
 	 */
 	@SuppressWarnings("unchecked")
-	public static <T extends Serializable> T deserialize(byte[] serialized) {
+	public static <T extends Serializable> T deserialize(byte[] serialized)
+			throws DeserializationException {
 		ObjectInputStream ois = null;
 
 		try {
@@ -78,17 +87,15 @@ public final class Serializer {
 
 		} catch (IOException e) {
 
-			// Designed for use within the application
-			// Should not happen
-			e.printStackTrace();
-			throw new RuntimeException(e);
+			throw new DeserializationException(String.format(
+					"An error occurred while deserializing data: <%s>",
+					new String(serialized)), e);
 
 		} catch (ClassNotFoundException e) {
 
-			// Designed for use within the application
-			// Should not happen
-			e.printStackTrace();
-			throw new RuntimeException(e);
+			throw new DeserializationException(String.format(
+					"An error occurred while deserializing data: <%s>",
+					new String(serialized)), e);
 
 		} finally {
 
