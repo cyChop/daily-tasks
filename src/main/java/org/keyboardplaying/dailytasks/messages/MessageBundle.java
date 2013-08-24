@@ -37,7 +37,7 @@ import org.keyboardplaying.dailytasks.ui.theme.Theme;
 public class MessageBundle {
 
 	/** The base name of the message bundle. */
-	private static final String BUNDLE_BASE_NAME = "org.keyboardplaying.dailytasks.ui.messages.MessageBundle";
+	private static final String BUNDLE_BASE_NAME = "org.keyboardplaying.dailytasks.messages.MessageBundle";
 	/** The locale of the default message bundle. */
 	private static final String DEFAULT_LANG = "en";
 
