@@ -21,8 +21,9 @@ import java.util.logging.Logger;
 
 import org.keyboardplaying.dailytasks.exception.UnexpectedException;
 
-// XXX Javadoc
 /**
+ * A utility class for {@link Exception} handling.
+ * 
  * @author cyChop (http://keyboardplaying.org/)
  */
 public final class ExceptionUtils {
@@ -45,9 +46,27 @@ public final class ExceptionUtils {
 	 *             the exception, wrapping {@code throwable}
 	 */
 	public static void handleUnexpectedException(Object source,
-			Throwable throwable) throws UnexpectedException {
+			Throwable throwable) {
+		handleUnexpectedException(source.getClass(), throwable);
+	}
+
+	/**
+	 * Handles an exception which was not supposed to occur by throwing an
+	 * {@link UnexpectedException}.
+	 * <p/>
+	 * The stack trace is logged and preserved.
+	 * 
+	 * @param clazz
+	 *            the class receiving the unexpected error
+	 * @param throwable
+	 *            the unexpected error
+	 * @throws UnexpectedException
+	 *             the exception, wrapping {@code throwable}
+	 */
+	private static void handleUnexpectedException(Class<?> clazz,
+			Throwable throwable) {
 		UnexpectedException e = new UnexpectedException(throwable);
-		Logger.getLogger(source.getClass().getName()).log(Level.SEVERE,
+		Logger.getLogger(clazz.getName()).log(Level.SEVERE,
 				"An unexpected exception occurred.", e);
 		throw e;
 	}

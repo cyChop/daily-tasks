@@ -24,7 +24,7 @@ import java.io.IOException;
  * 
  * @author cyChop (http://keyboardplaying.org/)
  */
-public class IOUtils {
+public final class IOUtils {
 
 	/** Private constructor for utility class. */
 	private IOUtils() {

@@ -21,6 +21,8 @@ import java.awt.FontFormatException;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.keyboardplaying.dailytasks.util.ExceptionUtils;
+
 /**
  * A utility class to retrieve fonts.
  * 
@@ -137,7 +139,7 @@ public final class FontUtils {
 			} catch (IOException e) {
 				// font is inside the jar, this should not happen
 				// ugly logging just in case
-				e.printStackTrace();
+				ExceptionUtils.handleUnexpectedException(FontUtils.class, e);
 			}
 		}
 	}
@@ -149,15 +151,15 @@ public final class FontUtils {
 	private static void createFontAwesomeTTF() {
 		try {
 			createFontAwesome(FONT_AWESOME_TTF, FONT_SIZE_TTF);
-		} catch (FontFormatException e1) {
+		} catch (FontFormatException e) {
 			// TODO TTF on Linux's Sun Java 6?
 			// If yes, should provide a post script version, or a
 			// fallback to graphical icons
-			e1.printStackTrace();
-		} catch (IOException e1) {
+			ExceptionUtils.handleUnexpectedException(FontUtils.class, e);
+		} catch (IOException e) {
 			// font is inside the jar, this should not happen
 			// ugly logging just in case
-			e1.printStackTrace();
+			ExceptionUtils.handleUnexpectedException(FontUtils.class, e);
 		}
 	}
 
