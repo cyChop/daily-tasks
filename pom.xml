@@ -25,9 +25,6 @@
 		<sonar.jdbc.username>sonar</sonar.jdbc.username>
 		<sonar.jdbc.password>clinker</sonar.jdbc.password>
 		<sonar.host.url>http://clinker/sonar/</sonar.host.url>
-
-		<!-- Dependencies and plugin versions -->
-		<v.commons.io>2.4</v.commons.io>
 	</properties>
 
 	<build>
