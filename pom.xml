@@ -47,7 +47,7 @@
 		</resources>
 
 		<plugins>
-			<!-- Make JAR executable -->
+			<!-- Make executable JAR -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
@@ -60,7 +60,15 @@
 							<goal>single</goal>
 						</goals>
 						<configuration>
+							<appendAssemblyId>false</appendAssemblyId>
 							<archive>
+								<manifestEntries>
+									<App-version>${project.version}</App-version>
+									<Build-Time>${maven.build.timestamp}</Build-Time>
+									<Build-Host>${agent.name}</Build-Host>
+									<Build-OS>${os.name}</Build-OS>
+									<Build-Path>${basedir}</Build-Path>
+								</manifestEntries>
 								<manifest>
 									<mainClass>org.keyboardplaying.dailytasks.Launcher</mainClass>
 								</manifest>
@@ -78,11 +86,11 @@
 
 	<reporting>
 		<plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>2.16</version>
-            </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>2.16</version>
+			</plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
