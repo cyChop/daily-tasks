@@ -50,36 +50,22 @@
 			<!-- Make executable JAR -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.4</version>
-				<executions>
-					<execution>
-						<id>make-manifest</id>
-						<phase>package</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-						<configuration>
-							<appendAssemblyId>false</appendAssemblyId>
-							<archive>
-								<manifestEntries>
-									<App-version>${project.version}</App-version>
-									<Build-Time>${maven.build.timestamp}</Build-Time>
-									<Build-Host>${agent.name}</Build-Host>
-									<Build-OS>${os.name}</Build-OS>
-									<Build-Path>${basedir}</Build-Path>
-								</manifestEntries>
-								<manifest>
-									<mainClass>org.keyboardplaying.dailytasks.Launcher</mainClass>
-								</manifest>
-							</archive>
-							<descriptorRefs>
-								<!-- Pre-defined descriptor -->
-								<descriptorRef>jar-with-dependencies</descriptorRef>
-							</descriptorRefs>
-						</configuration>
-					</execution>
-				</executions>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<App-version>${project.version}</App-version>
+							<Build-Time>${maven.build.timestamp}</Build-Time>
+							<Build-Host>${agent.name}</Build-Host>
+							<Build-OS>${os.name}</Build-OS>
+							<Build-Path>${basedir}</Build-Path>
+						</manifestEntries>
+						<manifest>
+							<mainClass>org.keyboardplaying.dailytasks.Launcher</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
