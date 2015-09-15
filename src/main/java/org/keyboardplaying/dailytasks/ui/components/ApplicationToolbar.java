@@ -49,9 +49,8 @@ public class ApplicationToolbar extends JPanel {
      *
      * @param getter
      *            the object in charge of getting the windows on demand
-     *
-     * @see #initPanel()
      */
+    // @see #initPanel()
     public ApplicationToolbar(WindowGetter getter) {
         super();
         this.getter = getter;

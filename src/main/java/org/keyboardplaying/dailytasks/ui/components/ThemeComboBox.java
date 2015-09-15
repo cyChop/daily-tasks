@@ -25,7 +25,7 @@ import org.keyboardplaying.dailytasks.ui.theme.Theme;
  *
  * @author Cyrille Chopelet (http://keyboardplaying.org)
  */
-public class ThemeComboBox extends JComboBox {
+public class ThemeComboBox extends JComboBox<Theme> {
 
     /** Generated serial version UID. */
     private static final long serialVersionUID = 540078357947006457L;
@@ -42,26 +42,26 @@ public class ThemeComboBox extends JComboBox {
      *
      * @author Cyrille Chopelet (http://keyboardplaying.org)
      */
-    private class ThemeComboBoxRenderer extends PreferencesComboBoxRenderer {
+    private class ThemeComboBoxRenderer extends PreferencesComboBoxRenderer<Theme> {
 
         /** Generated serial version UID. */
-        private static final long serialVersionUID = 8668298417035583036L;
+        private static final long serialVersionUID = -5399024017010185625L;
 
         /*
          * (non-Javadoc)
          *
-         * @see javax.swing.ListCellRenderer#getListCellRendererComponent(javax.swing .JList, java.lang.Object, int,
+         * @see javax.swing.ListCellRenderer#getListCellRendererComponent(javax.swing.JList, java.lang.Object, int,
          * boolean, boolean)
          */
         @Override
-        public Component getListCellRendererComponent(JList list, Object theme, int index, boolean isSelected,
-                boolean cellHasFocus) {
+        public Component getListCellRendererComponent(JList<? extends Theme> list, Theme theme, int index,
+                boolean isSelected, boolean cellHasFocus) {
             /* Set the colors. */
-            setBackground(((Theme) theme).getBgColor());
-            setForeground(((Theme) theme).getTxtColor());
+            setBackground(theme.getBgColor());
+            setForeground(theme.getTxtColor());
 
             /* Set the panel renderer. */
-            setText(MessageBundle.get((Theme) theme));
+            setText(MessageBundle.get(theme));
 
             return this;
         }

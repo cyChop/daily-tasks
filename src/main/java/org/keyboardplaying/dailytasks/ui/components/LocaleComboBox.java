@@ -29,7 +29,7 @@ import org.keyboardplaying.dailytasks.messages.MessageBundle;
  *
  * @author Cyrille Chopelet (http://keyboardplaying.org)
  */
-public class LocaleComboBox extends JComboBox {
+public class LocaleComboBox extends JComboBox<Locale> {
 
     /** Generated serial version UID. */
     private static final long serialVersionUID = 4050125723828264998L;
@@ -58,7 +58,7 @@ public class LocaleComboBox extends JComboBox {
      * @return the store of the combo box
      */
     private static Locale[] makeStoreFromList(List<Locale> locales) {
-        List<Locale> clone = new ArrayList<Locale>(locales);
+        List<Locale> clone = new ArrayList<>(locales);
         Collections.sort(locales, new Comparator<Locale>() {
 
             @Override
@@ -91,20 +91,20 @@ public class LocaleComboBox extends JComboBox {
      *
      * @author Cyrille Chopelet (http://keyboardplaying.org)
      */
-    private class LocaleComboBoxRenderer extends PreferencesComboBoxRenderer {
+    private class LocaleComboBoxRenderer extends PreferencesComboBoxRenderer<Locale> {
 
         /** Generated serial version UID. */
-        private static final long serialVersionUID = -1987303094512226601L;
+        private static final long serialVersionUID = 5895576360090476049L;
 
         /*
          * (non-Javadoc)
          *
-         * @see javax.swing.ListCellRenderer#getListCellRendererComponent(javax.swing .JList, java.lang.Object, int,
+         * @see javax.swing.ListCellRenderer#getListCellRendererComponent(javax.swing.JList, java.lang.Object, int,
          * boolean, boolean)
          */
         @Override
-        public Component getListCellRendererComponent(JList list, Object locale, int index, boolean isSelected,
-                boolean cellHasFocus) {
+        public Component getListCellRendererComponent(JList<? extends Locale> list, Locale locale, int index,
+                boolean isSelected, boolean cellHasFocus) {
             /* Set the colors */
             if (isSelected) {
                 setBackground(list.getSelectionBackground());
@@ -115,7 +115,7 @@ public class LocaleComboBox extends JComboBox {
             }
 
             /* Set the panel renderer. */
-            setText(getLocaleDisplayName((Locale) locale));
+            setText(getLocaleDisplayName(locale));
 
             return this;
         }

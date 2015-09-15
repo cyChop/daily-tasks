@@ -43,10 +43,10 @@ public final class IconUtils {
      * the UI Manager.
      *
      * @return a list of the requested icon in all available sizes
-     * @see IconSize
      */
+    // @see org.keyboardplaying.dailytasks.ui.util.IconUtils.IconSize
     public static List<Image> getWindowIconImages() {
-        List<Image> icons = new ArrayList<Image>();
+        List<Image> icons = new ArrayList<>();
 
         for (IconSize size : IconSize.values()) {
             // build path to icon

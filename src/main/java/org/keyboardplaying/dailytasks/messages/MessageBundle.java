@@ -159,7 +159,7 @@ public class MessageBundle {
         /* Convert base name to a path. */
         String bundlePath = BUNDLE_BASE_NAME.replaceAll("\\.", "/") + "_%s.properties";
 
-        List<Locale> available = new ArrayList<Locale>();
+        List<Locale> available = new ArrayList<>();
 
         /* Loop over all locales to find those we do support. */
         // Get a list of all locales the JVM supports

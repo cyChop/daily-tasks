@@ -39,6 +39,7 @@ import org.keyboardplaying.dailytasks.ui.theme.Theme;
  *
  * @author Cyrille Chopelet (http://keyboardplaying.org)
  */
+@SuppressWarnings("javadoc")
 @FixMethodOrder(MethodSorters.DEFAULT)
 public class PreferencesManagerTest {
 
@@ -155,10 +156,10 @@ public class PreferencesManagerTest {
 
     /**
      * Asserts a {@link TaskSet} is the default task set.
-     * 
+     *
      * @param tasks
      *            the task set to test
-     * 
+     *
      * @see TaskManager#getDefaultTaskSet()
      */
     private static void assertDefaultTaskSet(TaskSet tasks) {

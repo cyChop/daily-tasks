@@ -27,8 +27,10 @@ import org.keyboardplaying.dailytasks.exception.TaskNotFoundException;
  *
  * @author Cyrille Chopelet (http://keyboardplaying.org)
  */
+@SuppressWarnings("javadoc")
 public class TaskSetTest {
 
+    /** Tests a tesk set being manipulated. */
     @Test
     public void testSetManipulation() throws UnexpectedException, TaskNotFoundException {
         Task task1 = new Task("Common label", true);
@@ -83,7 +85,7 @@ public class TaskSetTest {
 
     /**
      * Checks a task state in a set.
-     * 
+     *
      * @param set
      *            the set to search upon
      * @param task

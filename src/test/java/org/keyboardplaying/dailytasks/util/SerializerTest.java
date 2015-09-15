@@ -27,10 +27,11 @@ import org.keyboardplaying.dailytasks.model.Task;
 import org.keyboardplaying.dailytasks.model.TaskSet;
 
 /**
- * Tests the {@link Serialization} class on the objects which will be serialised when running the application.
+ * Tests the {@link Serializer} class on the objects which will be serialized when running the application.
  *
  * @author Cyrille Chopelet (http://keyboardplaying.org)
  */
+@SuppressWarnings("javadoc")
 public class SerializerTest {
 
     /** Tests serialization and deserialization of {@link Task}. */

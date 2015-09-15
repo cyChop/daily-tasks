@@ -43,9 +43,8 @@ public class TaskPanel extends JPanel {
      *            the tasks to be displayed
      * @param listener
      *            the object which listens on task state change
-     *
-     * @see #initPanel()
      */
+    // @see #initPanel(TaskSet, TaskStateChangeListener)
     public TaskPanel(TaskSet tasks, TaskStateChangeListener listener) {
         super();
         initPanel(tasks, listener);

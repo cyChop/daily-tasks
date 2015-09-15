@@ -37,7 +37,7 @@ public class TaskSet implements Serializable, Iterable<Task> {
     private static final long serialVersionUID = -1091318559849096033L;
 
     /** The tasks of this instance. */
-    private Set<Task> tasks = new LinkedHashSet<Task>();
+    private Set<Task> tasks = new LinkedHashSet<>();
 
     /** Creates a new instance. */
     public TaskSet() {

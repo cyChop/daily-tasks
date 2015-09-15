@@ -22,8 +22,11 @@ import javax.swing.ListCellRenderer;
  * This class defines some custom styles to be used for the combo boxes on the preferences window.
  *
  * @author Cyrille Chopelet (http://keyboardplaying.org)
+ *
+ * @param <T>
+ *            the type of values this renderer can be used for
  */
-public abstract class PreferencesComboBoxRenderer extends JLabel implements ListCellRenderer {
+public abstract class PreferencesComboBoxRenderer<T> extends JLabel implements ListCellRenderer<T> {
 
     /** Generated serial version UID. */
     private static final long serialVersionUID = 5057768568220733316L;
