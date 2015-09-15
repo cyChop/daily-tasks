@@ -5,8 +5,6 @@
 [![Coverity status][coverity-shield]][coverity-link]
 [![License][license-shield]][license-link]
 
-## About
-
 For more information about Daily Tasks, please refer to the [project page][3].
 
 You can also have a look on [the blog post][4] on how it began.
