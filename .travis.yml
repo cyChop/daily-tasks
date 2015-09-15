@@ -2,11 +2,10 @@ language: java
 
 sudo: false
 
-# Test compilation with JDK6 since it seems to cause problems with fonts
+# Test compilation with multiple JDK since fonts can cause problems
 jdk:
   - oraclejdk8
   - oraclejdk7
-  - openjdk6
 
 # Coverage report on Coveralls
 after_success:
