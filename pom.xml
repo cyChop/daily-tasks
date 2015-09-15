@@ -1,133 +1,209 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.keyboardplaying</groupId>
-	<artifactId>daily-tasks</artifactId>
-	<version>2.0.0-SNAPSHOT</version>
-	<packaging>jar</packaging>
+    <groupId>org.keyboardplaying</groupId>
+    <artifactId>daily-tasks</artifactId>
+    <version>2.0.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
-	<name>Daily Tasks</name>
-	<description>A simple task manager.</description>
-	<url>http://cychop.github.io/daily-tasks</url>
+    <name>Daily Tasks</name>
+    <description>A simple task manager.</description>
 
-	<properties>
-		<!-- Specify Java version and encoding for the compiler plugin -->
-		<maven.compiler.source>1.6</maven.compiler.source>
-		<maven.compiler.target>1.6</maven.compiler.target>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <licenses>
+        <license>
+            <name>ASF 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
-		<!-- Sonar configuration (using Clinker VA: http://clinkerhq.com/products#va) -->
-		<sonar.java.source>${maven.compiler.source}</sonar.java.source>
-		<sonar.java.target>${maven.compiler.target}</sonar.java.target>
-		<sonar.jdbc.url>jdbc:mysql://localhost:3306/sonar</sonar.jdbc.url>
-		<sonar.jdbc.driver>com.mysql.jdbc.Driver</sonar.jdbc.driver>
-		<sonar.jdbc.username>sonar</sonar.jdbc.username>
-		<sonar.jdbc.password>clinker</sonar.jdbc.password>
-		<sonar.host.url>http://clinker/sonar/</sonar.host.url>
-	</properties>
+    <properties>
+        <!-- Github properties -->
+        <github.user>cyChop</github.user>
+        <github.repo>${project.artifactId}</github.repo>
 
-	<build>
-		<resources>
-			<!-- Default resources dir -->
-			<resource>
-				<directory>${basedir}/src/main/resources</directory>
-				<excludes>
-					<exclude>**/MessageBundle.properties</exclude>
-				</excludes>
-			</resource>
-			<!-- Filter message bundle to add POM properties -->
-			<resource>
-				<directory>${basedir}/src/main/resources</directory>
-				<includes>
-					<include>**/MessageBundle.properties</include>
-				</includes>
-				<filtering>true</filtering>
-			</resource>
-		</resources>
+        <!-- Compilation settings -->
+        <java.version>1.6</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<plugins>
-			<!-- Make executable JAR -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.5</version>
-				<configuration>
-					<archive>
-						<manifestEntries>
-							<App-version>${project.version}</App-version>
-							<Build-Time>${maven.build.timestamp}</Build-Time>
-							<Build-Host>${agent.name}</Build-Host>
-							<Build-OS>${os.name}</Build-OS>
-							<Build-Path>${basedir}</Build-Path>
-						</manifestEntries>
-						<manifest>
-							<mainClass>org.keyboardplaying.dailytasks.Launcher</mainClass>
-						</manifest>
-					</archive>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+        <!-- Propagate Java version to Sonar -->
+        <sonar.java.source>${maven.compiler.source}</sonar.java.source>
+        <sonar.java.target>${maven.compiler.target}</sonar.java.target>
 
-	<reporting>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-report-plugin</artifactId>
-				<version>2.16</version>
-			</plugin>
+        <!-- Version management - test -->
+        <junit.version>4.12</junit.version>
+        <jdepend.version>2.9.1</jdepend.version>
+        <!-- Version management - coverage -->
+        <cobertura.plugin.version>2.7</cobertura.plugin.version>
+        <coveralls.plugin.version>4.0.0</coveralls.plugin.version>
+    </properties>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.9.1</version>
-			</plugin>
-		</plugins>
-	</reporting>
+    <dependencies>
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.1.3</version>
+            <scope>test</scope>
+        </dependency>
 
-	<dependencies>
-		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-			<version>1.1.3</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.11</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>jdepend</groupId>
-			<artifactId>jdepend</artifactId>
-			<version>2.9.1</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+        <!--<![CDATA[
+             _____       _
+            |_   _|__ __| |_
+              | |/ -_|_-<  _|
+              |_|\___/__/\__| ]]>-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>jdepend</groupId>
+            <artifactId>jdepend</artifactId>
+            <version>${jdepend.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
-	<!-- Project additional information -->
-	<scm>
-		<connection>scm:git:git@github.com:cyChop/daily-tasks.git</connection>
-		<url>scm:git:git@github.com:cyChop/daily-tasks.git</url>
-		<developerConnection>scm:git:git@github.com:cyChop/daily-tasks.git</developerConnection>
-	</scm>
-	<issueManagement>
-		<system>GitHub</system>
-		<url>https://github.com/cyChop/daily-tasks/issues</url>
-	</issueManagement>
-	<developers>
-		<developer>
-			<id>cyChop</id>
-			<name>Cyrille Chopelet</name>
-			<email>cyrille[dot]chopelet@gmail[dot]com</email>
-			<roles>
-				<role>architect</role>
-				<role>developer</role>
-			</roles>
-			<timezone>+1</timezone>
-			<url>http://keyboardplaying.org</url>
-		</developer>
-	</developers>
+    <build>
+        <resources>
+            <!-- Default resources dir -->
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+                <excludes>
+                    <exclude>**/MessageBundle.properties</exclude>
+                </excludes>
+            </resource>
+            <!-- Filter message bundle to add POM properties -->
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+                <includes>
+                    <include>**/MessageBundle.properties</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+        <plugins>
+            <!--<![CDATA[
+                  ___                      _ _
+                 / __|_____ _____ _ _ __ _| | |___
+                | (__/ _ \ V / -_) '_/ _` | | (_-<
+                 \___\___/\_/\___|_| \__,_|_|_/__/ ]]>-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.eluder.coveralls</groupId>
+                <artifactId>coveralls-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+
+        <pluginManagement>
+            <plugins>
+                <!--<![CDATA[
+                     __  __           _  __        _
+                    |  \/  |__ _ _ _ (_)/ _|___ __| |_
+                    | |\/| / _` | ' \| |  _/ -_|_-<  _|
+                    |_|  |_\__,_|_||_|_|_| \___/__/\__| ]]>-->
+                <plugin>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <configuration>
+                        <archive>
+                            <!-- Include a manifest -->
+                            <manifest>
+                                <mainClass>org.keyboardplaying.dailytasks.Launcher</mainClass>
+                                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                                <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                            </manifest>
+                            <manifestEntries>
+                                <url>${project.url}</url>
+                                <Build-Time>${maven.build.timestamp}</Build-Time>
+                                <X-Compile-Source-JDK>${maven.compiler.source}</X-Compile-Source-JDK>
+                                <X-Compile-Target-JDK>${maven.compiler.target}</X-Compile-Target-JDK>
+                            </manifestEntries>
+                        </archive>
+                    </configuration>
+                </plugin>
+
+                <!--<![CDATA[
+                      ___                      _ _
+                     / __|_____ _____ _ _ __ _| | |___
+                    | (__/ _ \ V / -_) '_/ _` | | (_-<
+                     \___\___/\_/\___|_| \__,_|_|_/__/ ]]>-->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>cobertura-maven-plugin</artifactId>
+                    <version>${cobertura.plugin.version}</version>
+                    <configuration>
+                        <format>xml</format>
+                        <maxmem>256m</maxmem>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.eluder.coveralls</groupId>
+                    <artifactId>coveralls-maven-plugin</artifactId>
+                    <version>${coveralls.plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <!--<![CDATA[
+         ___ _ _
+        / __(_) |_ ___
+        \__ \ |  _/ -_)
+        |___/_|\__\___| ]]>-->
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </reporting>
+
+    <!--<![CDATA[
+           _   _              _
+          /_\ | |__  ___ _  _| |_
+         / _ \| '_ \/ _ \ || |  _|
+        /_/ \_\_.__/\___/\_,_|\__| ]]>-->
+    <scm>
+        <url>https://github.com/${github.user}/${github.repo}</url>
+        <connection>scm:git:https://github.com/${github.user}/${github.repo}.git</connection>
+        <developerConnection>scm:git:git@github.com:${github.user}/${github.repo}.git</developerConnection>
+    </scm>
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/${github.user}/${github.repo}/issues</url>
+    </issueManagement>
+    <organization>
+        <name>Keyboard Playing</name>
+        <url>http://keyboardplaying.org</url>
+    </organization>
+    <developers>
+        <developer>
+            <id>cyChop</id>
+            <name>Cyrille Chopelet</name>
+            <email>cyrille dot chopelet at mines-nancy dot org</email>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+            <timezone>+1</timezone>
+            <url>http://keyboardplaying.org</url>
+        </developer>
+    </developers>
 </project>
