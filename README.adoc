@@ -20,6 +20,6 @@ image:{url-shields}badge/license-{license-shield}-blue.svg[License: {license-nam
 
 // Now, the main documentation.
 
-For more information about Daily Tasks, please refer to the http://cychop.github.io/daily-tasks[project page].
+For more information about {doctitle}, please refer to http://cychop.github.io/daily-tasks[the project page].
 
 You can also have a look on http://archive.keyboardplaying.org/2013/06/30/daily-task-manager/[the blog post] on how it began.
