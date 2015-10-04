@@ -2,29 +2,18 @@ language: java
 
 sudo: false
 
-# Test compilation with multiple JDK since fonts can cause problems
-jdk:
-  - oraclejdk8
-  - oraclejdk7
-
-# Coverage report on Coveralls
-after_success:
-  - mvn cobertura:cobertura coveralls:report
-
-# Coverity scan
-# Execute only for builds on branch coverity_scan
 env:
   global:
-   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
-   #   via the "travis encrypt" command using the project repo's public key
-   - secure: "AjDAqv5T9i95rTtrpTL8hn/9pWVkgNZE8qP4XvSvo2ybSKXOFhIkBHe5364flx6zOqCytod6NOJYHWNHRsFtyHlWvN86I4H1UNzYVV8fIC6uaH0UEu1u9Fu0h6H0lWQCEjH2FxIeBenuQdeJKdvejGb30RjiwfCt6JwNmeTC75w="
+    - JACOCO_VERSION=0.7.4.201502262128
 
-addons:
-  coverity_scan:
-    project:
-      name: "cyChop/daily-tasks"
-      description: "Build submitted via Travis CI"
-    notification_email: cyrille.chopelet@mines-nancy.org
-    build_command_prepend: "mvn clean"
-    build_command:   "mvn -DskipTests=true compile"
-    branch_pattern: coverity_scan
+jdk:
+  - oraclejdk7
+
+before_script:
+  - "mvn clean install -Dmaven.test.skip=true"
+
+script
+  - "mvn org.jacoco:jacoco-maven-plugin:$JACOCO_VERSION:prepare-agent install"
+
+after_success:
+  - "[[ $TRAVIS_PULL_REQUEST == false ]] && [[ $TRAVIS_BRANCH == quality ]] && mvn sonar:sonar"
