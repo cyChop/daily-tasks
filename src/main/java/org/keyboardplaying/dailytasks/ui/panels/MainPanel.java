@@ -48,6 +48,5 @@ public class MainPanel extends JPanel {
         TaskPanel taskPanel = new TaskPanel(tasks, taskStateListener);
         add(taskPanel, BorderLayout.CENTER);
         add(new ApplicationToolbar(getter), BorderLayout.EAST);
-        // build();
     }
 }

@@ -72,7 +72,7 @@ public final class IconUtils {
      */
     protected enum IconSize {
 
-        _16("16"), _32("32"), _48("48"), _128("128"), _256("256");
+        W_16("16"), W_32("32"), W_48("48"), W_128("128"), W_256("256");
 
         /** The identifier suffix that characterize a size. */
         private String identifier;

@@ -42,6 +42,11 @@ public class MessageBundle {
     /** The actual message {@link ResourceBundle}. */
     private ResourceBundle bundle;
 
+    /** Creates a new instance, loading the preferred locale. */
+    private MessageBundle() {
+        setInstanceLocale(Locale.getDefault());
+    }
+
     /**
      * Returns the single instance of this object, after creating if not initialized yet.
      *
@@ -52,11 +57,6 @@ public class MessageBundle {
             instance = new MessageBundle();
         }
         return instance;
-    }
-
-    /** Creates a new instance, loading the preferred locale. */
-    protected MessageBundle() {
-        setInstanceLocale(Locale.getDefault());
     }
 
     /**

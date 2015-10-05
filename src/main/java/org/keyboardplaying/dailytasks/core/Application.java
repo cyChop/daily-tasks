@@ -88,8 +88,6 @@ public class Application implements ApplicationController {
     @Override
     public void terminate() {
         disposeAllWindows();
-        // Exit without error
-        System.exit(0);
     }
 
     /**

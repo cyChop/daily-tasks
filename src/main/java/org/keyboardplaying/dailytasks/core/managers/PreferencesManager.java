@@ -66,6 +66,11 @@ public class PreferencesManager {
     /** The actual preferences for the application. */
     private Preferences prefs;
 
+    /** Creates a new instance. */
+    protected PreferencesManager() {
+        prefs = Preferences.userRoot().node(getClass().getName());
+    }
+
     /**
      * Returns the single instance of this object, after creating if not initialized yet.
      *
@@ -76,11 +81,6 @@ public class PreferencesManager {
             instance = new PreferencesManager();
         }
         return instance;
-    }
-
-    /** Creates a new instance. */
-    protected PreferencesManager() {
-        prefs = Preferences.userRoot().node(getClass().getName());
     }
 
     /**

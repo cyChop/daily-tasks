@@ -27,12 +27,7 @@ import java.io.ObjectOutput;
  */
 public class DailyTask extends Task implements Externalizable {
 
-    /**
-     * This constructor is for serialization only. Please It should not be used.
-     *
-     * @deprecated Please use either {@link #DailyTask(String)} or {@link #DailyTask(String, boolean)}.
-     */
-    @Deprecated
+    /** This constructor is for serialization only. Please don't use it. */
     public DailyTask() {
         this(null);
     }

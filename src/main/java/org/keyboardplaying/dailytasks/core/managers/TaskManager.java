@@ -35,6 +35,9 @@ public class TaskManager {
     /** The tasks the unique instance of this class will manage. */
     private TaskSet tasks;
 
+    private TaskManager() {
+    }
+
     /**
      * Returns the single instance of the {@link TaskManager} class.
      * <p/>
