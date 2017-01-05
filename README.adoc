@@ -1,4 +1,6 @@
 = Daily Tasks
+
+image:https://api.codacy.com/project/badge/Grade/e1394a4b272948ac865d5c8ccd037af0[link="https://www.codacy.com/app/cyrille-chopelet/daily-tasks?utm_source=github.com&utm_medium=referral&utm_content=cyChop/daily-tasks&utm_campaign=badger"]
 Cyrille Chopelet <cyrille.chopelet@mines-nancy.org>
 
 // Set your repository informations here.
