@@ -17,6 +17,7 @@ package org.keyboardplaying.dailytasks.ui.events;
  *
  * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
+@FunctionalInterface
 public interface TaskStateChangeListener {
 
     /**

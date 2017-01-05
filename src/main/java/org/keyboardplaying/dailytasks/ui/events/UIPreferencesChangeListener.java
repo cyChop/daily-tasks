@@ -19,6 +19,7 @@ import org.keyboardplaying.dailytasks.model.UIPreferences;
  *
  * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
+@FunctionalInterface
 public interface UIPreferencesChangeListener {
 
     /**

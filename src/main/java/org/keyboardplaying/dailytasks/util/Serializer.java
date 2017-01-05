@@ -45,13 +45,9 @@ public final class Serializer {
      * @throws SerializationException if serialization fails
      */
     public static <T extends Serializable> byte[] serialize(T object) throws SerializationException {
-        ObjectOutputStream oos = null;
+        try (ByteArrayOutputStream output = new ByteArrayOutputStream();
+             ObjectOutputStream oos = new ObjectOutputStream(output)) {
 
-        try {
-
-            /* Use the ObjectOutputStream to serialize. */
-            ByteArrayOutputStream output = new ByteArrayOutputStream();
-            oos = new ObjectOutputStream(output);
             oos.writeObject(object);
             oos.flush();
 
@@ -63,12 +59,7 @@ public final class Serializer {
             throw new SerializationException(
                     String.format("An error occurred while serializing an object of type %s: <%s>",
                             object.getClass().getName(), object.toString()),
-                    e);
-
-        } finally {
-
-            /* Make sure the stream is closed. */
-            IOUtils.closeQuietly(oos);
+                    e); 
         }
     }
 
@@ -81,13 +72,8 @@ public final class Serializer {
      */
     @SuppressWarnings("unchecked")
     public static <T extends Serializable> T deserialize(byte[] serialized) throws DeserializationException {
-        ObjectInputStream ois = null;
-
-        try {
-
-            /* Use the ObjectInputStream to deserialize. */
-            ByteArrayInputStream input = new ByteArrayInputStream(serialized);
-            ois = new ObjectInputStream(input);
+        try (ByteArrayInputStream input = new ByteArrayInputStream(serialized);
+             ObjectInputStream ois = new ObjectInputStream(input)) {
 
             // done, return the result
             return (T) ois.readObject();
@@ -96,11 +82,6 @@ public final class Serializer {
 
             throw new DeserializationException(
                     String.format("An error occurred while deserializing data: <%s>", new String(serialized)), e);
-
-        } finally {
-
-            /* Make sure the stream is closed. */
-            IOUtils.closeQuietly(ois);
         }
     }
 }
