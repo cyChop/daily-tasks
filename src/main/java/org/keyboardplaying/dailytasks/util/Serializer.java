@@ -12,6 +12,9 @@
  */
 package org.keyboardplaying.dailytasks.util;
 
+import org.keyboardplaying.dailytasks.exception.DeserializationException;
+import org.keyboardplaying.dailytasks.exception.SerializationException;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -19,30 +22,27 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import org.keyboardplaying.dailytasks.exception.DeserializationException;
-import org.keyboardplaying.dailytasks.exception.SerializationException;
-
 /**
  * A utility class to convert {@link Serializable} objects to byte arrays and back.
  * <p/>
  * This class uses the {@link ObjectOutputStream} and {@link ObjectInputStream}.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public final class Serializer {
 
-    /** Private constructor for utility class. */
+    /**
+     * Private constructor for utility class.
+     */
     private Serializer() {
     }
 
     /**
      * Marshals a {@link Serializable} object to a byte array.
      *
-     * @param object
-     *            the object to serialize
+     * @param object the object to serialize
      * @return the object serialized as a byte array
-     * @throws SerializationException
-     *             if serialization fails
+     * @throws SerializationException if serialization fails
      */
     public static <T extends Serializable> byte[] serialize(T object) throws SerializationException {
         ObjectOutputStream oos = null;
@@ -75,11 +75,9 @@ public final class Serializer {
     /**
      * Unmarshals a serialized object.
      *
-     * @param serialized
-     *            the serialized object
+     * @param serialized the serialized object
      * @return the deserialized object
-     * @throws DeserializationException
-     *             if deserialization fails
+     * @throws DeserializationException if deserialization fails
      */
     @SuppressWarnings("unchecked")
     public static <T extends Serializable> T deserialize(byte[] serialized) throws DeserializationException {
@@ -94,12 +92,7 @@ public final class Serializer {
             // done, return the result
             return (T) ois.readObject();
 
-        } catch (IOException e) {
-
-            throw new DeserializationException(
-                    String.format("An error occurred while deserializing data: <%s>", new String(serialized)), e);
-
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
 
             throw new DeserializationException(
                     String.format("An error occurred while deserializing data: <%s>", new String(serialized)), e);

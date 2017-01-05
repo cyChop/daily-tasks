@@ -12,34 +12,35 @@
  */
 package org.keyboardplaying.dailytasks.ui.components;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JCheckBox;
-
 import org.keyboardplaying.dailytasks.model.Task;
 import org.keyboardplaying.dailytasks.ui.events.TaskStateChangeListener;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * A check box to represent {@link Task} instances.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public class TaskCheckBox extends JCheckBox {
 
-    /** Generated serial version UID. */
+    /**
+     * Generated serial version UID.
+     */
     private static final long serialVersionUID = -2493794753510466163L;
 
-    /** The ID of the task this check box represents. */
+    /**
+     * The ID of the task this check box represents.
+     */
     private int taskId;
 
     /**
      * Creates new instance.
      *
-     * @param task
-     *            the task this check box represents
-     * @param stateListener
-     *            the listener which should be warned on task's state change
+     * @param task          the task this check box represents
+     * @param stateListener the listener which should be warned on task's state change
      */
     public TaskCheckBox(Task task, TaskStateChangeListener stateListener) {
         // save fields
@@ -58,18 +59,19 @@ public class TaskCheckBox extends JCheckBox {
      * <p/>
      * This class is private to avoid any other class instantiating it.
      *
-     * @author Cyrille Chopelet (http://keyboardplaying.org)
+     * @author Cyrille Chopelet (https://keyboardplaying.org)
      */
     private static final class TaskCheckBoxListener implements ActionListener {
 
-        /** The related {@link TaskStateChangeListener}. */
+        /**
+         * The related {@link TaskStateChangeListener}.
+         */
         private TaskStateChangeListener stateListener;
 
         /**
          * Creates a new instance.
          *
-         * @param stateListener
-         *            the listener which should be warned on task's state change
+         * @param stateListener the listener which should be warned on task's state change
          */
         private TaskCheckBoxListener(TaskStateChangeListener stateListener) {
             super();

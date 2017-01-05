@@ -12,8 +12,6 @@
  */
 package org.keyboardplaying.dailytasks.core.events;
 
-import javax.swing.JFrame;
-
 import org.keyboardplaying.dailytasks.core.managers.PreferencesManager;
 import org.keyboardplaying.dailytasks.core.managers.TaskManager;
 import org.keyboardplaying.dailytasks.model.TaskSet;
@@ -22,21 +20,24 @@ import org.keyboardplaying.dailytasks.ui.WindowFactory;
 import org.keyboardplaying.dailytasks.ui.events.ApplicationController;
 import org.keyboardplaying.dailytasks.ui.window.WindowGetter;
 
+import javax.swing.*;
+
 /**
  * A business-logic-rich implementation of the {@link WindowGetter} interface.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public class ApplicationWindowGetter implements WindowGetter {
 
-    /** An {@link ApplicationController}. */
+    /**
+     * An {@link ApplicationController}.
+     */
     private ApplicationController controller;
 
     /**
      * Creates a new instance.
      *
-     * @param controller
-     *            the application controller
+     * @param controller the application controller
      */
     public ApplicationWindowGetter(ApplicationController controller) {
         this.controller = controller;

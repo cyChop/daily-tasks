@@ -12,19 +12,6 @@
  */
 package org.keyboardplaying.dailytasks.ui.panels;
 
-import java.awt.Window;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Locale;
-
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.SequentialGroup;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
 import org.keyboardplaying.dailytasks.messages.MessageBundle;
 import org.keyboardplaying.dailytasks.model.UIPreferences;
 import org.keyboardplaying.dailytasks.ui.components.LocaleComboBox;
@@ -34,14 +21,23 @@ import org.keyboardplaying.dailytasks.ui.events.UIPreferencesChangeListener;
 import org.keyboardplaying.dailytasks.ui.theme.Theme;
 import org.keyboardplaying.dailytasks.ui.util.WindowUtils;
 
+import javax.swing.*;
+import javax.swing.GroupLayout.SequentialGroup;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Locale;
+
 /**
  * A window to update the UI settings of the application.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public class PreferencesPanel extends JPanel {
 
-    /** Generated serial version UID. */
+    /**
+     * Generated serial version UID.
+     */
     private static final long serialVersionUID = 6933364975990748589L;
 
     /**
@@ -49,9 +45,13 @@ public class PreferencesPanel extends JPanel {
      */
     private static final int STD_GAP = 30;
 
-    /** The value selector for the locale to use. */
+    /**
+     * The value selector for the locale to use.
+     */
     private LocaleComboBox localeCB;
-    /** The value selector for the theme to use. */
+    /**
+     * The value selector for the theme to use.
+     */
     private ThemeComboBox themeCB;
     /**
      * A checkbox to indicate whether the application should remain on top of other windows.
@@ -61,15 +61,12 @@ public class PreferencesPanel extends JPanel {
     /**
      * Creates a new instance and loads the current value of the UI preferences.
      *
-     * @param preferences
-     *            the current value for the UI preferences
-     * @param listener
-     *            the object listening for changes to the current preferences
-     * @param controller
-     *            the controller in charge of restarting the application if need be
+     * @param preferences the current value for the UI preferences
+     * @param listener    the object listening for changes to the current preferences
+     * @param controller  the controller in charge of restarting the application if need be
      */
     public PreferencesPanel(UIPreferences preferences, UIPreferencesChangeListener listener,
-            ApplicationController controller) {
+                            ApplicationController controller) {
         super();
         initSettingComponents(preferences);
         initWindow(listener, controller);
@@ -78,8 +75,7 @@ public class PreferencesPanel extends JPanel {
     /**
      * Initializes the components used to select the current value of the UI preferences.
      *
-     * @param preferences
-     *            the current value for the UI preferences
+     * @param preferences the current value for the UI preferences
      */
     private void initSettingComponents(UIPreferences preferences) {
         localeCB = new LocaleComboBox();
@@ -95,10 +91,8 @@ public class PreferencesPanel extends JPanel {
     /**
      * Creates non-setting related components and composes the window's layout.
      *
-     * @param listener
-     *            the object listening for changes to the preferences
-     * @param controller
-     *            the controller in charge of restarting the application if need be
+     * @param listener   the object listening for changes to the preferences
+     * @param controller the controller in charge of restarting the application if need be
      */
     private void initWindow(UIPreferencesChangeListener listener, ApplicationController controller) {
         /* Create minor components. */
@@ -141,22 +135,24 @@ public class PreferencesPanel extends JPanel {
      * The {@link ActionListener} which is called when the cancel button is clicked. This object saves the preferences
      * then closes the current preferences window.
      *
-     * @author Cyrille Chopelet (http://keyboardplaying.org)
+     * @author Cyrille Chopelet (https://keyboardplaying.org)
      */
     private class SaveButtonListener implements ActionListener {
 
-        /** The object listening for changes of the preferences. */
+        /**
+         * The object listening for changes of the preferences.
+         */
         private UIPreferencesChangeListener listener;
-        /** The controller in charge of restarting the application if need be. */
+        /**
+         * The controller in charge of restarting the application if need be.
+         */
         private ApplicationController controller;
 
         /**
          * Creates a new instance.
          *
-         * @param listener
-         *            the object listening for changes of the preferences
-         * @param controller
-         *            the controller in charge of restarting the application if need be
+         * @param listener   the object listening for changes of the preferences
+         * @param controller the controller in charge of restarting the application if need be
          */
         public SaveButtonListener(UIPreferencesChangeListener listener, ApplicationController controller) {
             this.listener = listener;
@@ -193,7 +189,7 @@ public class PreferencesPanel extends JPanel {
      * The {@link ActionListener} which is called when the cancel button is clicked. This object only closes the current
      * preferences window.
      *
-     * @author Cyrille Chopelet (http://keyboardplaying.org)
+     * @author Cyrille Chopelet (https://keyboardplaying.org)
      */
     private class CancelButtonListener implements ActionListener {
         /*

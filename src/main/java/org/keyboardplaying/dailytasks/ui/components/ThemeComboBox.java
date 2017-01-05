@@ -12,25 +12,27 @@
  */
 package org.keyboardplaying.dailytasks.ui.components;
 
-import java.awt.Component;
-
-import javax.swing.JComboBox;
-import javax.swing.JList;
-
 import org.keyboardplaying.dailytasks.messages.MessageBundle;
 import org.keyboardplaying.dailytasks.ui.theme.Theme;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * A combo box to display available themes.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public class ThemeComboBox extends JComboBox<Theme> {
 
-    /** Generated serial version UID. */
+    /**
+     * Generated serial version UID.
+     */
     private static final long serialVersionUID = 540078357947006457L;
 
-    /** Creates a new instance. */
+    /**
+     * Creates a new instance.
+     */
     public ThemeComboBox() {
         super(Theme.values());
         setRenderer(new ThemeComboBoxRenderer());
@@ -40,11 +42,13 @@ public class ThemeComboBox extends JComboBox<Theme> {
      * A renderer to display themes by their localized name, applying the theme settings to each single value, thus
      * easing the choice.
      *
-     * @author Cyrille Chopelet (http://keyboardplaying.org)
+     * @author Cyrille Chopelet (https://keyboardplaying.org)
      */
     private class ThemeComboBoxRenderer extends PreferencesComboBoxRenderer<Theme> {
 
-        /** Generated serial version UID. */
+        /**
+         * Generated serial version UID.
+         */
         private static final long serialVersionUID = -5399024017010185625L;
 
         /*
@@ -55,7 +59,7 @@ public class ThemeComboBox extends JComboBox<Theme> {
          */
         @Override
         public Component getListCellRendererComponent(JList<? extends Theme> list, Theme theme, int index,
-                boolean isSelected, boolean cellHasFocus) {
+                                                      boolean isSelected, boolean cellHasFocus) {
             /* Set the colors. */
             setBackground(theme.getBgColor());
             setForeground(theme.getTxtColor());

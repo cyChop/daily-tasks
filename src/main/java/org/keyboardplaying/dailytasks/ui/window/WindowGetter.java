@@ -12,12 +12,12 @@
  */
 package org.keyboardplaying.dailytasks.ui.window;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 
 /**
  * Gets the request windows.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public interface WindowGetter {
 

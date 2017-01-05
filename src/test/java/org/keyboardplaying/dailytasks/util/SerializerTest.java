@@ -12,13 +12,6 @@
  */
 package org.keyboardplaying.dailytasks.util;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import java.util.Iterator;
-import java.util.UUID;
-
 import org.junit.Test;
 import org.keyboardplaying.dailytasks.exception.DeserializationException;
 import org.keyboardplaying.dailytasks.exception.SerializationException;
@@ -26,15 +19,24 @@ import org.keyboardplaying.dailytasks.model.DailyTask;
 import org.keyboardplaying.dailytasks.model.Task;
 import org.keyboardplaying.dailytasks.model.TaskSet;
 
+import java.util.Iterator;
+import java.util.UUID;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 /**
  * Tests the {@link Serializer} class on the objects which will be serialized when running the application.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 @SuppressWarnings("javadoc")
 public class SerializerTest {
 
-    /** Tests serialization and deserialization of {@link Task}. */
+    /**
+     * Tests serialization and deserialization of {@link Task}.
+     */
     @Test
     public void testTaskSerialization() throws SerializationException, DeserializationException {
         Task original = new Task("Some label", true);
@@ -48,7 +50,9 @@ public class SerializerTest {
         assertEquals(original.isDone(), deserialized.isDone());
     }
 
-    /** Tests serialization and deserialization of dailies. */
+    /**
+     * Tests serialization and deserialization of dailies.
+     */
     @Test
     public void testDailySerialization() throws SerializationException, DeserializationException {
         DailyTask original = new DailyTask("Some label", false);
@@ -76,14 +80,16 @@ public class SerializerTest {
         assertFalse(deserialized.isDone());
     }
 
-    /** Tests serialization and deserialization of {@link Task}. */
+    /**
+     * Tests serialization and deserialization of {@link Task}.
+     */
     @Test
     public void testTaskSetSerialization() throws SerializationException, DeserializationException {
         // Some randomization to make things even better...
         TaskSet original = new TaskSet();
         int nbTasks = (int) (20 * Math.random()) + 1;
         for (int i = 0; i < nbTasks; i++) {
-            Task randomTask = new Task(UUID.randomUUID().toString(), Math.random() < 0.5 ? false : true);
+            Task randomTask = new Task(UUID.randomUUID().toString(), Math.random() >= 0.5);
             original.addTask(randomTask);
         }
 

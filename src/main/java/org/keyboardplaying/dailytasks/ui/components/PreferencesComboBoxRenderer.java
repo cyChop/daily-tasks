@@ -12,31 +12,35 @@
  */
 package org.keyboardplaying.dailytasks.ui.components;
 
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.ListCellRenderer;
+import javax.swing.*;
 
 /**
  * A common base for implementations of {@link ListCellRenderer} to be used.
  * <p/>
  * This class defines some custom styles to be used for the combo boxes on the preferences window.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
- *
- * @param <T>
- *            the type of values this renderer can be used for
+ * @param <T> the type of values this renderer can be used for
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public abstract class PreferencesComboBoxRenderer<T> extends JLabel implements ListCellRenderer<T> {
 
-    /** Generated serial version UID. */
+    /**
+     * Generated serial version UID.
+     */
     private static final long serialVersionUID = 5057768568220733316L;
 
-    /** The horizontal margin for combo box values. */
+    /**
+     * The horizontal margin for combo box values.
+     */
     private static final int MARGIN_HORIZONTAL = 10;
-    /** The vertical margin for combo box values. */
+    /**
+     * The vertical margin for combo box values.
+     */
     private static final int MARGIN_VERTICAL = 2;
 
-    /** Creates a new instance. */
+    /**
+     * Creates a new instance.
+     */
     public PreferencesComboBoxRenderer() {
         setOpaque(true);
         setBorder(BorderFactory.createEmptyBorder(MARGIN_VERTICAL, MARGIN_HORIZONTAL, MARGIN_VERTICAL,

@@ -12,40 +12,39 @@
  */
 package org.keyboardplaying.dailytasks.ui.components;
 
-import java.awt.Color;
-import java.awt.Dimension;
-
-import javax.swing.BorderFactory;
-import javax.swing.Box.Filler;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
 import org.keyboardplaying.dailytasks.messages.MessageBundle;
 import org.keyboardplaying.dailytasks.ui.util.FontUtils.FontAwesomeGlyph;
+
+import javax.swing.*;
+import javax.swing.Box.Filler;
+import java.awt.*;
 
 /**
  * A title bar for the task panel.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public class TaskTitleBar extends JPanel {
 
-    /** Generated serial version UID. */
+    /**
+     * Generated serial version UID.
+     */
     private static final long serialVersionUID = -6923076012298351055L;
 
-    /** The thickness of the filler line. */
+    /**
+     * The thickness of the filler line.
+     */
     private static final int FILLER_HEIGHT = 1;
-    /** The space (in pixels) to add on each side of the filler line. */
+    /**
+     * The space (in pixels) to add on each side of the filler line.
+     */
     private static final int FILLER_MARGIN = 3;
 
     /**
      * Creates a new instance.
      *
-     * @param icon
-     *            the icon to show on the left of the bar
-     * @param titleKey
-     *            the key to the title to show on the bar, retrieved from the {@link MessageBundle}
+     * @param icon     the icon to show on the left of the bar
+     * @param titleKey the key to the title to show on the bar, retrieved from the {@link MessageBundle}
      */
     public TaskTitleBar(FontAwesomeGlyph icon, String titleKey) {
         /* The basics. */

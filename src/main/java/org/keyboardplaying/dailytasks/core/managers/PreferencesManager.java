@@ -12,10 +12,6 @@
  */
 package org.keyboardplaying.dailytasks.core.managers;
 
-import java.util.Locale;
-import java.util.prefs.BackingStoreException;
-import java.util.prefs.Preferences;
-
 import org.keyboardplaying.dailytasks.exception.DeserializationException;
 import org.keyboardplaying.dailytasks.exception.SerializationException;
 import org.keyboardplaying.dailytasks.model.TaskSet;
@@ -23,6 +19,10 @@ import org.keyboardplaying.dailytasks.model.UIPreferences;
 import org.keyboardplaying.dailytasks.ui.theme.Theme;
 import org.keyboardplaying.dailytasks.util.ExceptionUtils;
 import org.keyboardplaying.dailytasks.util.Serializer;
+
+import java.util.Locale;
+import java.util.prefs.BackingStoreException;
+import java.util.prefs.Preferences;
 
 /**
  * Utility class for the management of preferences.
@@ -32,7 +32,7 @@ import org.keyboardplaying.dailytasks.util.Serializer;
  * Only static methods are exposed, but the class actually uses a Singleton design-pattern, and all static methods refer
  * to {@code protected} instance methods which can be overridden or mocked for the purpose of unit-testing.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public class PreferencesManager {
 
@@ -40,33 +40,49 @@ public class PreferencesManager {
      * A prefix to prepend to all fields, to avoid confusion with the preferences of another application.
      */
     private static final String FLD_PREFIX = "daily-tasks.";
-    /** The field storing the language to use. */
+    /**
+     * The field storing the language to use.
+     */
     private static final String FLD_LOCALE_LANG = FLD_PREFIX + "locale.lang";
-    /** The field storing the country for the locale to use. */
+    /**
+     * The field storing the country for the locale to use.
+     */
     private static final String FLD_LOCALE_COUNTRY = FLD_PREFIX + "locale.country";
     /**
      * The field storing the preference specifying if the todo-list should remain on top of other windows.
      */
     private static final String FLD_ON_TOP = FLD_PREFIX + "ontop";
-    /** The field storing the selected theme. */
+    /**
+     * The field storing the selected theme.
+     */
     private static final String FLD_THEME = FLD_PREFIX + "theme";
-    /** The field storing the tasks. */
+    /**
+     * The field storing the tasks.
+     */
     private static final String FLD_TASKS = FLD_PREFIX + "tasks";
 
     /**
      * The default preference specifying if the todo-list should remain on top of other windows.
      */
     private static final boolean DEF_ON_TOP = true;
-    /** The default theme if none is specified. */
+    /**
+     * The default theme if none is specified.
+     */
     private static final Theme DEF_THEME = Theme.ORANGE;
 
-    /** The unique instance of this object, using the Singleton design-pattern. */
+    /**
+     * The unique instance of this object, using the Singleton design-pattern.
+     */
     private static PreferencesManager instance;
 
-    /** The actual preferences for the application. */
+    /**
+     * The actual preferences for the application.
+     */
     private Preferences prefs;
 
-    /** Creates a new instance. */
+    /**
+     * Creates a new instance.
+     */
     protected PreferencesManager() {
         prefs = Preferences.userRoot().node(getClass().getName());
     }
@@ -86,9 +102,8 @@ public class PreferencesManager {
     /**
      * Clears all the preferences which were stored on the running system.
      *
-     * @throws BackingStoreException
-     *             if this operation cannot be completed due to a failure in the backing store, or inability to
-     *             communicate with it
+     * @throws BackingStoreException if this operation cannot be completed due to a failure in the backing store, or inability to
+     *                               communicate with it
      */
     public static void clear() throws BackingStoreException {
         getInstance().clearInstance();
@@ -97,9 +112,8 @@ public class PreferencesManager {
     /**
      * Clears all the preferences which were stored on the running system.
      *
-     * @throws BackingStoreException
-     *             if this operation cannot be completed due to a failure in the backing store, or inability to
-     *             communicate with it
+     * @throws BackingStoreException if this operation cannot be completed due to a failure in the backing store, or inability to
+     *                               communicate with it
      */
     public void clearInstance() throws BackingStoreException {
         prefs.clear();
@@ -145,10 +159,8 @@ public class PreferencesManager {
     /**
      * Sets the locale to use.
      *
-     * @param language
-     *            the locale's language
-     * @param country
-     *            the locale's country
+     * @param language the locale's language
+     * @param country  the locale's country
      */
     public static void setLocale(String language, String country) {
         getInstance().setInstanceLocale(language, country);
@@ -157,8 +169,7 @@ public class PreferencesManager {
     /**
      * Sets the locale to use.
      *
-     * @param language
-     *            the locale's language
+     * @param language the locale's language
      */
     public static void setLocale(String language) {
         setLocale(language, null);
@@ -167,10 +178,8 @@ public class PreferencesManager {
     /**
      * Sets the locale to use.
      *
-     * @param language
-     *            the locale's language
-     * @param country
-     *            the locale's country
+     * @param language the locale's language
+     * @param country  the locale's country
      */
     protected void setInstanceLocale(String language, String country) {
         prefs.put(FLD_LOCALE_LANG, language);
@@ -217,8 +226,7 @@ public class PreferencesManager {
     /**
      * Sets the theme to use.
      *
-     * @param theme
-     *            the theme to use
+     * @param theme the theme to use
      */
     public static void setTheme(Theme theme) {
         getInstance().setInstanceTheme(theme);
@@ -227,8 +235,7 @@ public class PreferencesManager {
     /**
      * Sets the theme to use.
      *
-     * @param theme
-     *            the theme to use
+     * @param theme the theme to use
      */
     protected void setInstanceTheme(Theme theme) {
         prefs.put(FLD_THEME, theme.name());
@@ -255,8 +262,7 @@ public class PreferencesManager {
     /**
      * Specifies whether the to-do list should always remain on top of other windows.
      *
-     * @param alwaysOnTop
-     *            {@code true} if to-do list should always remain on top of other windows
+     * @param alwaysOnTop {@code true} if to-do list should always remain on top of other windows
      */
     public static void setAlwaysOnTop(boolean alwaysOnTop) {
         getInstance().setInstanceAlwaysOnTop(alwaysOnTop);
@@ -265,8 +271,7 @@ public class PreferencesManager {
     /**
      * Specifies whether the to-do list should always remain on top of other windows.
      *
-     * @param alwaysOnTop
-     *            {@code true} if to-do list should always remain on top of other windows
+     * @param alwaysOnTop {@code true} if to-do list should always remain on top of other windows
      */
     protected void setInstanceAlwaysOnTop(boolean alwaysOnTop) {
         prefs.putBoolean(FLD_ON_TOP, alwaysOnTop);
@@ -284,8 +289,7 @@ public class PreferencesManager {
     /**
      * Saves the UI preferences from the supplied argument.
      *
-     * @param prefs
-     *            the UI preferences to save
+     * @param prefs the UI preferences to save
      */
     public static void setUIPreferences(UIPreferences prefs) {
         setLocale(prefs.getLocale().getLanguage(), prefs.getLocale().getCountry());
@@ -297,7 +301,6 @@ public class PreferencesManager {
      * Returns the tasks stored as a preference, or the default set if none.
      *
      * @return the tasks
-     *
      * @see TaskManager#getDefaultTaskSet()
      */
     public static TaskSet getTasks() {
@@ -308,7 +311,6 @@ public class PreferencesManager {
      * Returns the tasks stored as a preference, or the default set if none.
      *
      * @return the tasks
-     *
      * @see TaskManager#getDefaultTaskSet()
      */
     protected TaskSet getInstanceTasks() {
@@ -337,8 +339,7 @@ public class PreferencesManager {
     /**
      * Stores the specified {@link TaskSet} as a preference.
      *
-     * @param tasks
-     *            the tasks to save
+     * @param tasks the tasks to save
      */
     public static void setTasks(TaskSet tasks) {
         getInstance().setInstanceTasks(tasks);
@@ -347,8 +348,7 @@ public class PreferencesManager {
     /**
      * Stores the specified {@link TaskSet} as a preference.
      *
-     * @param tasks
-     *            the tasks to save
+     * @param tasks the tasks to save
      */
     protected void setInstanceTasks(TaskSet tasks) {
         try {

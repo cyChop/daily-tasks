@@ -12,10 +12,6 @@
  */
 package org.keyboardplaying.dailytasks.ui.panels;
 
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JPanel;
-
 import org.keyboardplaying.dailytasks.model.Task;
 import org.keyboardplaying.dailytasks.model.TaskSet;
 import org.keyboardplaying.dailytasks.ui.components.TaskCheckBox;
@@ -23,26 +19,30 @@ import org.keyboardplaying.dailytasks.ui.components.TaskTitleBar;
 import org.keyboardplaying.dailytasks.ui.events.TaskStateChangeListener;
 import org.keyboardplaying.dailytasks.ui.util.FontUtils.FontAwesomeGlyph;
 
+import javax.swing.*;
+
 /**
  * A panel to display the tasks.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public class TaskPanel extends JPanel {
 
-    /** Generated serial version UID. */
+    /**
+     * Generated serial version UID.
+     */
     private static final long serialVersionUID = 4237334615830374030L;
 
-    /** The width of the empty border to apply around the toolbar. */
+    /**
+     * The width of the empty border to apply around the toolbar.
+     */
     private static final int BORDER_WIDTH = 2;
 
     /**
      * Creates a new instance and initializes layout and content.
      *
-     * @param tasks
-     *            the tasks to be displayed
-     * @param listener
-     *            the object which listens on task state change
+     * @param tasks    the tasks to be displayed
+     * @param listener the object which listens on task state change
      */
     // @see #initPanel(TaskSet, TaskStateChangeListener)
     public TaskPanel(TaskSet tasks, TaskStateChangeListener listener) {
@@ -53,10 +53,8 @@ public class TaskPanel extends JPanel {
     /**
      * Initializes the toolbar layout and components.
      *
-     * @param tasks
-     *            the tasks to be displayed
-     * @param listener
-     *            the object which listens on task state change
+     * @param tasks    the tasks to be displayed
+     * @param listener the object which listens on task state change
      */
     private void initPanel(TaskSet tasks, TaskStateChangeListener listener) {
         /* Initialize layout. */

@@ -12,6 +12,8 @@
  */
 package org.keyboardplaying.dailytasks.messages;
 
+import org.keyboardplaying.dailytasks.ui.theme.Theme;
+
 import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -20,29 +22,37 @@ import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
-import org.keyboardplaying.dailytasks.ui.theme.Theme;
-
 /**
  * Utility class for the management of localized messages.
  * <p/>
  * This classes uses the system locale as a default, but another locale can be specified at any moment.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public class MessageBundle {
 
-    /** The base name of the message bundle. */
+    /**
+     * The base name of the message bundle.
+     */
     private static final String BUNDLE_BASE_NAME = "org.keyboardplaying.dailytasks.messages.MessageBundle";
-    /** The locale of the default message bundle. */
+    /**
+     * The locale of the default message bundle.
+     */
     private static final String DEFAULT_LANG = "en";
 
-    /** The unique instance of this object, using the Singleton design-pattern. */
+    /**
+     * The unique instance of this object, using the Singleton design-pattern.
+     */
     private static MessageBundle instance;
 
-    /** The actual message {@link ResourceBundle}. */
+    /**
+     * The actual message {@link ResourceBundle}.
+     */
     private ResourceBundle bundle;
 
-    /** Creates a new instance, loading the preferred locale. */
+    /**
+     * Creates a new instance, loading the preferred locale.
+     */
     private MessageBundle() {
         setInstanceLocale(Locale.getDefault());
     }
@@ -62,8 +72,7 @@ public class MessageBundle {
     /**
      * Reloads the bundle to match the specified locale.
      *
-     * @param locale
-     *            the locale to use
+     * @param locale the locale to use
      */
     public static void setLocale(Locale locale) {
         getInstance().setInstanceLocale(locale);
@@ -72,8 +81,7 @@ public class MessageBundle {
     /**
      * Reloads the bundle to match the specified locale.
      *
-     * @param locale
-     *            the locale to use
+     * @param locale the locale to use
      */
     protected final void setInstanceLocale(Locale locale) {
         bundle = ResourceBundle.getBundle(BUNDLE_BASE_NAME, locale);
@@ -82,10 +90,8 @@ public class MessageBundle {
     /**
      * Returns the {@link String} for the specified key and includes the supplied arguments into the pattern.
      *
-     * @param key
-     *            the key for the message
-     * @param args
-     *            the arguments to include inside the message pattern retrieved from the bundle
+     * @param key  the key for the message
+     * @param args the arguments to include inside the message pattern retrieved from the bundle
      * @return the message for the supplied key and arguments
      */
     public static String get(String key, Object... args) {
@@ -95,8 +101,7 @@ public class MessageBundle {
     /**
      * Returns the {@link String} for the specified key.
      *
-     * @param key
-     *            the key for the message
+     * @param key the key for the message
      * @return the message for the supplied key
      */
     public static String get(String key) {
@@ -106,8 +111,7 @@ public class MessageBundle {
     /**
      * Returns the localized name of a {@link Theme}.
      *
-     * @param theme
-     *            the theme
+     * @param theme the theme
      * @return the name of the theme
      */
     public static String get(Theme theme) {
@@ -117,10 +121,8 @@ public class MessageBundle {
     /**
      * Returns the {@link String} for the specified key and includes the supplied arguments into the pattern.
      *
-     * @param key
-     *            the key for the message
-     * @param args
-     *            the arguments to include inside the message pattern retrieved from the bundle
+     * @param key  the key for the message
+     * @param args the arguments to include inside the message pattern retrieved from the bundle
      * @return the message for the supplied key and arguments
      */
     protected String getString(String key, Object... args) {
@@ -137,8 +139,7 @@ public class MessageBundle {
      * <p/>
      * If the value was not found, the key will be returned instead.
      *
-     * @param key
-     *            the key for the message
+     * @param key the key for the message
      * @return the message for the supplied key
      */
     protected String getString(String key) {
@@ -182,8 +183,7 @@ public class MessageBundle {
      * If the supplied locale cannot be found in available locales, the closer variation should be returned. If no
      * variation corresponds to that language, the locale of the default bundle should be returned.
      *
-     * @param locale
-     *            the locale being searched for
+     * @param locale the locale being searched for
      * @return the closest applicable locale
      */
     public static Locale getClosestApplicableLocale(Locale locale) {

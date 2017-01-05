@@ -12,18 +12,20 @@
  */
 package org.keyboardplaying.dailytasks.ui.util;
 
-import static org.junit.Assert.assertNotNull;
-
 import org.junit.Test;
+
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Tests for the {@link FontUtils} class.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public class FontUtilsTest {
 
-    /** Ensures {@link FontUtils} is still capable of retrieving FontAwesome. */
+    /**
+     * Ensures {@link FontUtils} is still capable of retrieving FontAwesome.
+     */
     @Test
     public void testFontFetching() {
         assertNotNull(FontUtils.getFontAwesome());

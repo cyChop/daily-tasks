@@ -12,27 +12,31 @@
  */
 package org.keyboardplaying.dailytasks.core.managers;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.keyboardplaying.dailytasks.exception.TaskNotFoundException;
 import org.keyboardplaying.dailytasks.messages.MessageBundle;
 import org.keyboardplaying.dailytasks.model.Task;
 import org.keyboardplaying.dailytasks.model.TaskSet;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Provides utilities to manage a {@link TaskSet}.
  * <p/>
  * This class implements the Singleton design pattern and will handle only one task set.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public class TaskManager {
 
-    /** The single instance of the {@link TaskManager} class. */
+    /**
+     * The single instance of the {@link TaskManager} class.
+     */
     private static TaskManager instance = null;
 
-    /** The tasks the unique instance of this class will manage. */
+    /**
+     * The tasks the unique instance of this class will manage.
+     */
     private TaskSet tasks;
 
     private TaskManager() {
@@ -65,10 +69,8 @@ public class TaskManager {
     /**
      * Updates the state of a task in the set and persists changes in preferences for retrieval in the next session.
      *
-     * @param taskId
-     *            the ID of the task to update
-     * @param done
-     *            the completion state of the task
+     * @param taskId the ID of the task to update
+     * @param done   the completion state of the task
      * @return the updated task
      */
     public Task updateTask(int taskId, boolean done) {
@@ -93,19 +95,18 @@ public class TaskManager {
     /**
      * Updates the state of a task in the set.
      *
-     * @param taskId
-     *            the ID of the task to update
-     * @param done
-     *            the completion state of the task
+     * @param taskId the ID of the task to update
+     * @param done   the completion state of the task
      * @return the updated task
-     * @throws TaskNotFoundException
-     *             when the supplied task ID could not be found in the set
+     * @throws TaskNotFoundException when the supplied task ID could not be found in the set
      */
     private Task updateTaskState(int taskId, boolean done) throws TaskNotFoundException {
         return tasks.updateTaskState(taskId, done);
     }
 
-    /** Updates the tasks in the preferences (between-sessions persistence). */
+    /**
+     * Updates the tasks in the preferences (between-sessions persistence).
+     */
     private void saveTasks() {
         PreferencesManager.setTasks(tasks);
     }

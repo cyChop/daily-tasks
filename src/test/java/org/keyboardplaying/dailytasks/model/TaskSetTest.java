@@ -12,25 +12,27 @@
  */
 package org.keyboardplaying.dailytasks.model;
 
+import org.junit.Test;
+import org.keyboardplaying.dailytasks.exception.TaskNotFoundException;
+
+import java.rmi.UnexpectedException;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.rmi.UnexpectedException;
-
-import org.junit.Test;
-import org.keyboardplaying.dailytasks.exception.TaskNotFoundException;
-
 /**
  * Tests the {@link TaskSet} class.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 @SuppressWarnings("javadoc")
 public class TaskSetTest {
 
-    /** Tests a tesk set being manipulated. */
+    /**
+     * Tests a tesk set being manipulated.
+     */
     @Test
     public void testSetManipulation() throws UnexpectedException, TaskNotFoundException {
         Task task1 = new Task("Common label", true);
@@ -86,13 +88,10 @@ public class TaskSetTest {
     /**
      * Checks a task state in a set.
      *
-     * @param set
-     *            the set to search upon
-     * @param task
-     *            the task to look for
+     * @param set  the set to search upon
+     * @param task the task to look for
      * @return the task {@link Task#isDone()} method result
-     * @throws UnexpectedException
-     *             when the task is not found in the set
+     * @throws UnexpectedException when the task is not found in the set
      */
     public boolean isTaskDone(TaskSet set, Task task) throws UnexpectedException {
         for (Task taskInSet : set) {

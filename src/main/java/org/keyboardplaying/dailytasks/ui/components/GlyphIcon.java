@@ -12,32 +12,36 @@
  */
 package org.keyboardplaying.dailytasks.ui.components;
 
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-
 import org.keyboardplaying.dailytasks.ui.util.FontUtils;
 import org.keyboardplaying.dailytasks.ui.util.FontUtils.FontAwesomeGlyph;
+
+import javax.swing.*;
 
 /**
  * A utility to easily display a single FontAwesome glyph as a {@link JLabel}.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public class GlyphIcon extends JLabel {
 
-    /** Generated serial version UID. */
+    /**
+     * Generated serial version UID.
+     */
     private static final long serialVersionUID = 6199703398032250855L;
 
-    /** The horizontal margins around this icon. */
+    /**
+     * The horizontal margins around this icon.
+     */
     private static final int H_MARGIN = 4;
-    /** The vertical margins around this icon. */
+    /**
+     * The vertical margins around this icon.
+     */
     private static final int V_MARGIN = 0;
 
     /**
      * Creates a new instance.
      *
-     * @param glyph
-     *            the glyph this icon should show
+     * @param glyph the glyph this icon should show
      */
     public GlyphIcon(FontAwesomeGlyph glyph) {
         super(String.valueOf(glyph.getChar()));

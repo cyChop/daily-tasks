@@ -12,27 +12,31 @@
  */
 package org.keyboardplaying.dailytasks.ui.util;
 
-import java.awt.Image;
-import java.awt.Toolkit;
+import javax.swing.*;
+import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.UIManager;
-
 /**
  * A utility class to retrieve icons.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public final class IconUtils {
 
-    /** The extension for window icons files. */
+    /**
+     * The extension for window icons files.
+     */
     private static final String WINDOW_ICON_EXTENSION = ".png";
-    /** The relative path to the directory containing all icons. */
+    /**
+     * The relative path to the directory containing all icons.
+     */
     private static final String ICONS_RELATIVE_PATH = "../icons/";
 
-    /** Private constructor for utility class. */
+    /**
+     * Private constructor for utility class.
+     */
     private IconUtils() {
     }
 
@@ -50,12 +54,14 @@ public final class IconUtils {
 
         for (IconSize size : IconSize.values()) {
             // build path to icon
-            StringBuilder sb = new StringBuilder();
-            sb.append(ICONS_RELATIVE_PATH).append(UIManager.get("ApplicationWindow.icon.prefix"));
-            sb.append('-').append(size.getIdentifier()).append(WINDOW_ICON_EXTENSION);
+            String iconPath = ICONS_RELATIVE_PATH
+                    + UIManager.get("ApplicationWindow.icon.prefix")
+                    + '-'
+                    + size.getIdentifier()
+                    + WINDOW_ICON_EXTENSION;
 
             // create Image
-            URL url = IconUtils.class.getResource(sb.toString());
+            URL url = IconUtils.class.getResource(iconPath);
             Image icon = Toolkit.getDefaultToolkit().getImage(url);
 
             // store Image
@@ -68,22 +74,23 @@ public final class IconUtils {
     /**
      * The available icon sizes.
      *
-     * @author Cyrille Chopelet (http://keyboardplaying.org)
+     * @author Cyrille Chopelet (https://keyboardplaying.org)
      */
     protected enum IconSize {
 
         W_16("16"), W_32("32"), W_48("48"), W_128("128"), W_256("256");
 
-        /** The identifier suffix that characterize a size. */
+        /**
+         * The identifier suffix that characterize a size.
+         */
         private String identifier;
 
         /**
          * Creates a new instance.
          *
-         * @param identifier
-         *            the identifier suffix that characterize a size
+         * @param identifier the identifier suffix that characterize a size
          */
-        private IconSize(String identifier) {
+        IconSize(String identifier) {
             this.identifier = identifier;
         }
 

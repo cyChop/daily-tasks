@@ -12,29 +12,31 @@
  */
 package org.keyboardplaying.dailytasks.ui.components;
 
-import java.awt.Component;
+import org.keyboardplaying.dailytasks.messages.MessageBundle;
+
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
-import javax.swing.JComboBox;
-import javax.swing.JList;
-
-import org.keyboardplaying.dailytasks.messages.MessageBundle;
-
 /**
  * A combo box to display all available locales.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public class LocaleComboBox extends JComboBox<Locale> {
 
-    /** Generated serial version UID. */
+    /**
+     * Generated serial version UID.
+     */
     private static final long serialVersionUID = 4050125723828264998L;
 
-    /** Creates a new instance displaying all available locales. */
+    /**
+     * Creates a new instance displaying all available locales.
+     */
     public LocaleComboBox() {
         this(MessageBundle.getAvailableLocales());
     }
@@ -42,8 +44,7 @@ public class LocaleComboBox extends JComboBox<Locale> {
     /**
      * Creates a new instance.
      *
-     * @param locales
-     *            the locales to display
+     * @param locales the locales to display
      */
     protected LocaleComboBox(List<Locale> locales) {
         super(makeStoreFromList(locales));
@@ -53,19 +54,12 @@ public class LocaleComboBox extends JComboBox<Locale> {
     /**
      * Converts a list of locales into a sorted array for display.
      *
-     * @param locales
-     *            the list of locales to display
+     * @param locales the list of locales to display
      * @return the store of the combo box
      */
     private static Locale[] makeStoreFromList(List<Locale> locales) {
         List<Locale> clone = new ArrayList<>(locales);
-        Collections.sort(locales, new Comparator<Locale>() {
-
-            @Override
-            public int compare(Locale o1, Locale o2) {
-                return getLocaleDisplayName(o1).compareTo(getLocaleDisplayName(o2));
-            }
-        });
+        Collections.sort(locales, (o1, o2) -> getLocaleDisplayName(o1).compareTo(getLocaleDisplayName(o2)));
 
         return clone.toArray(new Locale[clone.size()]);
     }
@@ -73,10 +67,8 @@ public class LocaleComboBox extends JComboBox<Locale> {
     /**
      * Returns the display name of the locale in that same locale, with an upper-case first character.
      *
-     * @param locale
-     *            the locale to display
+     * @param locale the locale to display
      * @return the localized display name of the locale
-     *
      * @see Locale#getDisplayName()
      */
     private static String getLocaleDisplayName(Locale locale) {
@@ -89,11 +81,13 @@ public class LocaleComboBox extends JComboBox<Locale> {
     /**
      * A renderer to display Locales using {@link LocaleComboBox#getLocaleDisplayName(Locale)}.
      *
-     * @author Cyrille Chopelet (http://keyboardplaying.org)
+     * @author Cyrille Chopelet (https://keyboardplaying.org)
      */
     private class LocaleComboBoxRenderer extends PreferencesComboBoxRenderer<Locale> {
 
-        /** Generated serial version UID. */
+        /**
+         * Generated serial version UID.
+         */
         private static final long serialVersionUID = 5895576360090476049L;
 
         /*
@@ -104,7 +98,7 @@ public class LocaleComboBox extends JComboBox<Locale> {
          */
         @Override
         public Component getListCellRendererComponent(JList<? extends Locale> list, Locale locale, int index,
-                boolean isSelected, boolean cellHasFocus) {
+                                                      boolean isSelected, boolean cellHasFocus) {
             /* Set the colors */
             if (isSelected) {
                 setBackground(list.getSelectionBackground());

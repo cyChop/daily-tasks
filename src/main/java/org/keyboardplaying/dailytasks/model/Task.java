@@ -22,30 +22,38 @@ import java.io.Serializable;
  * The task contains an integer identifier generated upon instantiation. This ID will be used to ensure equality.
  * <strong>Warning:</strong> The IDs will not be serialised and will be valid only for current session.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public class Task implements Serializable {
 
-    /** Generated serial version UID. */
+    /**
+     * Generated serial version UID.
+     */
     private static final long serialVersionUID = 6770842266859911969L;
 
-    /** A sequence used to generate a unique ID for each task. */
+    /**
+     * A sequence used to generate a unique ID for each task.
+     */
     private static int sequence = 0;
 
-    /** The task's identifier. */
+    /**
+     * The task's identifier.
+     */
     private transient int id = ++sequence;
-    /** The task's label and identifier. */
+    /**
+     * The task's label and identifier.
+     */
     private String todo;
-    /** The task state (finished or not). */
+    /**
+     * The task state (finished or not).
+     */
     private boolean done;
 
     /**
      * Creates a new instance.
      *
-     * @param todo
-     *            the task's label
-     * @param done
-     *            {@code true} if the task is finished, {@code false} otherwise
+     * @param todo the task's label
+     * @param done {@code true} if the task is finished, {@code false} otherwise
      */
     public Task(String todo, boolean done) {
         this.todo = todo;
@@ -55,8 +63,7 @@ public class Task implements Serializable {
     /**
      * Creates a new unfinished task.
      *
-     * @param todo
-     *            the task's label
+     * @param todo the task's label
      */
     public Task(String todo) {
         this(todo, false);
@@ -65,8 +72,7 @@ public class Task implements Serializable {
     /**
      * Sets the task's label.
      *
-     * @param todo
-     *            the task's label
+     * @param todo the task's label
      */
     protected void setTodo(String todo) {
         this.todo = todo;
@@ -102,8 +108,7 @@ public class Task implements Serializable {
     /**
      * Sets the task's state.
      *
-     * @param done
-     *            {@code true} if the task is finished, {@code false} otherwise
+     * @param done {@code true} if the task is finished, {@code false} otherwise
      */
     public void setDone(boolean done) {
         this.done = done;
@@ -142,12 +147,9 @@ public class Task implements Serializable {
     /**
      * Invoked when deserializing an instance.
      *
-     * @param in
-     *            the deserializer
-     * @throws ClassNotFoundException
-     *             when the class is not found
-     * @throws IOException
-     *             when an exception occurs
+     * @param in the deserializer
+     * @throws ClassNotFoundException when the class is not found
+     * @throws IOException            when an exception occurs
      */
     private void readObject(ObjectInputStream in) throws ClassNotFoundException, IOException {
         // default deserialization

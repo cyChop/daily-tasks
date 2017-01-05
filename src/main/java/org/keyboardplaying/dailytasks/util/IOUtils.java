@@ -18,19 +18,20 @@ import java.io.IOException;
 /**
  * A reimplementation of some methods from commons-io.IOUtils
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public final class IOUtils {
 
-    /** Private constructor for utility class. */
+    /**
+     * Private constructor for utility class.
+     */
     private IOUtils() {
     }
 
     /**
      * Unconditionnally closes a {@link Closeable}.
      *
-     * @param closeable
-     *            the object to close, may be {@code null} or already closed
+     * @param closeable the object to close, may be {@code null} or already closed
      */
     public static void closeQuietly(Closeable closeable) {
         try {

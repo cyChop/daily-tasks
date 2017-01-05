@@ -12,43 +12,46 @@
  */
 package org.keyboardplaying.dailytasks.ui.components;
 
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-
 import org.keyboardplaying.dailytasks.ui.util.FontUtils.FontAwesomeGlyph;
 import org.keyboardplaying.dailytasks.ui.window.WindowGetter;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * The application toolbar.
  * <p/>
  * It comes with a set of buttons that blend on the background and display as simple glyphs from FontAwesome.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public class ApplicationToolbar extends JPanel {
 
-    /** Generated serial version UID. */
+    /**
+     * Generated serial version UID.
+     */
     private static final long serialVersionUID = 2257174746245010479L;
 
-    /** The width of the empty border to apply around the toolbar. */
+    /**
+     * The width of the empty border to apply around the toolbar.
+     */
     private static final int BORDER_WIDTH = 2;
-    /** The margin to apply at the top of each button. */
+    /**
+     * The margin to apply at the top of each button.
+     */
     private static final int BTN_TOP_MARGIN = 5;
 
-    /** The object in charge of getting the required windows on demand. */
+    /**
+     * The object in charge of getting the required windows on demand.
+     */
     private WindowGetter getter;
 
     /**
      * Creates a new instance and initializes layout and content.
      *
-     * @param getter
-     *            the object in charge of getting the windows on demand
+     * @param getter the object in charge of getting the windows on demand
      */
     // @see #initPanel()
     public ApplicationToolbar(WindowGetter getter) {
@@ -57,7 +60,9 @@ public class ApplicationToolbar extends JPanel {
         initPanel();
     }
 
-    /** Initializes the toolbar layout and components. */
+    /**
+     * Initializes the toolbar layout and components.
+     */
     private void initPanel() {
         /* Initialize layout. */
         this.setBorder(BorderFactory.createEmptyBorder(BORDER_WIDTH, BORDER_WIDTH, BORDER_WIDTH, BORDER_WIDTH));
@@ -68,22 +73,10 @@ public class ApplicationToolbar extends JPanel {
         Insets btnMargins = new Insets(BTN_TOP_MARGIN, 0, 0, 0);
 
         // Settings
-        addButtonToPanel(FontAwesomeGlyph.WRENCH, new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                getter.getPreferencesWindow().setVisible(true);
-            }
-        }, btnMargins);
+        addButtonToPanel(FontAwesomeGlyph.WRENCH, e -> getter.getPreferencesWindow().setVisible(true), btnMargins);
 
         // About
-        addButtonToPanel(FontAwesomeGlyph.QUESTION_SIGN, new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                getter.getAboutWindow().setVisible(true);
-            }
-        }, btnMargins);
+        addButtonToPanel(FontAwesomeGlyph.QUESTION_SIGN, e -> getter.getAboutWindow().setVisible(true), btnMargins);
     }
 
     /**
@@ -91,12 +84,9 @@ public class ApplicationToolbar extends JPanel {
      * <p/>
      * The button uses a FontAwesome glyph as text. The button is transparent in order to blend on the background.
      *
-     * @param glyph
-     *            the glyph to display on this button
-     * @param listener
-     *            the action to be activated on button click; {@code null} if none
-     * @param btnMargins
-     *            the margins to use when adding the buttons
+     * @param glyph      the glyph to display on this button
+     * @param listener   the action to be activated on button click; {@code null} if none
+     * @param btnMargins the margins to use when adding the buttons
      */
     private void addButtonToPanel(FontAwesomeGlyph glyph, ActionListener listener, Insets btnMargins) {
         JButton btn = new GlyphButton(glyph);

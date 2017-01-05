@@ -12,25 +12,24 @@
  */
 package org.keyboardplaying.dailytasks;
 
-import java.util.prefs.BackingStoreException;
-
 import org.keyboardplaying.dailytasks.core.managers.PreferencesManager;
 import org.keyboardplaying.dailytasks.ui.theme.Theme;
+
+import java.util.prefs.BackingStoreException;
 
 /**
  * This class is not properly speaking a unit test class. It is a utility to run the {@link Launcher} program with a
  * local properties file from within your IDE, without having to perform a full package.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public class LauncherTestUtils {
 
     /**
      * Runs the application.
-     * 
-     * @param args
-     *            optional arguments, unused
-     * @throws BackingStoreException
+     *
+     * @param args optional arguments, unused
+     * @throws BackingStoreException if an error occurs while accessing the backing store
      */
     public static void main(String[] args) throws BackingStoreException {
         PreferencesManager.clear();

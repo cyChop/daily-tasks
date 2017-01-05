@@ -12,19 +12,21 @@
  */
 package org.keyboardplaying.dailytasks.util;
 
+import org.keyboardplaying.dailytasks.exception.UnexpectedException;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import org.keyboardplaying.dailytasks.exception.UnexpectedException;
 
 /**
  * A utility class for {@link Exception} handling.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public final class ExceptionUtils {
 
-    /** Private constructor for utility class. */
+    /**
+     * Private constructor for utility class.
+     */
     private ExceptionUtils() {
     }
 
@@ -33,12 +35,9 @@ public final class ExceptionUtils {
      * <p/>
      * The stack trace is logged and preserved.
      *
-     * @param source
-     *            the object receiving the unexpected error
-     * @param throwable
-     *            the unexpected error
-     * @throws UnexpectedException
-     *             the exception, wrapping {@code throwable}
+     * @param source    the object receiving the unexpected error
+     * @param throwable the unexpected error
+     * @throws UnexpectedException the exception, wrapping {@code throwable}
      */
     public static void handleUnexpectedException(Object source, Throwable throwable) {
         handleUnexpectedException(source.getClass(), throwable);
@@ -49,12 +48,9 @@ public final class ExceptionUtils {
      * <p/>
      * The stack trace is logged and preserved.
      *
-     * @param clazz
-     *            the class receiving the unexpected error
-     * @param throwable
-     *            the unexpected error
-     * @throws UnexpectedException
-     *             the exception, wrapping {@code throwable}
+     * @param clazz     the class receiving the unexpected error
+     * @param throwable the unexpected error
+     * @throws UnexpectedException the exception, wrapping {@code throwable}
      */
     private static void handleUnexpectedException(Class<?> clazz, Throwable throwable) {
         UnexpectedException e = new UnexpectedException(throwable);

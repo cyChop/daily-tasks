@@ -20,19 +20,14 @@ import org.keyboardplaying.dailytasks.ui.util.WindowUtils;
  * An implementation of the {@link TaskStateListener} which closes the application once all the tasks have been
  * completed.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public class TaskCompletionListener extends TaskStateListener {
-
-    /** Creates a new instance. */
-    public TaskCompletionListener() {
-    }
 
     /**
      * Closes the application if all tasks have been completed.
      *
-     * @param task
-     *            {@inheritDoc}
+     * @param task {@inheritDoc}
      */
     @Override
     protected void processTaskAfterStateSaved(Task task) {

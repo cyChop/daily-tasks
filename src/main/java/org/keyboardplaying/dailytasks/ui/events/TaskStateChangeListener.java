@@ -15,7 +15,7 @@ package org.keyboardplaying.dailytasks.ui.events;
 /**
  * An interface for when task's state changes.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public interface TaskStateChangeListener {
 
@@ -23,10 +23,8 @@ public interface TaskStateChangeListener {
      * This method is called in the {@link org.keyboardplaying.dailytasks.ui.components.TaskCheckBox} when the box is
      * checked or unchecked.
      *
-     * @param taskId
-     *            the ID of the updated task
-     * @param done
-     *            the new state of the task
+     * @param taskId the ID of the updated task
+     * @param done   the new state of the task
      */
     void updateTaskState(int taskId, boolean done);
 }

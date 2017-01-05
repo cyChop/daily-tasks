@@ -12,63 +12,85 @@
  */
 package org.keyboardplaying.dailytasks.ui.util;
 
-import java.awt.Font;
-import java.awt.FontFormatException;
+import org.keyboardplaying.dailytasks.util.ExceptionUtils;
+
+import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
-
-import org.keyboardplaying.dailytasks.util.ExceptionUtils;
 
 /**
  * A utility class to retrieve fonts.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public final class FontUtils {
 
-    /** The version of FontAwesome we use. */
+    /**
+     * The version of FontAwesome we use.
+     */
     public static final String FONT_AWESOME_VERSION = "3.2.1";
 
-    /** The relative path to the directory containing all fonts. */
+    /**
+     * The relative path to the directory containing all fonts.
+     */
     private static final String FONTS_RELATIVE_PATH = "../fonts/";
 
-    /** The name of the FontAwesome OTF file. */
+    /**
+     * The name of the FontAwesome OTF file.
+     */
     // Using the OTF (CCF internally) file should ensure maximal compatibility across machines running Java 7
     private static final String FONT_AWESOME_OTF = "FontAwesome-" + FONT_AWESOME_VERSION + ".otf";
-    /** The name of the FontAwesome TTF file. */
+    /**
+     * The name of the FontAwesome TTF file.
+     */
     // TODO obsolete! TTF fallback for Sun Java 6
     private static final String FONT_AWESOME_TTF = "FontAwesome-" + FONT_AWESOME_VERSION + ".ttf";
-    /** The font size to apply when using the OTF file. */
+    /**
+     * The font size to apply when using the OTF file.
+     */
     private static final float FONT_SIZE_OTF = 8F;
-    /** The font size to apply when using the TTF file. */
+    /**
+     * The font size to apply when using the TTF file.
+     */
     private static final float FONT_SIZE_TTF = 14F;
 
-    /** The iconic font used for glyphs. */
+    /**
+     * The iconic font used for glyphs.
+     */
     private static Font fontAwesome = null;
 
     /**
      * A list of FontAwesome glyphs which can be used in the application.
      *
-     * @author Cyrille Chopelet (http://keyboardplaying.org)
+     * @author Cyrille Chopelet (https://keyboardplaying.org)
      */
-    public static enum FontAwesomeGlyph {
+    public enum FontAwesomeGlyph {
 
-        /** A pushpin icon. */
-        PUSHPIN('\uf08d'), /** A wrench icon. */
-        WRENCH('\uf0ad'), /** A question mark in a round sign. */
-        QUESTION_SIGN('\uf059'), /** A plus icon. */
+        /**
+         * A pushpin icon.
+         */
+        PUSHPIN('\uf08d'), /**
+         * A wrench icon.
+         */
+        WRENCH('\uf0ad'), /**
+         * A question mark in a round sign.
+         */
+        QUESTION_SIGN('\uf059'), /**
+         * A plus icon.
+         */
         PLUS('\uf067');
 
-        /** The character corresponding to this glyph in Font Awesome's font. */
+        /**
+         * The character corresponding to this glyph in Font Awesome's font.
+         */
         private char character;
 
         /**
          * Creates a new instance.
          *
-         * @param character
-         *            the character corresponding to this glyph
+         * @param character the character corresponding to this glyph
          */
-        private FontAwesomeGlyph(char character) {
+        FontAwesomeGlyph(char character) {
             this.character = character;
         }
 
@@ -92,7 +114,9 @@ public final class FontUtils {
         }
     }
 
-    /** Private constructor for utility class. */
+    /**
+     * Private constructor for utility class.
+     */
     private FontUtils() {
     }
 
@@ -138,14 +162,9 @@ public final class FontUtils {
     private static void createFontAwesomeTTF() {
         try {
             createFontAwesome(FONT_AWESOME_TTF, FONT_SIZE_TTF);
-        } catch (FontFormatException e) {
-            // TODO TTF on Linux's Sun Java 6?
+        } catch (FontFormatException | IOException e) {
             // If yes, should provide a post script version, or a
             // fallback to graphical icons
-            ExceptionUtils.handleUnexpectedException(FontUtils.class, e);
-        } catch (IOException e) {
-            // font is inside the jar, this should not happen
-            // ugly logging just in case
             ExceptionUtils.handleUnexpectedException(FontUtils.class, e);
         }
     }
@@ -153,14 +172,10 @@ public final class FontUtils {
     /**
      * Creates the iconic font for glyphs.
      *
-     * @param fontFile
-     *            the font file to use
-     * @param size
-     *            the size magnification to use (depends on the file)
-     * @throws FontFormatException
-     *             if the fontStream data does not contain the required font tables for the specified format
-     * @throws IOException
-     *             if the font file cannot be read
+     * @param fontFile the font file to use
+     * @param size     the size magnification to use (depends on the file)
+     * @throws FontFormatException if the fontStream data does not contain the required font tables for the specified format
+     * @throws IOException         if the font file cannot be read
      */
     private static void createFontAwesome(String fontFile, float size) throws FontFormatException, IOException {
         InputStream fontStream = FontUtils.class.getResourceAsStream(FONTS_RELATIVE_PATH + fontFile);

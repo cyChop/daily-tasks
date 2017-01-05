@@ -20,19 +20,20 @@ import org.keyboardplaying.dailytasks.core.events.ApplicationWindowGetter;
  * <p/>
  * This class is a mindless launcher which will instantiate and start the application.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public final class Launcher {
 
-    /** Private constructor for utility class. */
+    /**
+     * Private constructor for utility class.
+     */
     private Launcher() {
     }
 
     /**
      * Main method for the application.
      *
-     * @param args
-     *            optional arguments; first argument can be used to pass the path to the properties file
+     * @param args optional arguments; first argument can be used to pass the path to the properties file
      */
     public static void main(String... args) {
         Application app = new Application();

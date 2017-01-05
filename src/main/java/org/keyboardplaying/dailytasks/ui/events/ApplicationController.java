@@ -15,13 +15,17 @@ package org.keyboardplaying.dailytasks.ui.events;
 /**
  * This interface should provide control over the whole application for some advanced behaviors.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public interface ApplicationController {
 
-    /** Closes all windows and restart the application. */
+    /**
+     * Closes all windows and restart the application.
+     */
     void restart();
 
-    /** Closes all windows and ends the process. */
+    /**
+     * Closes all windows and ends the process.
+     */
     void terminate();
 }

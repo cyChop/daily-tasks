@@ -12,30 +12,29 @@
  */
 package org.keyboardplaying.dailytasks.ui.components;
 
-import java.awt.Color;
-
-import javax.swing.JButton;
-import javax.swing.UIManager;
-
 import org.keyboardplaying.dailytasks.ui.util.FontUtils;
 import org.keyboardplaying.dailytasks.ui.util.FontUtils.FontAwesomeGlyph;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * A button displaying only a glyph from the Font Awesome iconic font. This button is designed to display this icon the
  * same way as standard text and blend into its background.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public class GlyphButton extends JButton {
 
-    /** Generated serial version UID. */
+    /**
+     * Generated serial version UID.
+     */
     private static final long serialVersionUID = 6819853527671593836L;
 
     /**
      * Creates a new instance.
      *
-     * @param glyph
-     *            the glyph to display
+     * @param glyph the glyph to display
      */
     public GlyphButton(FontAwesomeGlyph glyph) {
         super(glyph.toString());

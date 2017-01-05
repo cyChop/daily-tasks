@@ -12,31 +12,28 @@
  */
 package org.keyboardplaying.dailytasks.core.events;
 
-import java.awt.Window;
-
 import org.keyboardplaying.dailytasks.core.managers.TaskManager;
 import org.keyboardplaying.dailytasks.model.Task;
 import org.keyboardplaying.dailytasks.ui.events.TaskStateChangeListener;
 
+import java.awt.*;
+
 /**
  * A class to persist the tasks' states and provide appropriate processing on their state changes.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public abstract class TaskStateListener implements TaskStateChangeListener {
 
-    /** The window this listener controls. */
+    /**
+     * The window this listener controls.
+     */
     private Window mainWindow;
-
-    /** Creates a new instance. */
-    public TaskStateListener() {
-    }
 
     /**
      * Sets the window this listener controls.
      *
-     * @param mainWindow
-     *            the window this listener controls
+     * @param mainWindow the window this listener controls
      */
     public void setMainWindow(Window mainWindow) {
         this.mainWindow = mainWindow;
@@ -56,10 +53,8 @@ public abstract class TaskStateListener implements TaskStateChangeListener {
      * <p/>
      * After saving the task's state, an additional processing can be performed.
      *
-     * @param taskId
-     *            {@inheritDoc}
-     * @param done
-     *            {@inheritDoc}
+     * @param taskId {@inheritDoc}
+     * @param done   {@inheritDoc}
      */
     @Override
     public void updateTaskState(int taskId, boolean done) {
@@ -73,8 +68,7 @@ public abstract class TaskStateListener implements TaskStateChangeListener {
     /**
      * Implementations should provide additional processing on the task which was just updated after it has been saved.
      *
-     * @param task
-     *            the task which were just updated
+     * @param task the task which were just updated
      */
     protected abstract void processTaskAfterStateSaved(Task task);
 }

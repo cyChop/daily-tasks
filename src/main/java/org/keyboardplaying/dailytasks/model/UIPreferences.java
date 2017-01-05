@@ -12,33 +12,36 @@
  */
 package org.keyboardplaying.dailytasks.model;
 
-import java.util.Locale;
-
 import org.keyboardplaying.dailytasks.ui.theme.Theme;
+
+import java.util.Locale;
 
 /**
  * This model represents the UI preferences of the running application.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public class UIPreferences {
 
-    /** The locale used for message display. */
+    /**
+     * The locale used for message display.
+     */
     private Locale locale;
-    /** The UI theme. */
+    /**
+     * The UI theme.
+     */
     private Theme theme;
-    /** {@code true} to keep application on top of other windows. */
+    /**
+     * {@code true} to keep application on top of other windows.
+     */
     private boolean onTop;
 
     /**
      * Creates a new instance.
      *
-     * @param locale
-     *            the locale used for message display
-     * @param theme
-     *            the UI theme
-     * @param onTop
-     *            {@code true} to keep application on top of other windows
+     * @param locale the locale used for message display
+     * @param theme  the UI theme
+     * @param onTop  {@code true} to keep application on top of other windows
      */
     public UIPreferences(Locale locale, Theme theme, boolean onTop) {
         super();
@@ -59,8 +62,7 @@ public class UIPreferences {
     /**
      * Sets the locale to use for message display.
      *
-     * @param locale
-     *            the locale to use for message display
+     * @param locale the locale to use for message display
      */
     public void setLocale(Locale locale) {
         this.locale = locale;
@@ -78,8 +80,7 @@ public class UIPreferences {
     /**
      * Sets the UI theme.
      *
-     * @param theme
-     *            the UI theme
+     * @param theme the UI theme
      */
     public void setTheme(Theme theme) {
         this.theme = theme;
@@ -97,8 +98,7 @@ public class UIPreferences {
     /**
      * Specifies whether application should be on top of other windows.
      *
-     * @param onTop
-     *            {@code true} if application is to remain on top of other windows
+     * @param onTop {@code true} if application is to remain on top of other windows
      */
     public void setAlwaysOnTop(boolean onTop) {
         this.onTop = onTop;

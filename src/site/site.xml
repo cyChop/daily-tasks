@@ -14,33 +14,33 @@
 
 <project name="Daily Tasks">
 
-	<bannerLeft>
-		<name>${project.name}</name>
-	</bannerLeft>
+  <bannerLeft>
+    <name>${project.name}</name>
+  </bannerLeft>
 
-	<skin>
-		<groupId>org.apache.maven.skins</groupId>
-		<artifactId>maven-fluido-skin</artifactId>
-		<version>1.3.0</version>
-	</skin>
+  <skin>
+    <groupId>org.apache.maven.skins</groupId>
+    <artifactId>maven-fluido-skin</artifactId>
+    <version>1.3.0</version>
+  </skin>
 
-	<custom>
-		<fluidoSkin>
-			<topBarEnabled>true</topBarEnabled>
-			<sideBarEnabled>true</sideBarEnabled>
-			<googleSearch>
-				<sitesearch>${project.url}</sitesearch>
-			</googleSearch>
-			<gitHub>
-				<projectId>cyChop/daily-tasks</projectId>
-				<ribbonOrientation>right</ribbonOrientation>
-				<ribbonColor>green</ribbonColor>
-			</gitHub>
-		</fluidoSkin>
-	</custom>
+  <custom>
+    <fluidoSkin>
+      <topBarEnabled>true</topBarEnabled>
+      <sideBarEnabled>true</sideBarEnabled>
+      <googleSearch>
+        <sitesearch>${project.url}</sitesearch>
+      </googleSearch>
+      <gitHub>
+        <projectId>cyChop/daily-tasks</projectId>
+        <ribbonOrientation>right</ribbonOrientation>
+        <ribbonColor>green</ribbonColor>
+      </gitHub>
+    </fluidoSkin>
+  </custom>
 
-	<body>
-		<menu ref="modules" />
-		<menu ref="reports" inherit="bottom" />
-	</body>
+  <body>
+    <menu ref="modules"/>
+    <menu ref="reports" inherit="bottom"/>
+  </body>
 </project>

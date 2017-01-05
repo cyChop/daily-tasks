@@ -12,34 +12,32 @@
  */
 package org.keyboardplaying.dailytasks.ui.panels;
 
-import java.awt.BorderLayout;
-
-import javax.swing.JPanel;
-
 import org.keyboardplaying.dailytasks.model.TaskSet;
 import org.keyboardplaying.dailytasks.ui.components.ApplicationToolbar;
 import org.keyboardplaying.dailytasks.ui.events.TaskStateChangeListener;
 import org.keyboardplaying.dailytasks.ui.window.WindowGetter;
 
+import javax.swing.*;
+import java.awt.*;
+
 /**
  * The panel displaying both the tasks and application toolbar.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public class MainPanel extends JPanel {
 
-    /** Generated serial version UID. */
+    /**
+     * Generated serial version UID.
+     */
     private static final long serialVersionUID = -8114051125473167781L;
 
     /**
      * Creates a new instance.
      *
-     * @param getter
-     *            the object in charge of getting the windows on demand
-     * @param tasks
-     *            the tasks to display
-     * @param taskStateListener
-     *            the object which listens to the tasks' state
+     * @param getter            the object in charge of getting the windows on demand
+     * @param tasks             the tasks to display
+     * @param taskStateListener the object which listens to the tasks' state
      */
     public MainPanel(WindowGetter getter, TaskSet tasks, TaskStateChangeListener taskStateListener) {
         super(new BorderLayout());

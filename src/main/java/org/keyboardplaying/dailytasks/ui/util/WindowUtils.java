@@ -12,29 +12,27 @@
  */
 package org.keyboardplaying.dailytasks.ui.util;
 
-import java.awt.Frame;
-import java.awt.Toolkit;
-import java.awt.Window;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.WindowEvent;
-
-import javax.swing.JFrame;
 
 /**
  * Provides utilities to handle windows.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public final class WindowUtils {
 
-    /** Private constructor for utility class. */
+    /**
+     * Private constructor for utility class.
+     */
     private WindowUtils() {
     }
 
     /**
      * Emulates the click on the 'close' button of the supplied window.
      *
-     * @param window
-     *            the window to close
+     * @param window the window to close
      */
     public static void triggerClosingEvent(Window window) {
         WindowEvent wev = new WindowEvent(window, WindowEvent.WINDOW_CLOSING);
@@ -44,8 +42,7 @@ public final class WindowUtils {
     /**
      * Searches for a visible window with the supplied name.
      *
-     * @param name
-     *            the name of the window to look for
+     * @param name the name of the window to look for
      * @return the first visible window with the supplied name, or {@code null} if none
      */
     public static JFrame getVisibleWindowByName(String name) {

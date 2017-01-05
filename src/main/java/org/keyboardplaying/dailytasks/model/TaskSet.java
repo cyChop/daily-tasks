@@ -12,12 +12,12 @@
  */
 package org.keyboardplaying.dailytasks.model;
 
+import org.keyboardplaying.dailytasks.exception.TaskNotFoundException;
+
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
-
-import org.keyboardplaying.dailytasks.exception.TaskNotFoundException;
 
 /**
  * A set of tasks.
@@ -29,27 +29,26 @@ import org.keyboardplaying.dailytasks.exception.TaskNotFoundException;
  * <li>Composition was retained rather than inheritance to allow for future reordering of tasks.</li>
  * </ul>
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public class TaskSet implements Serializable, Iterable<Task> {
 
-    /** Generated serial version UID. */
+    /**
+     * Generated serial version UID.
+     */
     private static final long serialVersionUID = -1091318559849096033L;
 
-    /** The tasks of this instance. */
+    /**
+     * The tasks of this instance.
+     */
     private Set<Task> tasks = new LinkedHashSet<>();
-
-    /** Creates a new instance. */
-    public TaskSet() {
-    }
 
     /**
      * Adds a task to the collection.
      * <p/>
      * The call to this method will be ignored if the supplied argument is {@code null}.
      *
-     * @param task
-     *            the task to add to the set
+     * @param task the task to add to the set
      */
     public void addTask(Task task) {
         if (task != null) {
@@ -60,12 +59,9 @@ public class TaskSet implements Serializable, Iterable<Task> {
     /**
      * Updates the {@link Task#isDone()} value of a collection in the set.
      *
-     * @param task
-     *            the task to update
-     * @param done
-     *            the state to apply
-     * @throws TaskNotFoundException
-     *             when the supplied task ID could not be found in the set
+     * @param task the task to update
+     * @param done the state to apply
+     * @throws TaskNotFoundException when the supplied task ID could not be found in the set
      */
     public void updateTaskState(Task task, boolean done) throws TaskNotFoundException {
         updateTaskState(task.getId(), done);
@@ -74,14 +70,10 @@ public class TaskSet implements Serializable, Iterable<Task> {
     /**
      * Updates the {@link Task#isDone()} value of a collection in the set.
      *
-     * @param taskId
-     *            the id of the task to update
-     * @param done
-     *            the state to apply
-     *
+     * @param taskId the id of the task to update
+     * @param done   the state to apply
      * @return the updated {@link Task}
-     * @throws TaskNotFoundException
-     *             when the supplied task ID could not be found in the set
+     * @throws TaskNotFoundException when the supplied task ID could not be found in the set
      */
     public Task updateTaskState(int taskId, boolean done) throws TaskNotFoundException {
         Task result = null;
@@ -110,10 +102,8 @@ public class TaskSet implements Serializable, Iterable<Task> {
      * <p/>
      * The new value for the state will be the one of the passed {@link Task}.
      *
-     * @param task
-     *            the task to update
-     * @throws TaskNotFoundException
-     *             when the supplied task ID could not be found in the set
+     * @param task the task to update
+     * @throws TaskNotFoundException when the supplied task ID could not be found in the set
      */
     public void updateTaskState(Task task) throws TaskNotFoundException {
         updateTaskState(task.getId(), task.isDone());
@@ -122,8 +112,7 @@ public class TaskSet implements Serializable, Iterable<Task> {
     /**
      * Removes a {@link Task} from the set.
      *
-     * @param task
-     *            the task to remove
+     * @param task the task to remove
      */
     public void removeTask(Task task) {
         tasks.remove(task);

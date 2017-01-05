@@ -12,31 +12,39 @@
  */
 package org.keyboardplaying.dailytasks.messages;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import org.junit.Test;
+import org.keyboardplaying.dailytasks.ui.theme.Theme;
 
 import java.util.List;
 import java.util.Locale;
 
-import org.junit.Test;
-import org.keyboardplaying.dailytasks.ui.theme.Theme;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Test class for {@link MessageBundle}.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public class MessageBundleTest {
 
-    /** The title field, used for locale testing. */
+    /**
+     * The title field, used for locale testing.
+     */
     private static final String TITLE = "app.title";
-    /** French value for the title. */
+    /**
+     * French value for the title.
+     */
     private static final String TITLE_FR = "Tâches";
-    /** English value for the title. */
+    /**
+     * English value for the title.
+     */
     private static final String TITLE_EN = "Tasks";
 
-    /** Tests the switching of locale with or without a country specified. */
+    /**
+     * Tests the switching of locale with or without a country specified.
+     */
     @Test
     public void testLocaleSwitching() {
         // Do not assert content on this level, you cannot know which locale the testing system has loaded.
@@ -66,7 +74,9 @@ public class MessageBundleTest {
         assertEquals(TITLE_EN, MessageBundle.get(TITLE));
     }
 
-    /** Tests different behaviours of messages with arguments. */
+    /**
+     * Tests different behaviours of messages with arguments.
+     */
     @Test
     public void testMessageWithArguments() {
         // the locale has been set to EN in the previous test, keep it
@@ -74,7 +84,7 @@ public class MessageBundleTest {
         assertEquals(TITLE_EN, MessageBundle.get(TITLE, args));
 
         // passing non-required arguments should not cause an error
-        args = new Object[] { "arg1" };
+        args = new Object[]{"arg1"};
         assertEquals(TITLE_EN, MessageBundle.get(TITLE, args));
 
         // now with actual formatting
@@ -93,14 +103,18 @@ public class MessageBundleTest {
         assertEquals(key, MessageBundle.get(key, "useless additional argument"));
     }
 
-    /** Tests the getting of a theme's name. */
+    /**
+     * Tests the getting of a theme's name.
+     */
     @Test
     public void testThemeNameGetting() {
         MessageBundle.setLocale(new Locale("en"));
         assertEquals("Dark", MessageBundle.get(Theme.DARK));
     }
 
-    /** Tests the listing of available locales. */
+    /**
+     * Tests the listing of available locales.
+     */
     @Test
     public void testAvailableLocales() {
         List<Locale> locales = MessageBundle.getAvailableLocales();
@@ -109,7 +123,9 @@ public class MessageBundleTest {
         assertTrue(locales.contains(new Locale("en")));
     }
 
-    /** Tests the closest locale. */
+    /**
+     * Tests the closest locale.
+     */
     @Test
     public void testClosestApplicableLocale() {
         Locale frLocale = new Locale("fr");

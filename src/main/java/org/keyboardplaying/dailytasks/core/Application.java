@@ -12,9 +12,6 @@
  */
 package org.keyboardplaying.dailytasks.core;
 
-import javax.swing.JFrame;
-import javax.swing.WindowConstants;
-
 import org.keyboardplaying.dailytasks.core.events.ApplicationClosingListener;
 import org.keyboardplaying.dailytasks.core.managers.PreferencesManager;
 import org.keyboardplaying.dailytasks.messages.MessageBundle;
@@ -24,34 +21,34 @@ import org.keyboardplaying.dailytasks.ui.theme.ThemeManager;
 import org.keyboardplaying.dailytasks.ui.util.WindowUtils;
 import org.keyboardplaying.dailytasks.ui.window.WindowGetter;
 
+import javax.swing.*;
+
 /**
  * The application class.
  * <p/>
  * This class is the main controller for the windows. It is not logic-rich though.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public class Application implements ApplicationController {
 
-    /** The object in charge of creating the windows on demand. */
+    /**
+     * The object in charge of creating the windows on demand.
+     */
     private WindowGetter getter;
-
-    /** Creates a new instance. */
-    public Application() {
-        super();
-    }
 
     /**
      * Sets the window getter.
      *
-     * @param getter
-     *            the object in charge of retrieving the window
+     * @param getter the object in charge of retrieving the window
      */
     public void setWindowGetter(WindowGetter getter) {
         this.getter = getter;
     }
 
-    /** Applies the UI preferences and starts the application. */
+    /**
+     * Applies the UI preferences and starts the application.
+     */
     public void start() {
         /* Load the application settings. */
         UIPreferences prefs = PreferencesManager.getUIPreferences();

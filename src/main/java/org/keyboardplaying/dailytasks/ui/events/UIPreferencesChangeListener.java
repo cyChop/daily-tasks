@@ -17,15 +17,14 @@ import org.keyboardplaying.dailytasks.model.UIPreferences;
 /**
  * This interface defines a listener which will be called upon when UI preferences change.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public interface UIPreferencesChangeListener {
 
     /**
      * Called when UI preferences change. Implementations of this method should persist the UI preferences.
      *
-     * @param prefs
-     *            the new values for the UI preferences
+     * @param prefs the new values for the UI preferences
      */
     void saveUIPreferences(UIPreferences prefs);
 }

@@ -12,15 +12,6 @@
  */
 package org.keyboardplaying.dailytasks.core;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
-
-import java.util.Iterator;
-import java.util.Locale;
-import java.util.prefs.BackingStoreException;
-
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -34,28 +25,43 @@ import org.keyboardplaying.dailytasks.model.TaskSet;
 import org.keyboardplaying.dailytasks.model.UIPreferences;
 import org.keyboardplaying.dailytasks.ui.theme.Theme;
 
+import java.util.Iterator;
+import java.util.Locale;
+import java.util.prefs.BackingStoreException;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+
 /**
  * Tests the {@link PreferencesManager} class.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 @SuppressWarnings("javadoc")
 @FixMethodOrder(MethodSorters.DEFAULT)
 public class PreferencesManagerTest {
 
-    /** Clears the whole preferences once testing is done. */
+    /**
+     * Clears the whole preferences once testing is done.
+     */
     @AfterClass
     public static void staticClean() throws BackingStoreException {
         PreferencesManager.clear();
     }
 
-    /** Clears the whole preferences set before each test. */
+    /**
+     * Clears the whole preferences set before each test.
+     */
     @Before
     public void clean() throws BackingStoreException {
         staticClean();
     }
 
-    /** Tests the locale setting. */
+    /**
+     * Tests the locale setting.
+     */
     @Test
     public void testLocale() {
         // Test default value
@@ -75,7 +81,9 @@ public class PreferencesManagerTest {
         assertEquals(new Locale("en"), PreferencesManager.getLocale());
     }
 
-    /** Tests the theme setting. */
+    /**
+     * Tests the theme setting.
+     */
     @Test
     public void testTheme() {
         // Test default value
@@ -86,7 +94,9 @@ public class PreferencesManagerTest {
         assertSame(Theme.DARK, PreferencesManager.getTheme());
     }
 
-    /** Tests the on top setting. */
+    /**
+     * Tests the on top setting.
+     */
     @Test
     public void testOnTop() {
         // Test default value
@@ -118,7 +128,9 @@ public class PreferencesManagerTest {
         assertFalse(PreferencesManager.isAlwaysOnTop());
     }
 
-    /** Tests the tasks */
+    /**
+     * Tests the tasks
+     */
     @Test
     public void testTasks() {
         // Test default
@@ -157,9 +169,7 @@ public class PreferencesManagerTest {
     /**
      * Asserts a {@link TaskSet} is the default task set.
      *
-     * @param tasks
-     *            the task set to test
-     *
+     * @param tasks the task set to test
      * @see TaskManager#getDefaultTaskSet()
      */
     private static void assertDefaultTaskSet(TaskSet tasks) {

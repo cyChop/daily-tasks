@@ -12,12 +12,11 @@
  */
 package org.keyboardplaying.dailytasks.ui.window;
 
-import java.awt.Container;
-
-import javax.swing.JFrame;
-
 import org.keyboardplaying.dailytasks.messages.MessageBundle;
 import org.keyboardplaying.dailytasks.ui.util.IconUtils;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * A standard window for all the application's screen.
@@ -25,24 +24,22 @@ import org.keyboardplaying.dailytasks.ui.util.IconUtils;
  * The constructor requires a key for the title in the message bundle, a unique name for this window and the content
  * pane.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public class ApplicationWindow extends JFrame {
 
-    /** Generated serial version UID. */
+    /**
+     * Generated serial version UID.
+     */
     private static final long serialVersionUID = -2522196280489071421L;
 
     /**
      * Creates a new instance.
      *
-     * @param titleKey
-     *            the key for this window's title in the {@link MessageBundle}
-     * @param windowName
-     *            the name of the window
-     * @param contentPane
-     *            the window's content
-     * @param alwaysOnTop
-     *            {@code true} if window should always remain on top of other windows
+     * @param titleKey    the key for this window's title in the {@link MessageBundle}
+     * @param windowName  the name of the window
+     * @param contentPane the window's content
+     * @param alwaysOnTop {@code true} if window should always remain on top of other windows
      */
     public ApplicationWindow(String titleKey, String windowName, Container contentPane, boolean alwaysOnTop) {
         /* Title and icon. */

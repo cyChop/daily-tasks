@@ -12,14 +12,13 @@
  */
 package org.keyboardplaying.dailytasks.core.events;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
-import javax.swing.JOptionPane;
-
 import org.keyboardplaying.dailytasks.core.managers.TaskManager;
 import org.keyboardplaying.dailytasks.messages.MessageBundle;
 import org.keyboardplaying.dailytasks.ui.events.ApplicationController;
+
+import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  * This {@link WindowAdapter} applies to the application's {@link org.keyboardplaying.dailytasks.ui.panels.MainPanel}.
@@ -31,18 +30,19 @@ import org.keyboardplaying.dailytasks.ui.events.ApplicationController;
  * <li>When the main window is closed, the program is terminated and any other window open is closed along with it.</li>
  * </ul>
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public class ApplicationClosingListener extends WindowAdapter {
 
-    /** The application controller. */
+    /**
+     * The application controller.
+     */
     private ApplicationController appController;
 
     /**
      * Creates a new instance.
      *
-     * @param controller
-     *            an application controller
+     * @param controller an application controller
      */
     public ApplicationClosingListener(ApplicationController controller) {
         this.appController = controller;
@@ -56,8 +56,7 @@ public class ApplicationClosingListener extends WindowAdapter {
      * <p/>
      * If other windows were left open, they will be closed.
      *
-     * @param e
-     *            {@inheritDoc}
+     * @param e {@inheritDoc}
      */
     @Override
     public void windowClosing(WindowEvent e) {
@@ -83,8 +82,7 @@ public class ApplicationClosingListener extends WindowAdapter {
     /**
      * Closes this window and any other open by terminating the program.
      *
-     * @param e
-     *            the closing window event
+     * @param e the closing window event
      */
     private void closeWindowAndTerminateProgram(WindowEvent e) {
         super.windowClosing(e);

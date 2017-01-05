@@ -19,15 +19,14 @@ import org.keyboardplaying.dailytasks.ui.events.UIPreferencesChangeListener;
 /**
  * Implementation of the {@link UIPreferencesChangeListener} using the {@link PreferencesManager}.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public class UIPreferencesSaver implements UIPreferencesChangeListener {
 
     /**
      * Saves the updated UI preferences using the {@link PreferencesManager}.
      *
-     * @param prefs
-     *            {@inheritDoc}
+     * @param prefs {@inheritDoc}
      */
     @Override
     public void saveUIPreferences(UIPreferences prefs) {

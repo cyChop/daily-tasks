@@ -21,11 +21,13 @@ package org.keyboardplaying.dailytasks.exception;
  * This object constructors oblige you to provide a {@link Throwable} because it always should be thrown in consequence
  * to another error, and the stack trace should be preserved.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public class UnexpectedException extends RuntimeException {
 
-    /** Generated serial version UID. */
+    /**
+     * Generated serial version UID.
+     */
     private static final long serialVersionUID = 4040061276950220381L;
 
     /**
@@ -34,10 +36,8 @@ public class UnexpectedException extends RuntimeException {
      * Note that the detail message associated with cause is <em>not</em> automatically incorporated in this runtime
      * exception's detail message.
      *
-     * @param message
-     *            the detail message (which is saved for later retrieval by the {@link #getMessage()} method)
-     * @param cause
-     *            the cause (which is saved for later retrieval by the {@link #getCause()} method)
+     * @param message the detail message (which is saved for later retrieval by the {@link #getMessage()} method)
+     * @param cause   the cause (which is saved for later retrieval by the {@link #getCause()} method)
      */
     public UnexpectedException(String message, Throwable cause) {
         super(message, cause);
@@ -48,8 +48,7 @@ public class UnexpectedException extends RuntimeException {
      * {@code (cause==null ? null : cause.toString())} (which typically contains the class and detail message of cause).
      * This constructor is useful for runtime exceptions that are little more than wrappers for other throwables.
      *
-     * @param cause
-     *            the cause (which is saved for later retrieval by the {@link #getCause()} method)
+     * @param cause the cause (which is saved for later retrieval by the {@link #getCause()} method)
      */
     public UnexpectedException(Throwable cause) {
         super(cause);

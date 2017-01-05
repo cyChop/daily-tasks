@@ -23,11 +23,13 @@ import java.io.ObjectOutput;
  * Thus, at each session restoration, the state is reset to its initial state. This means that, if you restart the
  * application daily, these tasks will have to be completed daily.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public class DailyTask extends Task implements Externalizable {
 
-    /** This constructor is for serialization only. Please don't use it. */
+    /**
+     * This constructor is for serialization only. Please don't use it.
+     */
     public DailyTask() {
         this(null);
     }
@@ -35,10 +37,8 @@ public class DailyTask extends Task implements Externalizable {
     /**
      * Creates a new instance.
      *
-     * @param todo
-     *            the task's label
-     * @param done
-     *            {@code true} if the task is finished, {@code false} otherwise
+     * @param todo the task's label
+     * @param done {@code true} if the task is finished, {@code false} otherwise
      */
     public DailyTask(String todo, boolean done) {
         super(todo, done);
@@ -47,8 +47,7 @@ public class DailyTask extends Task implements Externalizable {
     /**
      * Creates a new unfinished task.
      *
-     * @param todo
-     *            the task's label
+     * @param todo the task's label
      */
     public DailyTask(String todo) {
         super(todo);

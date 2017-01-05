@@ -12,19 +12,21 @@
  */
 package org.keyboardplaying.dailytasks.model;
 
+import org.junit.Test;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-
-import org.junit.Test;
 
 /**
  * Tests the {@link Task} class.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public class TaskTest {
 
-    /** Ensures the equals methods works as expected. */
+    /**
+     * Ensures the equals methods works as expected.
+     */
     @Test
     public void testTaskEquals() {
         Task task1 = new Task("Common label", true);

@@ -12,24 +12,26 @@
  */
 package org.keyboardplaying.dailytasks.ui.util;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-
-import java.awt.Image;
-import java.util.List;
-
 import org.junit.Test;
 import org.keyboardplaying.dailytasks.ui.theme.Theme;
 import org.keyboardplaying.dailytasks.ui.theme.ThemeManager;
 
+import java.awt.*;
+import java.util.List;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+
 /**
  * Tests for the {@link IconUtils} class.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public class IconUtilsTest {
 
-    /** Ensures {@link IconUtils} is still capable of retrieving icons. */
+    /**
+     * Ensures {@link IconUtils} is still capable of retrieving icons.
+     */
     @Test
     public void testIconFetching() {
         // Set the UI manager

@@ -16,11 +16,13 @@ package org.keyboardplaying.dailytasks.exception;
  * This exception is to be thrown when a {@link org.keyboardplaying.dailytasks.model.Task} instance could not be found
  * in a {@link org.keyboardplaying.dailytasks.model.TaskSet}.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public class TaskNotFoundException extends Exception {
 
-    /** Generated serial version UID. */
+    /**
+     * Generated serial version UID.
+     */
     private static final long serialVersionUID = 602886821247815365L;
 
     /**
@@ -35,8 +37,7 @@ public class TaskNotFoundException extends Exception {
      * Constructs a new exception with the specified detail message. The cause is not initialized, and may subsequently
      * be initialized by a call to {@link #initCause(Throwable)}.
      *
-     * @param message
-     *            the detail message (which is saved for later retrieval by the {@link #getMessage()} method)
+     * @param message the detail message (which is saved for later retrieval by the {@link #getMessage()} method)
      */
     public TaskNotFoundException(String message) {
         super(message);

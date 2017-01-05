@@ -12,30 +12,32 @@
  */
 package org.keyboardplaying.dailytasks.ui.panels;
 
-import java.awt.Font;
-
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
 import org.keyboardplaying.dailytasks.messages.MessageBundle;
 import org.keyboardplaying.dailytasks.ui.util.FontUtils;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * A window to display informations about this application.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 public class AboutPanel extends JPanel {
 
-    /** Generated serial version UID. */
+    /**
+     * Generated serial version UID.
+     */
     private static final long serialVersionUID = 6838253013008799433L;
 
-    /** The margin surrounding the text in the about window. */
+    /**
+     * The margin surrounding the text in the about window.
+     */
     private static final int WINDOW_MARGIN = 20;
 
-    /** Creates a new instance. */
+    /**
+     * Creates a new instance.
+     */
     public AboutPanel() {
 
         /* Set the container. */
@@ -51,7 +53,9 @@ public class AboutPanel extends JPanel {
         buildTextContent();
     }
 
-    /** Adds the about text to the panel. */
+    /**
+     * Adds the about text to the panel.
+     */
     private void buildTextContent() {
         /* A bold name and version. */
         JLabel appNameAndVersion = addLabel("app.pom.name.full");
@@ -77,8 +81,7 @@ public class AboutPanel extends JPanel {
     /**
      * Adds a label from the message bundle to the panel.
      *
-     * @param messageKey
-     *            the key for the message to add
+     * @param messageKey the key for the message to add
      * @return the label which was added
      */
     private JLabel addLabel(String messageKey) {
@@ -89,12 +92,9 @@ public class AboutPanel extends JPanel {
     /**
      * Adds a label from the message bundle to the panel and formats it with the supplied additional arguments.
      *
-     * @param messageKey
-     *            the key for the pattern for the message to add
-     * @param args
-     *            the additional arguments
+     * @param messageKey the key for the pattern for the message to add
+     * @param args       the additional arguments
      * @return the label which was added
-     *
      * @see MessageBundle#get(String, Object...)
      */
     private JLabel addLabel(String messageKey, Object... args) {
@@ -102,7 +102,9 @@ public class AboutPanel extends JPanel {
         return addLabel(label);
     }
 
-    /** Adds an empty line. */
+    /**
+     * Adds an empty line.
+     */
     private void addEmptyLine() {
         JLabel label = new JLabel(" ");
         addLabel(label);
@@ -111,8 +113,7 @@ public class AboutPanel extends JPanel {
     /**
      * Adds a label to a panel.
      *
-     * @param label
-     *            the panel
+     * @param label the panel
      * @return the label which was added
      */
     private JLabel addLabel(JLabel label) {

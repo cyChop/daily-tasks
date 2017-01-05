@@ -12,18 +12,19 @@
  */
 package org.keyboardplaying.dailytasks.ui.theme;
 
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.*;
 
 /**
  * Manages the theme across the application.
  *
- * @author Cyrille Chopelet (http://keyboardplaying.org)
+ * @author Cyrille Chopelet (https://keyboardplaying.org)
  */
 // TODO unit test in a headless environment
 public final class ThemeManager {
 
-    /** Private constructor for utility class. */
+    /**
+     * Private constructor for utility class.
+     */
     private ThemeManager() {
     }
 
@@ -32,21 +33,14 @@ public final class ThemeManager {
      * <p/>
      * The choice of the system look and feel was made to integrate at best with user's usual UI.
      *
-     * @param theme
-     *            the theme which should be applied
+     * @param theme the theme which should be applied
      */
     public static void applyTheme(Theme theme) {
 
         /* Switch to native look & feel. */
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException e) {
-            // this is no custom look and feel and should not happen
-        } catch (InstantiationException e) {
-            // this is no custom look and feel and should not happen
-        } catch (IllegalAccessException e) {
-            // this is no custom look and feel and should not happen
-        } catch (UnsupportedLookAndFeelException e) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             // this is no custom look and feel and should not happen
         }
 
